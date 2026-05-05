@@ -152,6 +152,10 @@ a { color: inherit; text-decoration: none; }
   background: #f6f1f1;
 }
 
+.section.audience {
+  background: #eef3f7;
+}
+
 .section-head {
   display: grid;
   grid-template-columns: 1fr;
