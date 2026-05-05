@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>AleVia · Wireframes Landing Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sketch.css" />
+<style>
+  html, body { margin: 0; padding: 0; background: #ece9e0; min-height: 100vh; }
+  body {
+    font-family: 'Kalam', system-ui, sans-serif;
+    color: #1c1d22;
+  }
+  /* Page header */
+  .page-head {
+    padding: 28px 40px 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .page-head h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0;
+    color: #1c1d22;
+  }
+  .page-head p {
+    font-family: 'Kalam', sans-serif;
+    font-size: 13px;
+    margin: 4px 0 0;
+    color: #5a5d65;
+    max-width: 640px;
+  }
+  .page-head .meta {
+    font-family: 'Kalam', sans-serif;
+    font-size: 10px;
+    color: #8a8d95;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .canvas-wrap {
+    height: calc(100vh - 110px);
+    min-height: 700px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <div>
+    <h1>AleVia · Landing page · 4 pistes</h1>
+    <p>Quatre directions wireframe pour la nouvelle page. Même contenu, traitements différents : du plus institutionnel au plus éditorial. Glissez les pistes pour les comparer, ouvrez-en une en plein écran pour la lire.</p>
+  </div>
+  <div class="meta">
+    Wireframes · v1<br/>
+    Design canvas
+  </div>
+</div>
+
+<div id="root" class="canvas-wrap"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="wf-shared.jsx"></script>
+<script type="text/babel" src="wf-classic.jsx"></script>
+<script type="text/babel" src="wf-manifesto.jsx"></script>
+<script type="text/babel" src="wf-modular.jsx"></script>
+<script type="text/babel" src="wf-dossier.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#b22234",
+  "showAnnotations": true,
+  "paper": "#fbfaf6"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // Apply CSS variables live
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--accent', t.accent);
+    document.documentElement.style.setProperty('--paper', t.paper);
+    document.body.style.background = t.paper === '#fbfaf6' ? '#ece9e0' : '#222';
+  }, [t.accent, t.paper]);
+
+  // Hide annotation notes globally if disabled
+  React.useEffect(() => {
+    const id = '__annot-style';
+    let s = document.getElementById(id);
+    if (!s) { s = document.createElement('style'); s.id = id; document.head.appendChild(s); }
+    s.textContent = t.showAnnotations
+      ? ''
+      : '.wf-note, .wf-sticky { display: none !important; }';
+  }, [t.showAnnotations]);
+
+  return (
+    <>
+      <DesignCanvas storageKey="alevia-wireframes-v1" initialZoom={0.55}>
+        <DCSection id="lp" title="Landing page · 4 pistes wireframe" subtitle="Même contenu · 4 traitements visuels">
+          <DCArtboard id="classic" label="A · Classic Editorial — sobre & institutionnel" width={980} height={2900}>
+            <VariantClassic />
+          </DCArtboard>
+          <DCArtboard id="manifesto" label="B · Manifesto — éditorial, statement fort" width={980} height={3400}>
+            <VariantManifesto />
+          </DCArtboard>
+          <DCArtboard id="modular" label="C · Modular — grille modulaire, plus dense" width={980} height={2900}>
+            <VariantModular />
+          </DCArtboard>
+          <DCArtboard id="dossier" label="D · Dossier — papier institutionnel, marginalia" width={980} height={3400}>
+            <VariantDossier />
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="Accent">
+          <TweakColor t={t} setTweak={setTweak} k="accent"
+            options={['#b22234', '#1c1d22', '#0f5e51', '#1f3a5f']} label="Couleur accent" />
+        </TweakSection>
+        <TweakSection title="Papier">
+          <TweakColor t={t} setTweak={setTweak} k="paper"
+            options={['#fbfaf6', '#f3f1ea', '#ffffff', '#1c1d22']} label="Fond papier" />
+        </TweakSection>
+        <TweakSection title="Annotations">
+          <TweakToggle t={t} setTweak={setTweak} k="showAnnotations"
+            label="Afficher notes & post-it" />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+
+</body>
+</html>

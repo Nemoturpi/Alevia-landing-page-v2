@@ -1,0 +1,254 @@
+/* Sketch / wireframe aesthetic — handwritten + low-fi shapes */
+
+:root {
+  --ink: #1c1d22;
+  --ink-soft: #4a4d55;
+  --ink-faint: #9aa0a8;
+  --paper: #fbfaf6;
+  --paper-2: #f3f1ea;
+  --rule: #1c1d22;
+  --accent: #b22234;       /* AleVia red — crimson V */
+  --accent-soft: #e2a8ad;
+  --warn: #c98a3a;
+}
+
+.wf {
+  font-family: 'Kalam', 'Caveat', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hand-drawn-ish boxes */
+.wf-box {
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  border-radius: 6px 14px 8px 12px / 10px 6px 14px 8px;
+  position: relative;
+}
+.wf-box.solid { background: var(--paper-2); }
+.wf-box.ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.wf-box.accent { background: var(--accent); color: #fff; border-color: var(--ink); }
+.wf-box.dashed { border-style: dashed; }
+
+/* Hand-drawn underline / strike */
+.wf-underline {
+  background-image: linear-gradient(transparent 86%, var(--accent) 86%, var(--accent) 96%, transparent 96%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 2px;
+}
+
+/* Squiggle line */
+.wf-squiggle {
+  height: 8px;
+  background:
+    radial-gradient(circle at 4px 6px, transparent 3px, var(--ink) 3.5px, transparent 4.5px) 0 0/12px 8px repeat-x;
+  opacity: .35;
+}
+
+/* Generic placeholder lines */
+.wf-line {
+  height: 8px;
+  background: var(--ink);
+  opacity: .8;
+  border-radius: 4px;
+}
+.wf-line.thin { height: 4px; opacity: .55; }
+.wf-line.faint { opacity: .25; }
+
+/* Image placeholder with diagonal cross */
+.wf-img {
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.wf-img::before, .wf-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom right, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px));
+  opacity: .35;
+}
+.wf-img::after {
+  background: linear-gradient(to top right, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px));
+}
+
+/* Headings */
+.wf h1, .wf h2, .wf h3, .wf h4 {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -.01em;
+  line-height: 1.05;
+}
+.wf .serif {
+  font-family: 'Caveat', cursive;
+}
+.wf .mono {
+  font-family: 'Kalam', monospace;
+  font-weight: 300;
+}
+
+/* Section label tag */
+.wf-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Kalam', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.wf-tag.ink { background: var(--ink); color: var(--paper); }
+.wf-tag.accent { color: var(--accent); border-color: var(--accent); }
+
+/* Annotation arrow */
+.wf-note {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: var(--accent);
+  position: absolute;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.wf-note::before {
+  content: '↳';
+  margin-right: 4px;
+}
+
+/* Scribble button */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px 10px 6px 12px / 8px 6px 12px 6px;
+  background: var(--paper);
+  font-family: 'Kalam', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+}
+.wf-btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.wf-btn.accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--ink);
+}
+.wf-btn.ghost {
+  background: transparent;
+  box-shadow: none;
+  border-style: dashed;
+}
+
+/* Section divider with label */
+.wf-section-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 16px;
+  font-family: 'Kalam', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.wf-section-rule::before, .wf-section-rule::after {
+  content: '';
+  flex: 1;
+  border-top: 1.5px solid var(--ink);
+}
+.wf-section-rule.dashed::before, .wf-section-rule.dashed::after { border-top-style: dashed; }
+
+/* Marginalia / numbered margin */
+.wf-margin-num {
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* Sticky note */
+.wf-sticky {
+  background: #fff7c2;
+  border: 1.2px solid #b89c2a;
+  padding: 8px 10px;
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  color: #4a3e0e;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.08);
+  border-radius: 2px;
+}
+
+/* Variant-specific frame chrome */
+.wf-frame {
+  background: var(--paper);
+  padding: 28px 32px 36px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.wf-frame .wf-meta {
+  position: absolute;
+  top: 10px; right: 14px;
+  font-family: 'Kalam', sans-serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Browser bar */
+.wf-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1.5px solid var(--ink);
+  padding: 8px 12px;
+  background: var(--paper-2);
+  font-family: 'Kalam', sans-serif;
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+.wf-bar .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid var(--ink);
+}
+.wf-bar .url {
+  flex: 1;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 3px 10px;
+  border-radius: 99px;
+  text-align: center;
+}
+
+/* Hatch fill */
+.wf-hatch {
+  background-image: repeating-linear-gradient(45deg, transparent 0, transparent 5px, var(--ink) 5px, var(--ink) 6px);
+  opacity: .55;
+}
+
+/* Helpers */
+.row { display: flex; }
+.col { display: flex; flex-direction: column; }
+.gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.flex-1 { flex: 1; }
