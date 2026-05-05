@@ -1,8 +1,6 @@
 {
-  "outputDirectory": "hifi",
   "rewrites": [
-    { "source": "/", "destination": "/AleVia Hi-Fi.html" },
-    { "source": "/uploads/(.*)", "destination": "/../uploads/$1" }
+    { "source": "/", "destination": "/hifi/AleVia Hi-Fi.html" }
   ],
   "headers": [
     {
