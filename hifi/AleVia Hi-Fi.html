@@ -9,6 +9,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
+<style>
+/* Pain section — layout with image thumbnail */
+.pain-row {
+  grid-template-columns: 80px 1fr 96px 80px;
+}
+.pain-body { display: flex; align-items: center; }
+.pain-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+}
+.pain-visual img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0.82;
+  filter: grayscale(15%);
+  transition: opacity .2s, filter .2s;
+  flex-shrink: 0;
+}
+.pain-row:hover .pain-visual img {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+@media (max-width: 900px) {
+  .pain-row {
+    grid-template-columns: 50px 1fr 72px;
+  }
+  .pain-visual img { width: 56px; height: 56px; }
+  .pain-mark { display: none; }
+}
+@media (max-width: 600px) {
+  .pain-row {
+    grid-template-columns: 40px 1fr 60px;
+    gap: 12px;
+  }
+  .pain-visual { padding: 0 4px; }
+  .pain-visual img { width: 48px; height: 48px; }
+}
+</style>
 </head>
 <body>
 
@@ -119,31 +161,62 @@
     </div>
 
     <div class="pains reveal">
+
       <div class="pain-row">
         <span class="pain-num">01</span>
-        <p class="pain-text">Vous découvrez le texte une fois que les arbitrages sont rendus. Il reste à commenter, pas à changer.</p>
+        <div class="pain-body">
+          <p class="pain-text">Vous découvrez le texte une fois que les arbitrages sont rendus. Il reste à commenter, pas à changer.</p>
+        </div>
+        <div class="pain-visual">
+          <img src="https://raw.githubusercontent.com/Nemoturpi/Alevia-landing-page-v2/main/uploads/ChatGPT%20Image%205%20mai%202026%2C%2016_28_01.png" alt="Trop tard — découverte tardive du texte" width="80" height="80" loading="lazy" />
+        </div>
         <span class="pain-mark">trop tard</span>
       </div>
+
       <div class="pain-row">
         <span class="pain-num">02</span>
-        <p class="pain-text">Santé, numérique, handicap : vos sujets sont traités séparément, par des interlocuteurs qui ne se parlent pas, sur des agendas qui ne se croisent jamais.</p>
+        <div class="pain-body">
+          <p class="pain-text">Santé, numérique, handicap : vos sujets sont traités séparément, par des interlocuteurs qui ne se parlent pas, sur des agendas qui ne se croisent jamais.</p>
+        </div>
+        <div class="pain-visual">
+          <img src="https://raw.githubusercontent.com/Nemoturpi/Alevia-landing-page-v2/main/uploads/ChatGPT%20Image%205%20mai%202026%2C%2019_44_53%20(1).png" alt="Silos — sujets traités séparément" width="80" height="80" loading="lazy" />
+        </div>
         <span class="pain-mark">silos</span>
       </div>
+
       <div class="pain-row">
         <span class="pain-num">03</span>
-        <p class="pain-text">Vos analyses sont rigoureuses. Mais les décisions se prennent dans des réunions auxquelles vous n'êtes pas convié.</p>
+        <div class="pain-body">
+          <p class="pain-text">Vos analyses sont rigoureuses. Mais les décisions se prennent dans des réunions auxquelles vous n'êtes pas convié.</p>
+        </div>
+        <div class="pain-visual">
+          <img src="https://raw.githubusercontent.com/Nemoturpi/Alevia-landing-page-v2/main/uploads/ChatGPT%20Image%205%20mai%202026%2C%2019_44_53%20(2).png" alt="Absence — exclusion des réunions décisionnelles" width="80" height="80" loading="lazy" />
+        </div>
         <span class="pain-mark">absence</span>
       </div>
+
       <div class="pain-row">
         <span class="pain-num">04</span>
-        <p class="pain-text">Accessibilité, transparence, droits des personnes : vous les respectez, vous ne les utilisez pas pour peser.</p>
+        <div class="pain-body">
+          <p class="pain-text">Accessibilité, transparence, droits des personnes : vous les respectez, vous ne les utilisez pas pour peser.</p>
+        </div>
+        <div class="pain-visual">
+          <img src="https://raw.githubusercontent.com/Nemoturpi/Alevia-landing-page-v2/main/uploads/ChatGPT%20Image%205%20mai%202026%2C%2019_44_54%20(3).png" alt="Levier perdu — droits non utilisés comme levier d'influence" width="80" height="80" loading="lazy" />
+        </div>
         <span class="pain-mark">levier perdu</span>
       </div>
+
       <div class="pain-row">
         <span class="pain-num">05</span>
-        <p class="pain-text">Vous n'avez pas les bons contacts, ou vous ne savez pas lesquels activer, ni quand.</p>
+        <div class="pain-body">
+          <p class="pain-text">Vous n'avez pas les bons contacts, ou vous ne savez pas lesquels activer, ni quand.</p>
+        </div>
+        <div class="pain-visual">
+          <img src="https://raw.githubusercontent.com/Nemoturpi/Alevia-landing-page-v2/main/uploads/ChatGPT%20Image%205%20mai%202026%2C%2019_44_54%20(4).png" alt="Isolement — manque de contacts décisionnels" width="80" height="80" loading="lazy" />
+        </div>
         <span class="pain-mark">isolement</span>
       </div>
+
     </div>
   </div>
 </section>
