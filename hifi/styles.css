@@ -426,7 +426,32 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 600px) {
   .hero { padding-bottom: 80px; }
-  .orbit-label { font-size: 10px; padding: 6px 10px; }
+  .hero-grid { gap: 48px; }
+  .hero-orbit {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .orbit-label {
+    font-size: 10px;
+    line-height: 1.25;
+    padding: 7px 10px;
+    max-width: min(44vw, 170px);
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+  .orbit-label-1 { top: 2%; left: 50%; transform: translate(-50%, -48%); }
+  .orbit-label-2 { top: 20%; right: 2%; transform: translate(12%, -50%); }
+  .orbit-label-3 { top: 50%; left: 2%; transform: translate(-12%, -50%); }
+  .orbit-label-4 { bottom: 20%; right: 2%; transform: translate(12%, 50%); }
+  .orbit-label-5 { bottom: 2%; left: 50%; transform: translate(-50%, 48%); }
+  .orbit-label-6 { bottom: 20%; left: 2%; transform: translate(-12%, 50%); }
+  .orbit-label-1:hover { transform: translate(-50%, -50%); }
+  .orbit-label-2:hover { transform: translate(10%, -52%); }
+  .orbit-label-3:hover { transform: translate(-14%, -52%); }
+  .orbit-label-4:hover { transform: translate(10%, 52%); }
+  .orbit-label-5:hover { transform: translate(-50%, 50%); }
+  .orbit-label-6:hover { transform: translate(-14%, 52%); }
 }
 
 /* Sectors */
