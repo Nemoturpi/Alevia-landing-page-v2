@@ -415,13 +415,13 @@ a { color: inherit; text-decoration: none; }
 }
 .orbit-label-1 { top: 0%; left: 50%; transform: translate(-50%, -40%); }
 .orbit-label-2 { top: 18%; right: -2%; transform: translate(20%, -50%); }
-.orbit-label-3 { top: 50%; left: -2%; transform: translate(-20%, -50%); }
+.orbit-label-3 { top: 50%; left: -10%; transform: translate(-34%, -50%); max-width: 230px; }
 .orbit-label-4 { bottom: 18%; right: -2%; transform: translate(20%, 50%); }
 .orbit-label-5 { bottom: 0%; left: 50%; transform: translate(-50%, 40%); }
 .orbit-label-6 { bottom: 18%; left: -2%; transform: translate(-20%, 50%); }
 .orbit-label-1:hover { transform: translate(-50%, -45%); }
 .orbit-label-2:hover { transform: translate(15%, -55%); }
-.orbit-label-3:hover { transform: translate(-25%, -55%); }
+.orbit-label-3:hover { transform: translate(-38%, -55%); }
 .orbit-label-4:hover { transform: translate(15%, 55%); }
 .orbit-label-5:hover { transform: translate(-50%, 45%); }
 .orbit-label-6:hover { transform: translate(-25%, 55%); }
@@ -448,13 +448,13 @@ a { color: inherit; text-decoration: none; }
   }
   .orbit-label-1 { top: 2%; left: 50%; transform: translate(-50%, -48%); }
   .orbit-label-2 { top: 20%; right: 2%; transform: translate(12%, -50%); }
-  .orbit-label-3 { top: 50%; left: 2%; transform: translate(-12%, -50%); }
+  .orbit-label-3 { top: 50%; left: -2%; transform: translate(-22%, -50%); }
   .orbit-label-4 { bottom: 20%; right: 2%; transform: translate(12%, 50%); }
   .orbit-label-5 { bottom: 2%; left: 50%; transform: translate(-50%, 48%); }
   .orbit-label-6 { bottom: 20%; left: 2%; transform: translate(-12%, 50%); }
   .orbit-label-1:hover { transform: translate(-50%, -50%); }
   .orbit-label-2:hover { transform: translate(10%, -52%); }
-  .orbit-label-3:hover { transform: translate(-14%, -52%); }
+  .orbit-label-3:hover { transform: translate(-24%, -52%); }
   .orbit-label-4:hover { transform: translate(10%, 52%); }
   .orbit-label-5:hover { transform: translate(-50%, 50%); }
   .orbit-label-6:hover { transform: translate(-14%, 52%); }
