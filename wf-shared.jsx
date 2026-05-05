@@ -116,14 +116,14 @@ const PAINS = [
 ];
 
 const SECTORS = [
-  ['🧬', 'Santé globale & One Health', 'Vos enjeux traversent santé humaine, animale, environnementale — les politiques restent en silos.'],
-  ['♿', 'Handicap & accessibilité', 'SERAFIN-PH, OETH, financement médico-social : chantiers ouverts, pas figés.'],
-  ['🏥', 'Grand âge & médico-social', "La réforme s'écrit maintenant. Les opérateurs à la table influent sur le texte final."],
-  ['💻', 'Numérique responsable', 'IA Act, RGPD, NIS2 : qui contribue aux règles est mieux placé pour les naviguer.'],
-  ['🌿', 'Transition écologique', 'PPE, taxonomie : les textes structurants des dix ans à venir se bouclent.'],
-  ['🤝', 'Mutualité & protection sociale', "L'enjeu n'est plus d'avoir des arguments mais d'être entendus."],
-  ['🎭', 'Industries culturelles', "Représentation institutionnelle fragmentée — parler d'une seule voix."],
-  ['🛡️', 'Sécurité & sûreté privée', "LOPMI : agréments, encadrement, relations régulateur."],
+  ['🧬', 'Santé globale & One Health', 'Fédérations et associations de santé, industriels responsables, fondations, réseaux One Health.'],
+  ['♿', 'Handicap & accessibilité', 'Fédérations handicap, associations gestionnaires d\'ESMS, collectifs accessibilité numérique.'],
+  ['🏥', 'Grand âge & médico-social', 'Groupes et associations du secteur médico-social, opérateurs du grand âge, réseaux d\'établissements.'],
+  ['💻', 'Numérique responsable', 'Entreprises et opérateurs numériques, ESN, éditeurs de solutions e-santé, acteurs de l\'accessibilité numérique.'],
+  ['🌿', 'Transition écologique', 'Acteurs de l\'énergie et des EnR, fédérations professionnelles, coalitions climat.'],
+  ['🤝', 'Mutualité & protection sociale', 'Mutuelles, institutions de prévoyance, fédérations et unions du secteur de la protection sociale.'],
+  ['🎭', 'Industries culturelles', 'Institutions culturelles, réseaux professionnels, fondations et opérateurs des ICC.'],
+  ['🛡️', 'Sécurité & sûreté privée', 'Entreprises de sécurité privée, fédérations et organisations professionnelles du secteur.'],
 ];
 
 const LEVERS = [
