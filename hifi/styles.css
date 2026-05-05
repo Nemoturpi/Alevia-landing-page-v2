@@ -148,6 +148,10 @@ a { color: inherit; text-decoration: none; }
 }
 .section.cream { background: var(--paper-2); }
 
+.section.references {
+  background: #f6f1f1;
+}
+
 .section-head {
   display: grid;
   grid-template-columns: 1fr;
@@ -697,7 +701,7 @@ a { color: inherit; text-decoration: none; }
 /* Founder — section quasi-portrait */
 .founder {
   position: relative;
-  background: var(--paper-2);
+  background: #fff;
 }
 .founder-hero {
   display: grid;
