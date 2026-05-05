@@ -9,6 +9,110 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
+<style>
+/* ── Section douleurs avec images ── */
+.pains-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pain-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 420px;
+  overflow: hidden;
+  border-top: 1px solid var(--rule, rgba(28,29,34,0.1));
+}
+
+.pain-card:last-child {
+  border-bottom: 1px solid var(--rule, rgba(28,29,34,0.1));
+}
+
+.pain-card:nth-child(even) {
+  direction: rtl;
+}
+.pain-card:nth-child(even) > * {
+  direction: ltr;
+}
+
+.pain-card-img {
+  overflow: hidden;
+  position: relative;
+}
+
+.pain-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pain-card:hover .pain-card-img img {
+  transform: scale(1.03);
+}
+
+.pain-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 64px;
+  gap: 20px;
+}
+
+.pain-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute, #888);
+}
+
+.pain-card-title {
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--ink, #1c1d22);
+  letter-spacing: -0.02em;
+}
+
+.pain-card-text {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-2, #444);
+  max-width: 44ch;
+}
+
+.pain-card-mark {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent, #b22234);
+  border: 1px solid currentColor;
+  padding: 4px 10px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .pain-card {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .pain-card:nth-child(even) {
+    direction: ltr;
+  }
+  .pain-card-img {
+    aspect-ratio: 16 / 9;
+  }
+  .pain-card-body {
+    padding: 36px 24px;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -111,40 +215,101 @@
           <span class="section-num">03 / Constat</span>
           <span class="rule"></span>
         </div>
-        <h2 class="h-section">Vous vivez peut-être l'une de ces situations.</h2>
+        <h2 class="h-section">Vous vivez peut-être l'une<br>de ces situations.</h2>
       </div>
       <p class="lead">
-        Cinq douleurs récurrentes des organisations qui découvrent les arbitrages trop tard pour peser dessus.
+        Cinq situations dans lesquelles une organisation perd de l'influence, souvent sans s'en rendre compte.
       </p>
     </div>
+  </div>
 
-    <div class="pains reveal">
-      <div class="pain-row">
-        <span class="pain-num">— 01</span>
-        <p class="pain-text">Vous découvrez des projets de loi, de décrets ou de réformes quand ils sont déjà trop avancés pour être réellement corrigés.</p>
-        <span class="pain-mark">trop tard</span>
+  <div class="pains-visual reveal">
+
+    <!-- 01 – trop tard -->
+    <div class="pain-card">
+      <div class="pain-card-img">
+        <img
+          src="../uploads/ChatGPT Image 5 mai 2026, 16_28_01.png"
+          alt="Une salle de réunion vide après que les décisions ont été prises"
+          width="900" height="600" loading="lazy" decoding="async"
+        />
       </div>
-      <div class="pain-row">
-        <span class="pain-num">— 02</span>
-        <p class="pain-text">Vos sujets sont traités en silos — santé, handicap, environnement, numérique — alors qu'ils exigent une approche globale et coordonnée.</p>
-        <span class="pain-mark">silos</span>
-      </div>
-      <div class="pain-row">
-        <span class="pain-num">— 03</span>
-        <p class="pain-text">Vous produisez des notes solides, mais vous n'êtes jamais vraiment dans la pièce où se prennent les arbitrages.</p>
-        <span class="pain-mark">absence</span>
-      </div>
-      <div class="pain-row">
-        <span class="pain-num">— 04</span>
-        <p class="pain-text">Vous portez des obligations légales fortes — accessibilité numérique, droits des personnes handicapées, régulation du numérique — sans réussir à en faire un levier de plaidoyer.</p>
-        <span class="pain-mark">levier perdu</span>
-      </div>
-      <div class="pain-row">
-        <span class="pain-num">— 05</span>
-        <p class="pain-text">Vous manquez de relais et de réseaux institutionnels pour être perçus comme une force de proposition légitime.</p>
-        <span class="pain-mark">isolement</span>
+      <div class="pain-card-body">
+        <span class="pain-card-num">— 01</span>
+        <h3 class="pain-card-title">Vous découvrez le texte une fois que les arbitrages sont rendus.</h3>
+        <p class="pain-card-text">Il reste à commenter, pas à changer.</p>
+        <span class="pain-card-mark">trop tard</span>
       </div>
     </div>
+
+    <!-- 02 – silos -->
+    <div class="pain-card">
+      <div class="pain-card-img">
+        <img
+          src="../uploads/ChatGPT Image 5 mai 2026, 19_44_53 (1).png"
+          alt="Des équipes qui travaillent séparément sans se parler"
+          width="900" height="600" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="pain-card-body">
+        <span class="pain-card-num">— 02</span>
+        <h3 class="pain-card-title">Santé, numérique, handicap : vos sujets sont traités séparément.</h3>
+        <p class="pain-card-text">Par des interlocuteurs qui ne se parlent pas, sur des agendas qui ne se croisent jamais.</p>
+        <span class="pain-card-mark">silos</span>
+      </div>
+    </div>
+
+    <!-- 03 – absence -->
+    <div class="pain-card">
+      <div class="pain-card-img">
+        <img
+          src="../uploads/ChatGPT Image 5 mai 2026, 19_44_53 (2).png"
+          alt="Une porte fermée, symbole d'une réunion à laquelle on n'est pas convié"
+          width="900" height="600" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="pain-card-body">
+        <span class="pain-card-num">— 03</span>
+        <h3 class="pain-card-title">Vos analyses sont rigoureuses.</h3>
+        <p class="pain-card-text">Mais les décisions se prennent dans des réunions auxquelles vous n'êtes pas convié.</p>
+        <span class="pain-card-mark">absence</span>
+      </div>
+    </div>
+
+    <!-- 04 – levier perdu -->
+    <div class="pain-card">
+      <div class="pain-card-img">
+        <img
+          src="../uploads/ChatGPT Image 5 mai 2026, 19_44_54 (3).png"
+          alt="Des obligations légales non utilisées comme levier de plaidoyer"
+          width="900" height="600" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="pain-card-body">
+        <span class="pain-card-num">— 04</span>
+        <h3 class="pain-card-title">Accessibilité, transparence, droits des personnes.</h3>
+        <p class="pain-card-text">Vous les respectez, vous ne les utilisez pas pour peser.</p>
+        <span class="pain-card-mark">levier perdu</span>
+      </div>
+    </div>
+
+    <!-- 05 – isolement -->
+    <div class="pain-card">
+      <div class="pain-card-img">
+        <img
+          src="../uploads/ChatGPT Image 5 mai 2026, 19_44_54 (4).png"
+          alt="Une organisation isolée sans réseau institutionnel"
+          width="900" height="600" loading="lazy" decoding="async"
+        />
+      </div>
+      <div class="pain-card-body">
+        <span class="pain-card-num">— 05</span>
+        <h3 class="pain-card-title">Vous n'avez pas les bons contacts.</h3>
+        <p class="pain-card-text">Ou vous ne savez pas lesquels activer, ni quand.</p>
+        <span class="pain-card-mark">isolement</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -546,7 +711,6 @@ function App() {
 
   React.useEffect(() => {
     document.documentElement.style.setProperty('--accent', t.accent);
-    // dérive accent-2 et accent-soft
     const lighten = (hex, amt) => {
       const n = parseInt(hex.slice(1), 16);
       let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
