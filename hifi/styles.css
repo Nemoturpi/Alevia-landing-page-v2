@@ -157,7 +157,7 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 900px) {
   .section-head {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 80px;
+    gap: 104px;
     align-items: end;
   }
 }
@@ -311,10 +311,15 @@ a { color: inherit; text-decoration: none; }
   gap: 60px;
   align-items: center;
 }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
 @media (min-width: 1000px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 80px;
+    gap: 104px;
   }
 }
 .hero-tagline {
@@ -355,6 +360,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   max-width: 600px;
   margin-left: auto;
+  z-index: 1;
 }
 .orbit-ring {
   position: absolute;
@@ -708,12 +714,16 @@ a { color: inherit; text-decoration: none; }
 }
 .founder-photo-wrap {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 1/1;
   background: var(--paper);
   overflow: hidden;
 }
 .founder-photo-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  transform: scale(1.14);
 }
 .founder-photo-credit {
   position: absolute;
