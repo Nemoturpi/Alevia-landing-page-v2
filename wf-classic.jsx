@@ -29,7 +29,7 @@ function VariantClassic() {
         </div>
         <div style={{ position: 'relative' }}>
           <ImgBox h={300} label="Illustration One Health" />
-          <div className="wf-note" style={{ top: -18, right: 8 }}>illustration vectorielle, 3 cercles entrelacés</div>
+          <div className="wf-note" style={{ top: -18, right: 8 }}>illustration vectorielle, 3 cercles enrelacés</div>
         </div>
       </section>
 
@@ -39,8 +39,8 @@ function VariantClassic() {
       <section style={{ padding: '0 36px' }}>
         <div className="row" style={{ alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 16 }}>
           <Sketch size={32}>À qui nous nous adressons</Sketch>
-          <Type size={11} color="var(--ink-soft)" style={{ maxWidth: 320, textAlign: 'right' }}>
-            Organisations qui défendent des biens communs et veulent être reconnues comme forces de proposition légitimes.
+          <Type size={11} color="var(--ink-soft)" style={{ maxWidth: 360, textAlign: 'right' }}>
+            Nous travaillons avec des fédérations, syndicats, associations, mutuelles et opérateurs qui défendent des biens communs et souhaitent s'imposer comme forces de proposition légitimes.
           </Type>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
