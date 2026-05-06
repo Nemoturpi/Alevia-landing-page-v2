@@ -1,1 +1,1029 @@
-/tmp/alevia_fixed.html
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>AleVia Conseil – Cabinet d'affaires publiques | Paris</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="AleVia est un cabinet d'affaires publiques spécialisé en santé globale (One Health), handicap et numérique responsable. Stratégie d'influence, plaidoyer et veille réglementaire pour organisations engagées." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+/* ── Tous les titres en extrabold ── */
+.h-display, .h-section, .h-card,
+.commitment-item h3,
+.founder-name,
+.why-item h3,
+.trade h4,
+.board-h,
+.lever h3 {
+  font-weight: 800;
+}
+
+/* ── H1 hero ── */
+.hero .h-display {
+  font-size: clamp(32px, 3.6vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+/* ── Hero : layout 2 colonnes ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: stretch;
+  background: var(--paper, #f7f5f0);
+  overflow: hidden;
+}
+
+/* Container pleine largeur dans le hero */
+.hero > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+}
+
+/* Colonne gauche : texte */
+.hero-col-text {
+  flex: 0 0 50%;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px 72px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Colonne droite : image animée */
+.hero-col-video {
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Image hero unique avec Ken Burns */
+.hero-col-video .hero-img {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform-origin: center center;
+  animation: heroKenBurns 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroKenBurns {
+  0%   { transform: scale(1.00) translate(0%, 0%); }
+  33%  { transform: scale(1.05) translate(-1.5%, -1.5%); }
+  66%  { transform: scale(1.08) translate(1.5%, -2%); }
+  100% { transform: scale(1.04) translate(-1%, 1%); }
+}
+
+/* Dégradé de fondu vers la gauche */
+.hero-col-video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 30%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Texte en italique rouge pour les accents */
+.hero .h-display em {
+  font-style: inherit;
+  color: var(--accent, #b22234);
+}
+
+/* Mobile : empiler */
+@media (max-width: 768px) {
+  .hero { flex-direction: column; min-height: auto; }
+  .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 40px; }
+  .hero-col-video { flex: none; max-width: 100%; height: 62vw; min-height: 260px; }
+  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 20%); }
+  .hero > .container { flex-direction: column; }
+}
+
+/* ── Section 05 / Engagements ── */
+.commitments { background: #fff; }
+.commitments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+  margin-top: var(--gap-md);
+}
+@media (max-width: 700px) { .commitments-grid { grid-template-columns: 1fr; } }
+.commitment-item {
+  background: #fff;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  transition: background .2s;
+}
+.commitment-item:hover { background: var(--paper); }
+.commitment-item--wide { grid-column: 1 / -1; }
+.commitment-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.commitment-item h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+.commitment-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 46ch;
+}
+.commitment-item--wide p { max-width: 64ch; }
+.commitment-item h3::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 10px;
+  border-radius: 1px;
+}
+
+/* Cartes secteurs */
+.sector-card .sector-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-mute, #7a7770);
+  margin-bottom: 2px;
+}
+.sector-card .sector-who,
+.sector-card .sector-why {
+  font-size: 13px;
+  color: var(--ink-mute, #7a7770);
+  line-height: 1.45;
+  margin: 0;
+}
+.sector-card .sector-who { margin-top: 8px; }
+.sector-card .sector-why { margin-top: 6px; }
+
+/* Sector icon */
+.sector-card .sector-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule-soft);
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--accent);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+/* Guillemets sur les pain-text */
+.pain-text.guillemets::before { content: '\00AB\00A0'; color: var(--accent); }
+.pain-text.guillemets::after  { content: '\00A0\00BB'; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <nav class="nav">
+      <a href="#" class="nav-logo" aria-label="AleVia · accueil">
+        <img src="assets/alevia-logo.png" alt="AleVia" />
+      </a>
+      <div class="nav-links">
+        <a href="#secteurs">À qui</a>
+        <a href="#leviers">Ce qu'on fait</a>
+        <a href="#pourquoi">Pourquoi AleVia</a>
+        <a href="#fondatrice">Fondatrice</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary">
+          Prendre RDV<span class="arrow">→</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="container">
+
+    <!-- Colonne texte (gauche) -->
+    <div class="hero-col-text">
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <span class="tag-rule"></span>
+          <span class="tag-text">Votre cabinet d'affaires publiques à Paris</span>
+        </div>
+        <h1 class="h-display">
+          Défendre <em>vos&nbsp;intérêts</em><br>pour servir le <em>bien&nbsp;commun</em>
+        </h1>
+        <p class="lead">
+          Nous aidons les organisations engagées pour les biens communs à ne plus être absentes des réformes et à peser sur les décisions publiques.
+        </p>
+        <p class="lead" style="margin-top: 16px;">
+          Nous vous accompagnons pour tous vos enjeux liés à la santé globale (One Health), à l'inclusivité, à la protection sociale, à la transition écologique, au numérique responsable, à la silver economy, à la culture et à la sécurité.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">
+            Prendre rendez-vous avec Nicole<span class="arrow">→</span>
+          </a>
+          <a href="#leviers" class="btn btn-ghost">
+            Voir comment nous obtenons des arbitrages
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonne image (droite) — image animée Ken Burns -->
+    <div class="hero-col-video" id="heroImageCol">
+      <img class="hero-img" src="../uploads/Hero1.png" alt="AleVia — cabinet d'affaires publiques à Paris" loading="eager" width="800" height="900" />
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTEURS -->
+<section class="section audience" id="secteurs">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">02 / Clientèle</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">À qui nous nous adressons.</h2>
+      </div>
+      <p class="lead">
+        Nous travaillons avec des fédérations, syndicats, associations, mutuelles et opérateurs qui défendent des biens communs et souhaitent s'imposer comme forces de proposition légitimes.
+      </p>
+    </div>
+
+    <div class="sectors-grid" id="sectorsContainer">
+      <!-- Cards rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- DOULEURS -->
+<section class="section cream" id="douleurs">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">03 / Constat</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">Vous vivez peut-être l'une de ces situations.</h2>
+      </div>
+      <p class="lead">
+        Cinq douleurs récurrentes des organisations qui découvrent les arbitrages trop tard pour peser dessus.
+      </p>
+    </div>
+
+<div class="pains-grid reveal">
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-05.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">On a appris la réforme dans le journal, c'était trop tard</p>
+    </figcaption>
+  </figure>
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-02.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">Ce qu'exprime la fédération ne représente pas nos intérêts</p>
+    </figcaption>
+  </figure>
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-04.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">On n'a jamais été consulté alors qu'on est les premiers concernés</p>
+    </figcaption>
+  </figure>
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-01.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">On aimerait que la loi change mais on sait pas comment s'y prendre</p>
+    </figcaption>
+  </figure>
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-03.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">On n'a pas de contacts à l'Élysée, au Sénat, en région</p>
+    </figcaption>
+  </figure>
+  <figure class="pain-card">
+    <div class="pain-illu"><img src="../uploads/pain-6.png" alt="" loading="lazy"></div>
+    <figcaption class="pain-cap">
+      <p class="pain-text guillemets">On a été attaqués dans la presse et on n'a pas su quoi dire</p>
+    </figcaption>
+  </figure>
+</div>
+  </div>
+</section>
+
+<!-- LEVIERS -->
+<section class="section" id="leviers">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">04 / Méthode</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">Ce que nous faisons concrètement.</h2>
+      </div>
+      <p class="lead">
+        Par temps calme comme en période de crise, trois leviers d'influence articulés pour vous donner une longueur d'avance dans un contexte mouvant et complexe.
+      </p>
+    </div>
+
+    <div class="levers reveal">
+      <article class="lever">
+        <h3 class="h-card" style="color:var(--accent);">Veille &amp; intelligence sociétale</h3>
+        <p class="body">
+          Avant que le texte soit déposé, avant que l'arbitrage soit rendu, nous sommes déjà informés. Nous identifions les tendances et les risques, sur les plans réglementaire et réputationnel, pour que vous ne découvriez pas vos enjeux dans le Journal officiel.
+        </p>
+        <div class="lever-tags">
+          <span class="lever-tag">Décryptage</span>
+          <span class="lever-tag">Notes flash</span>
+          <span class="lever-tag">Cartographie d'acteurs</span>
+        </div>
+      </article>
+
+      <article class="lever">
+        <h3 class="h-card" style="color:var(--accent);">Stratégie d'influence &amp; plaidoyer</h3>
+        <p class="body">
+          Pas de note qui dort dans un tiroir. Nous clarifions votre position, identifions les bons interlocuteurs et organisons les échanges avec les décideurs publics et les coalitions qui comptent. L'objectif : que vos propositions soient réellement prises en compte dans les arbitrages.
+        </p>
+        <div class="lever-tags">
+          <span class="lever-tag">Représentation d'intérêts</span>
+          <span class="lever-tag">Auditions</span>
+          <span class="lever-tag">Coalitions</span>
+        </div>
+      </article>
+
+      <article class="lever">
+        <h3 class="h-card" style="color:var(--accent);">Prise de parole &amp; communication</h3>
+        <p class="body">
+          Tribunes, auditions, interviews, tables rondes : chaque prise de parole peut faire avancer votre dossier ou le fragiliser. Nous choisissons les bons formats et préparons vos interventions pour qu'elles servent votre stratégie d'influence, pas seulement votre visibilité.
+        </p>
+        <div class="lever-tags">
+          <span class="lever-tag">Tribunes</span>
+          <span class="lever-tag">Media-training</span>
+          <span class="lever-tag">Événements décideurs</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 05 / ENGAGEMENTS -->
+<section class="section commitments" id="pourquoi">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">05 / Engagements</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">Pourquoi AleVia<br/>plutôt qu'un autre cabinet.</h2>
+      </div>
+      <p class="lead">
+        Cinq engagements — pas des arguments marketing. Ce qu'on accepte. Ce qu'on refuse.
+      </p>
+    </div>
+
+    <div class="commitments-grid reveal">
+      <div class="commitment-item">
+        <h3>Zéro conflit d'intérêts.</h3>
+        <p>Jamais deux acteurs aux intérêts croisés. Cela limite notre portefeuille — et protège votre crédibilité.</p>
+      </div>
+      <div class="commitment-item">
+        <h3>L'intérêt général, boussole.</h3>
+        <p>Santé, inclusion, numérique responsable, environnement, culture. Défendre un intérêt particulier en servant le bien commun.</p>
+      </div>
+      <div class="commitment-item">
+        <h3>Interlocuteur unique.</h3>
+        <p>Nicole reste dans la pièce — de la stratégie à l'exécution. Pas de « selling senior » qui s'évapore après la signature.</p>
+      </div>
+      <div class="commitment-item">
+        <h3>Rien de standardisé.</h3>
+        <p>Chaque mission repart de votre situation réelle. La stratégie qu'on construit n'a jamais servi pour quelqu'un d'autre.</p>
+      </div>
+      <div class="commitment-item commitment-item--wide">
+        <h3>Trois métiers, une adresse.</h3>
+        <p>Droit, journalisme, représentation d'intérêts — exercés de l'intérieur. La différence entre une belle analyse et une stratégie applicable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="section references" id="confiance">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">06 / Références</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">Ils nous font déjà confiance.</h2>
+      </div>
+      <p class="lead">
+        Plus de 35 organisations engagées sur la santé, le handicap, l'inclusion, l'environnement et le numérique responsable nous font confiance.
+      </p>
+    </div>
+
+    <div class="logos-grid reveal">
+      <div class="logo-tile">Institut des hautes études<br/>de défense nationale</div>
+      <div class="logo-tile">Nexem</div>
+      <div class="logo-tile">Fédération française des<br/>masseurs-kinésithérapeutes</div>
+      <div class="logo-tile">FFMI</div>
+      <div class="logo-tile">Association<br/>Valentin Haüy</div>
+      <div class="logo-tile">Addictions France</div>
+      <div class="logo-tile">Ligue contre la<br/>sclérose en plaques</div>
+      <div class="logo-tile">Fermentalg</div>
+    </div>
+    <p class="body" style="margin-top:24px;font-size:14px;color:var(--ink-mute);text-align:center;">
+      + 27 autres organisations · références complètes sur demande
+    </p>
+  </div>
+</section>
+
+<!-- FONDATRICE -->
+<section class="section founder" id="fondatrice">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">07 / Fondatrice</span>
+          <span class="rule"></span>
+        </div>
+        <h2 class="h-section">La fondatrice.</h2>
+      </div>
+    </div>
+
+    <div class="founder-hero reveal">
+      <div>
+        <div class="founder-photo-wrap">
+          <img src="assets/nicole.png" alt="Portrait de Nicole Tortello Duban" />
+          <div class="founder-photo-credit">Nicole Tortello Duban</div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow accent">Présidente &amp; fondatrice d'AleVia Conseil</span>
+        <h3 class="founder-name">Nicole Tortello Duban</h3>
+        <p class="founder-bio">
+          Avocate, journaliste, déléguée générale d'organisation professionnelle : <em>trois métiers exercés de l'intérieur</em> pour construire des stratégies d'influence ancrées dans la réalité. Nicole accompagne des fédérations, associations et opérateurs confrontés à des séquences institutionnelles complexes dans les secteurs de la santé, du médico-social, du handicap, de l'accessibilité numérique et du One Health.
+        </p>
+
+        <div class="founder-trades">
+          <div class="trade">
+            <div class="trade-num">01</div>
+            <h4>Avocate</h4>
+            <p>Avocate au barreau de Paris pendant plusieurs années, titulaire du CAPA.</p>
+          </div>
+          <div class="trade">
+            <div class="trade-num">02</div>
+            <h4>Journaliste</h4>
+            <p>Journaliste de formation, rédactrice spécialisée pendant plusieurs années.</p>
+          </div>
+          <div class="trade">
+            <div class="trade-num">03</div>
+            <h4>Déléguée générale</h4>
+            <p>Déléguée générale d'organisation professionnelle pendant plusieurs années, au contact direct des arbitrages sectoriels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom: 60px;">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num" style="color:var(--accent-soft);">08 / Contact</span>
+          <span class="rule" style="background:rgba(255,255,255,.3);"></span>
+        </div>
+        <h2 class="h-section">Transformons ensemble vos enjeux en décisions concrètes.</h2>
+      </div>
+    </div>
+
+    <div class="contact-grid reveal">
+      <div>
+        <p class="lead" style="font-size: 22px; margin-bottom: 24px;">
+          Consultation gratuite, sans engagement.
+        </p>
+        <p class="body" style="color: rgba(255,255,255,.7); font-size: 17px; max-width: 460px;">
+          Expliquez-nous en une phrase la situation qui vous préoccupe. Nous vous dirons rapidement si AleVia est le bon cabinet pour vous accompagner.
+        </p>
+        <div class="contact-meta">
+          <div><strong>Réponse</strong> sous 48h ouvrées</div>
+          <div><strong>Confidentialité</strong> totale, échanges sous secret professionnel</div>
+          <div><strong>Paris</strong> · déplacements France entière</div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Merci, nous vous recontactons sous 48h.')">
+        <div class="field">
+          <label for="f-name">Prénom &amp; nom</label>
+          <input id="f-name" type="text" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="f-org">Organisation</label>
+          <input id="f-org" type="text" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="f-msg">Votre enjeu en une phrase</label>
+          <textarea id="f-msg" rows="3"></textarea>
+        </div>
+        <label class="consent">
+          <input type="checkbox" />
+          <span>J'accepte que mes données soient utilisées pour me recontacter. <a href="#">Politique de confidentialité</a>.</span>
+        </label>
+        <div>
+          <button type="submit" class="btn btn-accent">
+            Prendre rendez-vous avec Nicole<span class="arrow">→</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-row">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <img src="assets/alevia-logo.png" alt="AleVia" style="height:24px;filter:brightness(0) invert(1);opacity:.85;" />
+        <span style="opacity:.5;font-size:12px;">Communication stratégique &amp; représentation d'intérêts</span>
+      </div>
+      <div style="display:flex;gap:24px;font-size:13px;">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Registre HATVP</a>
+        <span style="opacity:.5;">© 2026 AleVia Conseil</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script>
+/* ================================================
+   SECTORS DATA + icons SVG inline
+   ================================================ */
+const SECTORS = [
+  {
+    title: 'Santé globale et One Health',
+    who:   'Acteurs de la santé humaine, animale et environnementale',
+    why:   'Prévention, accès aux soins, santé environnementale, préparation aux crises sanitaires',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.509 3.516 1 6.5 1c1.945 0 3.73 1.046 4.5 2.31C11.77 2.046 13.555 1 15.5 1 18.484 1 21 3.509 21 7.191c0 4.105-5.37 8.863-9 12.81"/><path d="M9 12h6M12 9v6"/></svg>'
+  },
+  {
+    title: 'Handicap et accessibilité',
+    who:   'Acteurs du handicap, gestionnaires d\u2019ESMS, collectifs pour l\u2019accessibilité',
+    why:   'Accessibilité universelle, effectivité des droits, simplification des parcours de vie',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M10.5 8.5h3L15 14l2.5 4H18a2 2 0 1 1 0 4h-.5l-2-4h-7l-2 4H6a2 2 0 1 1 0-4h.5l1-6Z"/></svg>'
+  },
+  {
+    title: 'Grand âge, médico-social et silver economy',
+    who:   'Opérateurs du grand âge, acteurs médico-sociaux, acteurs de la silver economy',
+    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d\u2019une silver economy responsable',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
+  },
+  {
+    title: 'Numérique responsable',
+    who:   'Entreprises et opérateurs numériques, ESN, éditeurs de solutions de e-santé',
+    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobriété du numérique',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
+  },
+  {
+    title: 'Transition écologique',
+    who:   'Acteurs de l\u2019énergie et des énergies renouvelables, fédérations professionnelles, coalitions climat',
+    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l\u2019air et des milieux',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2c2.5 2.5 4 6 4 10"/><path d="M2 12c0-2.5 1.5-4.5 4-6"/><path d="M22 2l-8 8"/><path d="M16 2h6v6"/></svg>'
+  },
+  {
+    title: 'Mutualité et protection sociale',
+    who:   'Mutuelles, institutions de prévoyance, fédérations et unions de la protection sociale',
+    why:   'Accès aux droits, lutte contre le renoncement aux soins, prévention, soutenabilité du système de protection sociale',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+  },
+  {
+    title: 'Culture et création',
+    who:   'Institutions culturelles, réseaux professionnels, fondations et opérateurs culturels et créatifs',
+    why:   'Accès à la culture, financement de la création, régulation des médias et plateformes, place de la culture dans les transitions sociales et écologiques',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.5 8.5s1.5 1 3.5 1 3.5-1 3.5-1"/><path d="M8 15a5 5 0 0 0 8 0"/></svg>'
+  },
+  {
+    title: 'Sécurité et sûreté privée',
+    who:   'Entreprises de sécurité privée, fédérations et organisations professionnelles du secteur',
+    why:   'Sécurité des lieux recevant du public, continuité des services essentiels, régulation de la filière, résilience des territoires',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+  },
+];
+
+function renderSectors(layout) {
+  const c = document.getElementById('sectorsContainer');
+  if (!c) return;
+  c.classList.remove('sectors-grid', 'sectors-list');
+  c.innerHTML = '';
+
+  if (layout === 'list') {
+    c.classList.add('sectors-list');
+    SECTORS.forEach((s) => {
+      const row = document.createElement('div');
+      row.className = 'sector-row';
+      row.innerHTML = `
+        <div class="sector-content">
+          <div class="sector-icon">${s.icon}</div>
+          <h3 class="h-card" style="color:var(--accent);">${s.title}</h3>
+          <p class="sector-label">Pour qui</p>
+          <p class="sector-who">${s.who}</p>
+          <p class="sector-label" style="margin-top:10px;">Pour quoi</p>
+          <p class="sector-why">${s.why}</p>
+          <div class="arrow-row" style="margin-top:12px;">
+            <span>En savoir plus</span>
+            <span style="color:var(--accent);">→</span>
+          </div>
+        </div>`;
+      c.appendChild(row);
+    });
+  } else {
+    c.classList.add('sectors-grid');
+    SECTORS.forEach((s) => {
+      const card = document.createElement('article');
+      card.className = 'card sector-card';
+      card.style.padding = '24px';
+      card.innerHTML = `
+        <div class="sector-icon">${s.icon}</div>
+        <h3 class="h-card" style="color:var(--accent);">${s.title}</h3>
+        <p class="sector-label">Pour qui</p>
+        <p class="sector-who">${s.who}</p>
+        <p class="sector-label" style="margin-top:10px;">Pour quoi</p>
+        <p class="sector-why">${s.why}</p>
+        <div class="arrow-row" style="margin-top:auto;padding-top:16px;">
+          <span>En savoir plus</span>
+          <span style="color:var(--accent);">→</span>
+        </div>`;
+      c.appendChild(card);
+    });
+  }
+}
+renderSectors('grid');
+
+/* HEADER scroll state */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 12) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+});
+
+/* REVEAL on scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+/* Hero : animation Ken Burns CSS pure — aucun JS requis */
+</script>
+
+<script type="text/babel">
+// tweaks-panel.jsx — inlined
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;overflow-wrap:anywhere}
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-noncommentable=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ title, children }) {
+  return (
+    <>
+      <div className="twk-sect">{title}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, onChange }) {
+  return (
+    <TweakRow label={label} value={value}>
+      <input
+        type="range" className="twk-slider"
+        min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => (
+          <option key={o.value ?? o} value={o.value ?? o}>{o.label ?? o}</option>
+        ))}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakInput({ label, value, onChange, type = 'text' }) {
+  return (
+    <TweakRow label={label}>
+      <input
+        type={type} className="twk-field" value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <TweakRow label={label} inline>
+      <button
+        className="twk-toggle" data-on={value ? '1' : '0'}
+        onClick={() => onChange(!value)} aria-pressed={value}
+      ><i /></button>
+    </TweakRow>
+  );
+}
+
+function TweakColorPicker({ label, value, onChange }) {
+  return (
+    <TweakRow label={label} value={value} inline>
+      <input type="color" className="twk-swatch" value={value}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakSegmented({ label, value, options, onChange }) {
+  const idx = options.findIndex((o) => (o.value ?? o) === value);
+  const refs = React.useRef([]);
+  const [thumbStyle, setThumbStyle] = React.useState({});
+
+  React.useLayoutEffect(() => {
+    const el = refs.current[idx];
+    if (el) setThumbStyle({ left: el.offsetLeft + 'px', width: el.offsetWidth + 'px' });
+  }, [idx, options]);
+
+  return (
+    <TweakRow label={label}>
+      <div className="twk-seg">
+        <div className="twk-seg-thumb" style={thumbStyle} />
+        {options.map((o, i) => (
+          <button
+            key={o.value ?? o}
+            ref={(el) => (refs.current[i] = el)}
+            onClick={() => onChange(o.value ?? o)}
+          >{o.label ?? o}</button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function App() {
+  const [tweaks, setTweak] = useTweaks({
+    layout: 'grid',
+  });
+
+  React.useEffect(() => {
+    renderSectors(tweaks.layout);
+  }, [tweaks.layout]);
+
+  return (
+    <TweaksPanel title="AleVia Tweaks">
+      <TweakSection title="Secteurs">
+        <TweakSegmented
+          label="Affichage"
+          value={tweaks.layout}
+          options={[{ value: 'grid', label: 'Grille' }, { value: 'list', label: 'Liste' }]}
+          onChange={(v) => setTweak('layout', v)}
+        />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+root.render(<App />);
+</script>
+
+</body>
+</html>
