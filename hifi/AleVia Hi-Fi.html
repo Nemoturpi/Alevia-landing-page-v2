@@ -27,13 +27,24 @@
   overflow: hidden;
 }
 
-/* Colonne gauche : texte */
+/* Container pleine largeur dans le hero */
+.hero > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+}
+
+/* Colonne gauche : texte — padding symétrique gauche/droite */
 .hero-col-text {
   flex: 0 0 55%;
   max-width: 55%;
   display: flex;
   align-items: center;
-  padding: 120px 48px 80px 0;
+  padding: 120px 48px 80px 80px;
   position: relative;
   z-index: 2;
 }
@@ -94,17 +105,6 @@
 .hero-video-toggle .icon-play  { display: block; }
 .hero-video-toggle.playing .icon-pause { display: block; }
 .hero-video-toggle.playing .icon-play  { display: none; }
-
-/* Container pleine largeur dans le hero */
-.hero > .container {
-  width: 100%;
-  max-width: none;
-  padding: 0;
-  display: flex;
-  align-items: stretch;
-  position: relative;
-  z-index: 2;
-}
 
 /* Texte en italique rouge pour les accents */
 .hero .h-display em {
@@ -254,14 +254,14 @@
       </div>
     </div>
 
-    <!-- Colonne vidéo (droite) — autoplay silencieuse -->
+    <!-- Colonne vidéo (droite) — sans autoplay, lecture manuelle -->
     <div class="hero-col-video">
-      <video id="heroVideo" muted loop playsinline autoplay preload="auto">
+      <video id="heroVideo" muted loop playsinline preload="metadata">
         <source src="../uploads/hero.mp4" type="video/mp4" />
       </video>
 
       <!-- Bouton pause / play -->
-      <button class="hero-video-toggle playing" id="heroVideoToggle" aria-label="Mettre en pause la vidéo">
+      <button class="hero-video-toggle" id="heroVideoToggle" aria-label="Lancer la vidéo">
         <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <polygon points="5,3 19,12 5,21"/>
         </svg>
@@ -730,24 +730,11 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Vidéo hero : autoplay + bouton pause/play ── */
+/* ── Vidéo hero : lecture manuelle uniquement ── */
 (function() {
   const video  = document.getElementById('heroVideo');
   const toggle = document.getElementById('heroVideoToggle');
   if (!video || !toggle) return;
-
-  /* Tenter l'autoplay dès que possible */
-  const tryPlay = () => {
-    video.play().then(() => {
-      toggle.classList.add('playing');
-      toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
-    }).catch(() => {
-      /* Autoplay bloqué par le navigateur — laisser le bouton play visible */
-      toggle.classList.remove('playing');
-      toggle.setAttribute('aria-label', 'Lancer la vidéo');
-    });
-  };
-  tryPlay();
 
   toggle.addEventListener('click', () => {
     if (video.paused) {
@@ -1114,21 +1101,22 @@ function App() {
             { value: 'normal', label: 'Normal' },
             { value: 'airy', label: 'Aéré' },
           ]}
-          label="Espacement vertical" />
+          label="Espacement" />
       </TweakSection>
-      <TweakSection title="Section secteurs">
+      <TweakSection title="Secteurs">
         <TweakRadio t={t} setTweak={setTweak} k="sectorsLayout"
           options={[
             { value: 'grid', label: 'Grille' },
             { value: 'list', label: 'Liste' },
           ]}
-          label="Mise en page" />
+          label="Affichage" />
       </TweakSection>
     </TweaksPanel>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
+const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+root.render(<App />);
 </script>
 
 </body>
