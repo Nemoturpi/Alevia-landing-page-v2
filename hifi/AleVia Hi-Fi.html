@@ -7,9 +7,20 @@
 <meta name="description" content="AleVia est un cabinet d'affaires publiques spécialisé en santé globale (One Health), handicap et numérique responsable. Stratégie d'influence, plaidoyer et veille réglementaire pour organisations engagées." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <style>
+/* ── Tous les titres en extrabold ── */
+.h-display, .h-section, .h-card,
+.commitment-item h3,
+.founder-name,
+.why-item h3,
+.trade h4,
+.board-h,
+.lever h3 {
+  font-weight: 800;
+}
+
 /* ── H1 hero ── */
 .hero .h-display {
   font-size: clamp(32px, 3.6vw, 54px);
@@ -38,7 +49,7 @@
   z-index: 2;
 }
 
-/* Colonne gauche : texte — padding symétrique gauche/droite */
+/* Colonne gauche : texte */
 .hero-col-text {
   flex: 0 0 65%;
   max-width: 65%;
@@ -49,7 +60,7 @@
   z-index: 2;
 }
 
-/* Colonne droite : slideshow */
+/* Colonne droite : image animée */
 .hero-col-video {
   flex: 0 0 35%;
   max-width: 35%;
@@ -57,51 +68,32 @@
   overflow: hidden;
 }
 
-/* ── Slideshow hero ── */
-.hero-slideshow {
+/* ── Image hero animée — reveal + parallax ── */
+.hero-image-wrap {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  display: block;
-}
-.hero-slide.active {
-  opacity: 1;
+  will-change: transform;
 }
 
-/* Indicateurs de progression */
-.hero-slide-dots {
+.hero-image-wrap img {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  gap: 6px;
-  align-items: center;
+  inset: -8% 0;
+  width: 100%;
+  height: 116%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transform: scale(1.06) translateY(18px);
+  transition:
+    opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hero-slide-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.4);
-  transition: background .3s, transform .3s;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-.hero-slide-dot.active {
-  background: rgba(255,255,255,.9);
-  transform: scale(1.3);
+
+.hero-image-wrap img.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
 /* Léger dégradé de fondu vers la gauche */
@@ -162,7 +154,6 @@
 .commitment-item h3 {
   font-family: var(--font-display);
   font-size: clamp(20px, 1.8vw, 26px);
-  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
   color: var(--ink);
@@ -204,6 +195,22 @@
 }
 .sector-card .sector-who { margin-top: 8px; }
 .sector-card .sector-why { margin-top: 6px; }
+
+/* Sector icon */
+.sector-card .sector-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule-soft);
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--accent);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+/* Guillemets sur les pain-text */
+.pain-text.guillemets::before { content: '\00AB\00A0'; color: var(--accent); }
+.pain-text.guillemets::after  { content: '\00A0\00BB'; color: var(--accent); }
 </style>
 </head>
 <body>
@@ -260,17 +267,10 @@
       </div>
     </div>
 
-    <!-- Colonne images (droite) — slideshow crossfade -->
-    <div class="hero-col-video" id="heroSlideshow">
-      <img class="hero-slide active" src="../uploads/Hero1.png" alt="AleVia — visuel 1" loading="eager" />
-      <img class="hero-slide" src="../uploads/Hero2.png" alt="AleVia — visuel 2" loading="lazy" />
-      <img class="hero-slide" src="../uploads/Hero3.png" alt="AleVia — visuel 3" loading="lazy" />
-
-      <!-- Indicateurs -->
-      <div class="hero-slide-dots" aria-hidden="true">
-        <button class="hero-slide-dot active" data-idx="0"></button>
-        <button class="hero-slide-dot" data-idx="1"></button>
-        <button class="hero-slide-dot" data-idx="2"></button>
+    <!-- Colonne image (droite) — reveal animé + parallax scroll -->
+    <div class="hero-col-video" id="heroImageCol">
+      <div class="hero-image-wrap" id="heroImageWrap">
+        <img id="heroImg" src="../uploads/Hero1.png" alt="AleVia — visuel" loading="eager" />
       </div>
     </div>
 
@@ -319,37 +319,37 @@
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-05.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">On a appris la réforme dans le journal, c'était trop tard</p>
+      <p class="pain-text guillemets">On a appris la réforme dans le journal, c'était trop tard</p>
     </figcaption>
   </figure>
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-02.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">Ce qu'exprime la fédération ne représente pas nos intérêts</p>
+      <p class="pain-text guillemets">Ce qu'exprime la fédération ne représente pas nos intérêts</p>
     </figcaption>
   </figure>
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-04.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">On n'a jamais été consulté alors qu'on est les premiers concernés</p>
+      <p class="pain-text guillemets">On n'a jamais été consulté alors qu'on est les premiers concernés</p>
     </figcaption>
   </figure>
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-01.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">On aimerait que la loi change mais on sait pas comment s'y prendre</p>
+      <p class="pain-text guillemets">On aimerait que la loi change mais on sait pas comment s'y prendre</p>
     </figcaption>
   </figure>
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-03.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">On n'a pas de contacts à l'Élysée, au Sénat, en région</p>
+      <p class="pain-text guillemets">On n'a pas de contacts à l'Élysée, au Sénat, en région</p>
     </figcaption>
   </figure>
   <figure class="pain-card">
     <div class="pain-illu"><img src="../uploads/pain-6.png" alt="" loading="lazy"></div>
     <figcaption class="pain-cap">
-      <p class="pain-text">On a été attaqués dans la presse et on n'a pas su quoi dire</p>
+      <p class="pain-text guillemets">On a été attaqués dans la presse et on n'a pas su quoi dire</p>
     </figcaption>
   </figure>
 </div>
@@ -374,7 +374,6 @@
 
     <div class="levers reveal">
       <article class="lever">
-        <div class="lever-num"><span class="accent">01</span></div>
         <h3 class="h-card" style="color:var(--accent);">Veille &amp; intelligence sociétale</h3>
         <p class="body">
           Avant que le texte soit déposé, avant que l'arbitrage soit rendu, nous sommes déjà informés. Nous identifions les tendances et les risques, sur les plans réglementaire et réputationnel, pour que vous ne découvriez pas vos enjeux dans le Journal officiel.
@@ -387,7 +386,6 @@
       </article>
 
       <article class="lever">
-        <div class="lever-num"><span class="accent">02</span></div>
         <h3 class="h-card" style="color:var(--accent);">Stratégie d'influence &amp; plaidoyer</h3>
         <p class="body">
           Pas de note qui dort dans un tiroir. Nous clarifions votre position, identifions les bons interlocuteurs et organisons les échanges avec les décideurs publics et les coalitions qui comptent. L'objectif : que vos propositions soient réellement prises en compte dans les arbitrages.
@@ -400,7 +398,6 @@
       </article>
 
       <article class="lever">
-        <div class="lever-num"><span class="accent">03</span></div>
         <h3 class="h-card" style="color:var(--accent);">Prise de parole &amp; communication</h3>
         <p class="body">
           Tribunes, auditions, interviews, tables rondes : chaque prise de parole peut faire avancer votre dossier ou le fragiliser. Nous choisissons les bons formats et préparons vos interventions pour qu'elles servent votre stratégie d'influence, pas seulement votre visibilité.
@@ -619,48 +616,56 @@
 
 <script>
 /* ================================================
-   SECTORS DATA
+   SECTORS DATA + icons SVG inline
    ================================================ */
 const SECTORS = [
   {
     title: 'Santé globale et One Health',
     who:   'Acteurs de la santé humaine, animale et environnementale',
-    why:   'Prévention, accès aux soins, santé environnementale, préparation aux crises sanitaires'
+    why:   'Prévention, accès aux soins, santé environnementale, préparation aux crises sanitaires',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.509 3.516 1 6.5 1c1.945 0 3.73 1.046 4.5 2.31C11.77 2.046 13.555 1 15.5 1 18.484 1 21 3.509 21 7.191c0 4.105-5.37 8.863-9 12.81"/><path d="M9 12h6M12 9v6"/></svg>'
   },
   {
     title: 'Handicap et accessibilité',
     who:   'Acteurs du handicap, gestionnaires d\u2019ESMS, collectifs pour l\u2019accessibilité',
-    why:   'Accessibilité universelle, effectivité des droits, simplification des parcours de vie'
+    why:   'Accessibilité universelle, effectivité des droits, simplification des parcours de vie',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M10.5 8.5h3L15 14l2.5 4H18a2 2 0 1 1 0 4h-.5l-2-4h-7l-2 4H6a2 2 0 1 1 0-4h.5l1-6Z"/></svg>'
   },
   {
     title: 'Grand âge, médico-social et silver economy',
     who:   'Opérateurs du grand âge, acteurs médico-sociaux, acteurs de la silver economy',
-    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d\u2019une silver economy responsable'
+    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d\u2019une silver economy responsable',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
   },
   {
     title: 'Numérique responsable',
     who:   'Entreprises et opérateurs numériques, ESN, éditeurs de solutions de e-santé',
-    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobriété du numérique'
+    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobriété du numérique',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
   },
   {
     title: 'Transition écologique',
     who:   'Acteurs de l\u2019énergie et des énergies renouvelables, fédérations professionnelles, coalitions climat',
-    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l\u2019air et des milieux'
+    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l\u2019air et des milieux',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2c2.5 2.5 4 6 4 10"/><path d="M2 12c0-2.5 1.5-4.5 4-6"/><path d="M22 2l-8 8"/><path d="M16 2h6v6"/></svg>'
   },
   {
     title: 'Mutualité et protection sociale',
     who:   'Mutuelles, institutions de prévoyance, fédérations et unions de la protection sociale',
-    why:   'Accès aux droits, lutte contre le renoncement aux soins, prévention, soutenabilité du système de protection sociale'
+    why:   'Accès aux droits, lutte contre le renoncement aux soins, prévention, soutenabilité du système de protection sociale',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
   },
   {
     title: 'Culture et création',
     who:   'Institutions culturelles, réseaux professionnels, fondations et opérateurs culturels et créatifs',
-    why:   'Accès à la culture, financement de la création, régulation des médias et plateformes, place de la culture dans les transitions sociales et écologiques'
+    why:   'Accès à la culture, financement de la création, régulation des médias et plateformes, place de la culture dans les transitions sociales et écologiques',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.5 8.5s1.5 1 3.5 1 3.5-1 3.5-1"/><path d="M8 15a5 5 0 0 0 8 0"/></svg>'
   },
   {
     title: 'Sécurité et sûreté privée',
     who:   'Entreprises de sécurité privée, fédérations et organisations professionnelles du secteur',
-    why:   'Sécurité des lieux recevant du public, continuité des services essentiels, régulation de la filière, résilience des territoires'
+    why:   'Sécurité des lieux recevant du public, continuité des services essentiels, régulation de la filière, résilience des territoires',
+    icon:  '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
   },
 ];
 
@@ -677,6 +682,7 @@ function renderSectors(layout) {
       row.className = 'sector-row';
       row.innerHTML = `
         <div class="sector-content">
+          <div class="sector-icon">${s.icon}</div>
           <h3 class="h-card" style="color:var(--accent);">${s.title}</h3>
           <p class="sector-label">Pour qui</p>
           <p class="sector-who">${s.who}</p>
@@ -694,7 +700,9 @@ function renderSectors(layout) {
     SECTORS.forEach((s) => {
       const card = document.createElement('article');
       card.className = 'card sector-card';
+      card.style.padding = '24px';
       card.innerHTML = `
+        <div class="sector-icon">${s.icon}</div>
         <h3 class="h-card" style="color:var(--accent);">${s.title}</h3>
         <p class="sector-label">Pour qui</p>
         <p class="sector-who">${s.who}</p>
@@ -728,41 +736,30 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Slideshow hero : crossfade automatique ── */
+/* ── Image hero : reveal au chargement + parallax au scroll ── */
 (function() {
-  const slides = document.querySelectorAll('#heroSlideshow .hero-slide');
-  const dots   = document.querySelectorAll('#heroSlideshow .hero-slide-dot');
-  if (!slides.length) return;
+  const img  = document.getElementById('heroImg');
+  const wrap = document.getElementById('heroImageWrap');
+  if (!img || !wrap) return;
 
-  let current = 0;
-  const INTERVAL = 4000; // ms entre chaque image
-
-  function goTo(idx) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (idx + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
+  // Reveal dès que la page est prête
+  function revealHero() {
+    img.classList.add('revealed');
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(revealHero, 80); // petit délai pour que la CSS soit peinte
+  } else {
+    window.addEventListener('load', () => setTimeout(revealHero, 80));
   }
 
-  // Clic sur les dots
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      clearInterval(timer);
-      goTo(parseInt(dot.dataset.idx, 10));
-      timer = setInterval(() => goTo(current + 1), INTERVAL);
-    });
-  });
-
-  // Autoplay
-  let timer = setInterval(() => goTo(current + 1), INTERVAL);
-
-  // Pause au survol
-  const wrap = document.getElementById('heroSlideshow');
-  wrap.addEventListener('mouseenter', () => clearInterval(timer));
-  wrap.addEventListener('mouseleave', () => {
-    timer = setInterval(() => goTo(current + 1), INTERVAL);
-  });
+  // Parallax léger au scroll : l'image dérive doucement vers le haut
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const maxPx = 60; // amplitude max en pixels
+    const shift = Math.min(scrollY * 0.18, maxPx);
+    wrap.style.transform = `translateY(${shift}px)`;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
 
