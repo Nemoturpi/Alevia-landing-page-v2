@@ -23,19 +23,34 @@
 
 /* ── H1 hero ── */
 .hero .h-display {
-  font-size: clamp(32px, 3.6vw, 54px);
-  line-height: 1.06;
-  letter-spacing: -0.025em;
+  font-size: clamp(40px, 5.7vw, 82px);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+  max-width: 11ch;
 }
 
 /* ── Hero : layout 2 colonnes ── */
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: calc(100svh - 76px);
   display: flex;
   align-items: stretch;
-  background: var(--paper, #f7f5f0);
+  padding: 0;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(178, 34, 52, 0.11), transparent 28%),
+    linear-gradient(135deg, var(--paper, #f7f5f0) 0%, #fffaf5 55%, #f0ebe1 100%);
   overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 80px;
+  right: 35%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, rgba(178,34,52,.45), transparent);
+  z-index: 1;
 }
 
 /* Container pleine largeur dans le hero */
@@ -55,9 +70,13 @@
   max-width: 65%;
   display: flex;
   align-items: center;
-  padding: 120px 48px 80px 80px;
+  padding: clamp(72px, 9vw, 128px) 48px clamp(56px, 7vw, 96px) clamp(32px, 6vw, 96px);
   position: relative;
   z-index: 2;
+}
+
+.hero-content {
+  max-width: 760px;
 }
 
 /* Colonne droite : slideshow */
@@ -66,6 +85,7 @@
   max-width: 35%;
   position: relative;
   overflow: hidden;
+  border-left: 1px solid rgba(20,22,28,.08);
 }
 
 /* ── Slideshow hero ── */
@@ -144,13 +164,64 @@
   color: var(--accent, #b22234);
 }
 
+.hero-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 42px;
+  max-width: 660px;
+  background: rgba(20,22,28,.1);
+  border: 1px solid rgba(20,22,28,.1);
+}
+
+.hero-proof-item {
+  background: rgba(255,255,255,.54);
+  padding: 18px 20px;
+  min-height: 112px;
+}
+
+.hero-proof-kpi {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.hero-proof-label {
+  display: block;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.hero .lead {
+  max-width: 650px;
+}
+
+.hero .lead + .lead {
+  max-width: 680px;
+}
+
 /* Mobile : empiler */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .hero { flex-direction: column; min-height: auto; }
-  .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 40px; }
-  .hero-col-video { flex: none; max-width: 100%; height: 55vw; min-height: 220px; }
-  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 20%); }
+  .hero::after { left: 20px; right: 20px; }
+  .hero .h-display { max-width: 12ch; }
+  .hero-col-text { flex: none; max-width: 100%; padding: 96px 20px 44px; }
+  .hero-col-video { flex: none; max-width: 100%; height: 62vw; min-height: 260px; border-left: 0; border-top: 1px solid rgba(20,22,28,.08); }
+  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 22%); }
   .hero > .container { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .hero .h-display { font-size: clamp(40px, 13vw, 58px); }
+  .hero-cta .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
+  .hero-proof { grid-template-columns: 1fr; margin-top: 32px; }
+  .hero-proof-item { min-height: auto; padding: 16px 18px; }
 }
 
 /* ── Section 05 / Engagements ── */
@@ -277,24 +348,38 @@
       <div class="hero-content">
         <div class="hero-tagline">
           <span class="tag-rule"></span>
-          <span class="tag-text">Votre cabinet d'affaires publiques à Paris</span>
+          <span class="tag-text">01 / Cabinet d'affaires publiques à Paris</span>
         </div>
         <h1 class="h-display">
-          Défendre <em>vos&nbsp;intérêts</em><br>pour servir le <em>bien&nbsp;commun</em>
+          Faites entrer <em>vos&nbsp;enjeux</em> dans les décisions publiques.
         </h1>
         <p class="lead">
-          Nous aidons les organisations engagées pour les biens communs à ne plus être absentes des réformes et à peser sur les décisions publiques.
+          AleVia aide les organisations engagées pour les biens communs à détecter les réformes en amont, formuler une position crédible et peser au bon moment auprès des décideurs.
         </p>
         <p class="lead" style="margin-top: 16px;">
-          Nous vous accompagnons pour tous vos enjeux liés à la santé globale (One Health), à l'inclusivité, à la protection sociale, à la transition écologique, au numérique responsable, à la silver economy, à la culture et à la sécurité.
+          Santé globale (One Health), inclusivité, protection sociale, transition écologique, numérique responsable, silver economy, culture ou sécurité : nous transformons vos sujets complexes en trajectoires d'influence lisibles.
         </p>
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary">
             Prendre rendez-vous avec Nicole<span class="arrow">→</span>
           </a>
           <a href="#leviers" class="btn btn-ghost">
-            Voir comment nous obtenons des arbitrages
+            Voir la méthode
           </a>
+        </div>
+        <div class="hero-proof" aria-label="Repères AleVia">
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">35+</span>
+            <span class="hero-proof-label">organisations accompagnées sur des causes d'intérêt général</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">3</span>
+            <span class="hero-proof-label">leviers : veille, plaidoyer et prise de parole</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">1</span>
+            <span class="hero-proof-label">interlocutrice senior de la stratégie à l'exécution</span>
+          </div>
         </div>
       </div>
     </div>
