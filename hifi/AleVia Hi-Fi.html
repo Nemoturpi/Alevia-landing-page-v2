@@ -29,7 +29,7 @@
   max-width: 12.5ch;
 }
 
-/* ── Hero : plus compact, image statique en soutien ── */
+/* ── Hero : plus compact, image animée en soutien ── */
 .hero {
   position: relative;
   min-height: 0;
@@ -58,8 +58,8 @@
   max-width: 1280px;
   padding: 0 32px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
-  gap: clamp(34px, 6vw, 74px);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: clamp(30px, 5vw, 64px);
   align-items: center;
   position: relative;
   z-index: 2;
@@ -76,16 +76,16 @@
 .hero-visual {
   position: relative;
   justify-self: end;
-  width: min(100%, 380px);
+  width: min(100%, 300px);
 }
 
 .hero-visual::before {
   content: '';
   position: absolute;
-  inset: 12% -4% -6% 18%;
+  inset: 14% -5% -8% 20%;
   background: rgba(178, 34, 52, 0.08);
   border-radius: 999px;
-  filter: blur(26px);
+  filter: blur(20px);
   z-index: 0;
 }
 
@@ -93,10 +93,10 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 18px;
+  padding: 12px;
   border: 1px solid rgba(20,22,28,.1);
   background: rgba(255, 255, 255, 0.68);
-  box-shadow: 0 26px 60px -42px rgba(20,22,28,.5);
+  box-shadow: 0 20px 46px -34px rgba(20,22,28,.45);
   overflow: hidden;
 }
 
@@ -111,7 +111,7 @@
 .hero-visual-stage {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / .78;
+  aspect-ratio: 1 / .68;
   overflow: hidden;
 }
 
@@ -125,12 +125,12 @@
   mix-blend-mode: multiply;
   opacity: 0;
   transform: scale(.985);
-  animation: heroVisualCycle 15s infinite ease-in-out;
+  animation: heroVisualCycle 9s infinite ease-in-out;
 }
 
 .hero-visual-stage img:nth-child(1) { animation-delay: 0s; }
-.hero-visual-stage img:nth-child(2) { animation-delay: 5s; }
-.hero-visual-stage img:nth-child(3) { animation-delay: 10s; }
+.hero-visual-stage img:nth-child(2) { animation-delay: 3s; }
+.hero-visual-stage img:nth-child(3) { animation-delay: 6s; }
 
 @keyframes heroVisualCycle {
   0%, 28% { opacity: 1; transform: scale(1); }
@@ -143,10 +143,10 @@
 }
 
 .hero-figure-caption {
-  margin-top: 14px;
-  padding-top: 13px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid rgba(20,22,28,.1);
-  font-size: 12px;
+  font-size: 10.5px;
   line-height: 1.4;
   color: var(--ink-soft);
 }
@@ -155,7 +155,7 @@
   display: block;
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: .14em;
   text-transform: uppercase;
   margin-bottom: 4px;
@@ -165,7 +165,7 @@
   position: absolute;
   z-index: 2;
   left: -16px;
-  bottom: 22px;
+  bottom: 18px;
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -173,12 +173,12 @@
 
 .hero-visual-chip {
   width: max-content;
-  max-width: 170px;
-  padding: 7px 10px;
+  max-width: 150px;
+  padding: 6px 9px;
   border: 1px solid rgba(20,22,28,.1);
   background: rgba(251,250,246,.92);
   box-shadow: 0 12px 28px -20px rgba(20,22,28,.45);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: .02em;
   color: var(--ink);
@@ -243,7 +243,7 @@
     padding: 0 20px;
   }
   .hero .h-display { max-width: 12.5ch; }
-  .hero-visual { justify-self: start; width: min(100%, 420px); }
+  .hero-visual { justify-self: start; width: min(100%, 320px); }
 }
 
 @media (max-width: 640px) {
@@ -253,8 +253,8 @@
   .hero-cta .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
   .hero-proof { grid-template-columns: 1fr; margin-top: 28px; }
   .hero-proof-item { min-height: auto; padding: 14px 16px; }
-  .hero-visual { width: min(100%, 360px); }
-  .hero-figure { padding: 14px; }
+  .hero-visual { width: min(100%, 300px); }
+  .hero-figure { padding: 12px; }
   .hero-visual-chips { position: static; flex-direction: row; flex-wrap: wrap; margin-top: 12px; }
   .hero-visual-chip,
   .hero-visual-chip:nth-child(2),
@@ -431,7 +431,7 @@
         </div>
         <figcaption class="hero-figure-caption">
           <strong>Santé · inclusion · environnement</strong>
-          Une animation lente des territoires AleVia, plus petite, pour soutenir le message sans voler l'attention au titre.
+          Une animation courte des territoires AleVia, en soutien du message principal.
         </figcaption>
       </figure>
       <div class="hero-visual-chips" aria-hidden="true">
