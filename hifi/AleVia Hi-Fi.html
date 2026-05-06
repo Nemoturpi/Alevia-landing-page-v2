@@ -17,20 +17,23 @@
   letter-spacing: -0.025em;
 }
 
-/* ── Hero vidéo : intégration cinématique ── */
-.hero-visual {
+/* ── Hero vidéo : fond plein écran cinématique ── */
+.hero {
   position: relative;
-  width: 100%;
-  border-radius: 12px;
   overflow: hidden;
-  background: var(--ink);
-  aspect-ratio: 16 / 10;
-  box-shadow:
-    0 2px 4px rgba(20,22,28,.08),
-    0 16px 48px rgba(20,22,28,.22),
-    0 40px 80px rgba(20,22,28,.14);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
 }
-.hero-visual video {
+
+/* Vidéo en fond absolu */
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-video-bg video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -38,16 +41,79 @@
   object-fit: cover;
   display: block;
 }
-/* Vignette subtile sur les bords */
-.hero-visual::after {
-  content: '';
+
+/* Overlay sombre pour lisibilité du texte */
+.hero-video-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, rgba(20,22,28,.18) 0%, transparent 28%, transparent 72%, rgba(20,22,28,.18) 100%),
-    linear-gradient(to bottom, transparent 70%, rgba(20,22,28,.28) 100%);
-  pointer-events: none;
+    linear-gradient(to right, rgba(14,12,8,.72) 0%, rgba(14,12,8,.48) 55%, rgba(14,12,8,.18) 100%),
+    linear-gradient(to bottom, rgba(14,12,8,.3) 0%, transparent 30%, transparent 70%, rgba(14,12,8,.5) 100%);
+  z-index: 1;
 }
+
+/* Contenu par-dessus */
+.hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Quand la vidéo est active, texte en blanc */
+.hero.video-active .h-display,
+.hero.video-active .hero-tagline .tag-text,
+.hero.video-active .lead,
+.hero.video-active .hero-meta {
+  color: #f5f3ee;
+}
+.hero.video-active .tag-rule {
+  background: rgba(245,243,238,.5);
+}
+.hero.video-active .hero-meta div {
+  color: rgba(245,243,238,.7);
+}
+.hero.video-active .btn-ghost {
+  color: rgba(245,243,238,.85);
+  border-color: rgba(245,243,238,.3);
+}
+.hero.video-active .btn-ghost:hover {
+  background: rgba(245,243,238,.1);
+}
+
+/* Bouton play/pause */
+.hero-video-toggle {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.45);
+  background: rgba(14,12,8,.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.hero-video-toggle:hover {
+  background: rgba(14,12,8,.65);
+  border-color: rgba(255,255,255,.7);
+  transform: scale(1.06);
+}
+.hero-video-toggle svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+/* Icône pause cachée par défaut, play visible */
+.hero-video-toggle .icon-pause { display: none; }
+.hero-video-toggle .icon-play  { display: block; }
+.hero-video-toggle.playing .icon-pause { display: block; }
+.hero-video-toggle.playing .icon-play  { display: none; }
 
 /* ── Section 05 / Engagements ── */
 .commitments {
@@ -158,7 +224,29 @@
 </header>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="heroSection">
+
+  <!-- Vidéo en fond plein écran -->
+  <div class="hero-video-bg" id="heroBg">
+    <video id="heroVideo" muted loop playsinline preload="metadata">
+      <source src="../uploads/hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
+
+  <!-- Bouton play / pause -->
+  <button class="hero-video-toggle" id="heroVideoToggle" aria-label="Lancer la vidéo">
+    <!-- Icône Play -->
+    <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <polygon points="5,3 19,12 5,21"/>
+    </svg>
+    <!-- Icône Pause -->
+    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="6" y="4" width="4" height="16" rx="1"/>
+      <rect x="14" y="4" width="4" height="16" rx="1"/>
+    </svg>
+  </button>
+
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
@@ -185,13 +273,6 @@
           <div><strong>3 métiers</strong> en interne · droit, journalisme, lobbying</div>
           <div><strong>0 conflit</strong> d'intérêts</div>
         </div>
-      </div>
-
-      <!-- Vidéo hero — embedded cinématique -->
-      <div class="hero-visual">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="../uploads/hero.mp4" type="video/mp4" />
-        </video>
       </div>
     </div>
   </div>
@@ -543,7 +624,7 @@
 
 <script>
 /* ================================================
-   SECTORS DATA — structure Titre / Pour qui / Pour quoi
+   SECTORS DATA
    ================================================ */
 const SECTORS = [
   {
@@ -651,6 +732,35 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+/* ── Vidéo hero : play / pause manuel ── */
+(function() {
+  const video  = document.getElementById('heroVideo');
+  const toggle = document.getElementById('heroVideoToggle');
+  const hero   = document.getElementById('heroSection');
+  if (!video || !toggle) return;
+
+  toggle.addEventListener('click', () => {
+    if (video.paused) {
+      video.play().then(() => {
+        toggle.classList.add('playing');
+        toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
+        hero.classList.add('video-active');
+      }).catch(() => {});
+    } else {
+      video.pause();
+      toggle.classList.remove('playing');
+      toggle.setAttribute('aria-label', 'Lancer la vidéo');
+      hero.classList.remove('video-active');
+    }
+  });
+
+  /* Si la vidéo se termine (loop désactivable) */
+  video.addEventListener('ended', () => {
+    toggle.classList.remove('playing');
+    toggle.setAttribute('aria-label', 'Lancer la vidéo');
+  });
+})();
 </script>
 
 <script type="text/babel">
@@ -957,7 +1067,7 @@ function App() {
       let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
       r = Math.max(0, Math.round(r * (1 - amt)));
       g = Math.max(0, Math.round(g * (1 - amt)));
-      b = Math.max(0, Math.round(b * (1 - amt)));
+      b = Math.max(0, Math.round(b + (255 - b) * 0));
       return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
     };
     document.documentElement.style.setProperty('--accent-2', darken(t.accent, 0.2));
