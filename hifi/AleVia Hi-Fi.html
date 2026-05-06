@@ -254,14 +254,14 @@
       </div>
     </div>
 
-    <!-- Colonne vidéo (droite) — sans autoplay, lecture manuelle -->
+    <!-- Colonne vidéo (droite) — autoplay sans boucle -->
     <div class="hero-col-video">
-      <video id="heroVideo" muted loop playsinline preload="metadata">
+      <video id="heroVideo" autoplay muted playsinline preload="auto">
         <source src="../uploads/hero.mp4" type="video/mp4" />
       </video>
 
       <!-- Bouton pause / play -->
-      <button class="hero-video-toggle" id="heroVideoToggle" aria-label="Lancer la vidéo">
+      <button class="hero-video-toggle playing" id="heroVideoToggle" aria-label="Mettre en pause la vidéo">
         <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <polygon points="5,3 19,12 5,21"/>
         </svg>
@@ -730,14 +730,30 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Vidéo hero : lecture manuelle uniquement ── */
+/* ── Vidéo hero : autoplay au chargement, sans boucle ── */
 (function() {
   const video  = document.getElementById('heroVideo');
   const toggle = document.getElementById('heroVideoToggle');
   if (!video || !toggle) return;
 
+  /* Tenter l'autoplay (déjà dans l'attribut HTML, mais on synchro le bouton) */
+  video.play().then(() => {
+    toggle.classList.add('playing');
+    toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
+  }).catch(() => {
+    /* Autoplay bloqué par le navigateur : bouton reste en état "play" */
+    toggle.classList.remove('playing');
+    toggle.setAttribute('aria-label', 'Lancer la vidéo');
+  });
+
+  /* Quand la vidéo se termine, repasser le bouton en état "play" */
+  video.addEventListener('ended', () => {
+    toggle.classList.remove('playing');
+    toggle.setAttribute('aria-label', 'Relancer la vidéo');
+  });
+
   toggle.addEventListener('click', () => {
-    if (video.paused) {
+    if (video.paused || video.ended) {
       video.play().then(() => {
         toggle.classList.add('playing');
         toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
