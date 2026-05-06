@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
-<title>AleVia Conseil – Cabinet d'affaires publiques | Santé, Handicap, Numérique responsable</title>
+<title>AleVia Conseil – Cabinet d'affaires publiques | Paris</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="AleVia est un cabinet d'affaires publiques spécialisé en santé globale (One Health), handicap et numérique responsable. Stratégie d'influence, plaidoyer et veille réglementaire pour organisations engagées." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,30 +10,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <style>
-/* ── H1 hero : même taille que .h-section ── */
+/* ── H1 hero ── */
 .hero .h-display {
-  font-size: clamp(36px, 4vw, 58px);
-  line-height: 1.04;
+  font-size: clamp(32px, 3.6vw, 54px);
+  line-height: 1.06;
   letter-spacing: -0.025em;
 }
 
-/* ── Hero vidéo : fond plein écran cinématique ── */
+/* ── Hero : layout 2 colonnes ── */
 .hero {
   position: relative;
-  overflow: hidden;
   min-height: 100svh;
   display: flex;
-  align-items: center;
-}
-
-/* Vidéo en fond absolu */
-.hero-video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  align-items: stretch;
+  background: var(--paper, #f7f5f0);
   overflow: hidden;
 }
-.hero-video-bg video {
+
+/* Colonne gauche : texte */
+.hero-col-text {
+  flex: 0 0 55%;
+  max-width: 55%;
+  display: flex;
+  align-items: center;
+  padding: 120px 48px 80px 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Colonne droite : vidéo */
+.hero-col-video {
+  flex: 0 0 45%;
+  max-width: 45%;
+  position: relative;
+  overflow: hidden;
+}
+.hero-col-video video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -42,53 +54,26 @@
   display: block;
 }
 
-/* Overlay sombre pour lisibilité du texte */
-.hero-video-overlay {
+/* Léger dégradé de fondu vers la gauche */
+.hero-col-video::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to right, rgba(14,12,8,.72) 0%, rgba(14,12,8,.48) 55%, rgba(14,12,8,.18) 100%),
-    linear-gradient(to bottom, rgba(14,12,8,.3) 0%, transparent 30%, transparent 70%, rgba(14,12,8,.5) 100%);
+  background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 18%);
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Contenu par-dessus */
-.hero > .container {
-  position: relative;
-  z-index: 2;
-}
-
-/* Quand la vidéo est active, texte en blanc */
-.hero.video-active .h-display,
-.hero.video-active .hero-tagline .tag-text,
-.hero.video-active .lead,
-.hero.video-active .hero-meta {
-  color: #f5f3ee;
-}
-.hero.video-active .tag-rule {
-  background: rgba(245,243,238,.5);
-}
-.hero.video-active .hero-meta div {
-  color: rgba(245,243,238,.7);
-}
-.hero.video-active .btn-ghost {
-  color: rgba(245,243,238,.85);
-  border-color: rgba(245,243,238,.3);
-}
-.hero.video-active .btn-ghost:hover {
-  background: rgba(245,243,238,.1);
-}
-
-/* Bouton play/pause */
+/* Bouton pause (en bas à droite de la colonne vidéo) */
 .hero-video-toggle {
   position: absolute;
-  bottom: 32px;
-  right: 32px;
+  bottom: 20px;
+  right: 20px;
   z-index: 3;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,.45);
+  border: 1.5px solid rgba(255,255,255,.5);
   background: rgba(14,12,8,.45);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -101,24 +86,43 @@
 }
 .hero-video-toggle:hover {
   background: rgba(14,12,8,.65);
-  border-color: rgba(255,255,255,.7);
+  border-color: rgba(255,255,255,.75);
   transform: scale(1.06);
 }
-.hero-video-toggle svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-/* Icône pause cachée par défaut, play visible */
+.hero-video-toggle svg { width: 16px; height: 16px; flex-shrink: 0; }
 .hero-video-toggle .icon-pause { display: none; }
 .hero-video-toggle .icon-play  { display: block; }
 .hero-video-toggle.playing .icon-pause { display: block; }
 .hero-video-toggle.playing .icon-play  { display: none; }
 
-/* ── Section 05 / Engagements ── */
-.commitments {
-  background: #fff;
+/* Container pleine largeur dans le hero */
+.hero > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
 }
+
+/* Texte en italique rouge pour les accents */
+.hero .h-display em {
+  font-style: inherit;
+  color: var(--accent, #b22234);
+}
+
+/* Mobile : empiler */
+@media (max-width: 768px) {
+  .hero { flex-direction: column; min-height: auto; }
+  .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 40px; }
+  .hero-col-video { flex: none; max-width: 100%; height: 55vw; min-height: 220px; }
+  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 20%); }
+  .hero > .container { flex-direction: column; }
+}
+
+/* ── Section 05 / Engagements ── */
+.commitments { background: #fff; }
 .commitments-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -127,9 +131,7 @@
   border: 1px solid var(--rule-soft);
   margin-top: var(--gap-md);
 }
-@media (max-width: 700px) {
-  .commitments-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 700px) { .commitments-grid { grid-template-columns: 1fr; } }
 .commitment-item {
   background: #fff;
   padding: 40px 36px;
@@ -140,9 +142,7 @@
   transition: background .2s;
 }
 .commitment-item:hover { background: var(--paper); }
-.commitment-item--wide {
-  grid-column: 1 / -1;
-}
+.commitment-item--wide { grid-column: 1 / -1; }
 .commitment-num {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -168,8 +168,6 @@
   max-width: 46ch;
 }
 .commitment-item--wide p { max-width: 64ch; }
-
-/* Accent rule sous le titre */
 .commitment-item h3::after {
   content: '';
   display: block;
@@ -225,37 +223,17 @@
 
 <!-- HERO -->
 <section class="hero" id="heroSection">
-
-  <!-- Vidéo en fond plein écran -->
-  <div class="hero-video-bg" id="heroBg">
-    <video id="heroVideo" muted loop playsinline preload="metadata">
-      <source src="../uploads/hero.mp4" type="video/mp4" />
-    </video>
-  </div>
-  <div class="hero-video-overlay"></div>
-
-  <!-- Bouton play / pause -->
-  <button class="hero-video-toggle" id="heroVideoToggle" aria-label="Lancer la vidéo">
-    <!-- Icône Play -->
-    <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <polygon points="5,3 19,12 5,21"/>
-    </svg>
-    <!-- Icône Pause -->
-    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <rect x="6" y="4" width="4" height="16" rx="1"/>
-      <rect x="14" y="4" width="4" height="16" rx="1"/>
-    </svg>
-  </button>
-
   <div class="container">
-    <div class="hero-grid">
+
+    <!-- Colonne texte (gauche) -->
+    <div class="hero-col-text">
       <div class="hero-content">
         <div class="hero-tagline">
           <span class="tag-rule"></span>
           <span class="tag-text">Votre cabinet d'affaires publiques à Paris</span>
         </div>
         <h1 class="h-display">
-          Défendre <em>vos intérêts</em> pour servir les <em>biens communs</em>
+          Défendre <em>vos&nbsp;intérêts</em><br>pour servir le <em>bien&nbsp;commun</em>
         </h1>
         <p class="lead">
           Nous aidons les organisations engagées pour les biens communs à ne plus être absentes des réformes et à peser sur les décisions publiques.
@@ -275,6 +253,25 @@
         </div>
       </div>
     </div>
+
+    <!-- Colonne vidéo (droite) — autoplay silencieuse -->
+    <div class="hero-col-video">
+      <video id="heroVideo" muted loop playsinline autoplay preload="auto">
+        <source src="../uploads/hero.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Bouton pause / play -->
+      <button class="hero-video-toggle playing" id="heroVideoToggle" aria-label="Mettre en pause la vidéo">
+        <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="5,3 19,12 5,21"/>
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16" rx="1"/>
+          <rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+      </button>
+    </div>
+
   </div>
 </section>
 
@@ -733,32 +730,36 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Vidéo hero : play / pause manuel ── */
+/* ── Vidéo hero : autoplay + bouton pause/play ── */
 (function() {
   const video  = document.getElementById('heroVideo');
   const toggle = document.getElementById('heroVideoToggle');
-  const hero   = document.getElementById('heroSection');
   if (!video || !toggle) return;
+
+  /* Tenter l'autoplay dès que possible */
+  const tryPlay = () => {
+    video.play().then(() => {
+      toggle.classList.add('playing');
+      toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
+    }).catch(() => {
+      /* Autoplay bloqué par le navigateur — laisser le bouton play visible */
+      toggle.classList.remove('playing');
+      toggle.setAttribute('aria-label', 'Lancer la vidéo');
+    });
+  };
+  tryPlay();
 
   toggle.addEventListener('click', () => {
     if (video.paused) {
       video.play().then(() => {
         toggle.classList.add('playing');
         toggle.setAttribute('aria-label', 'Mettre en pause la vidéo');
-        hero.classList.add('video-active');
       }).catch(() => {});
     } else {
       video.pause();
       toggle.classList.remove('playing');
       toggle.setAttribute('aria-label', 'Lancer la vidéo');
-      hero.classList.remove('video-active');
     }
-  });
-
-  /* Si la vidéo se termine (loop désactivable) */
-  video.addEventListener('ended', () => {
-    toggle.classList.remove('playing');
-    toggle.setAttribute('aria-label', 'Lancer la vidéo');
   });
 })();
 </script>
