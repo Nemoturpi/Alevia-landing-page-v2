@@ -51,19 +51,19 @@
 
 /* Colonne gauche : texte */
 .hero-col-text {
-  flex: 0 0 65%;
-  max-width: 65%;
+  flex: 0 0 52%;
+  max-width: 52%;
   display: flex;
   align-items: center;
-  padding: 120px 48px 80px 80px;
+  padding: 120px 40px 80px 72px;
   position: relative;
   z-index: 2;
 }
 
 /* Colonne droite : slideshow */
 .hero-col-video {
-  flex: 0 0 35%;
-  max-width: 35%;
+  flex: 0 0 48%;
+  max-width: 48%;
   position: relative;
   overflow: hidden;
 }
@@ -83,7 +83,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity;
 }
 
@@ -97,16 +97,36 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
+  transform-origin: center center;
+  will-change: transform;
 }
+
+/* ── Ken Burns : 3 variantes (zoom + pan unique par slide) ── */
+@keyframes kenBurns1 {
+  0%   { transform: scale(1.00) translate(0%, 0%); }
+  100% { transform: scale(1.08) translate(-2%, -1.5%); }
+}
+@keyframes kenBurns2 {
+  0%   { transform: scale(1.06) translate(-1.5%, 1%); }
+  100% { transform: scale(1.00) translate(1.5%, -0.5%); }
+}
+@keyframes kenBurns3 {
+  0%   { transform: scale(1.00) translate(1%, -1%); }
+  100% { transform: scale(1.07) translate(-1%, 1.5%); }
+}
+
+.hero-slide[data-index="0"] img { animation: kenBurns1 8s ease-in-out infinite alternate; }
+.hero-slide[data-index="1"] img { animation: kenBurns2 8s ease-in-out infinite alternate; }
+.hero-slide[data-index="2"] img { animation: kenBurns3 8s ease-in-out infinite alternate; }
 
 /* Dégradé de fondu vers la gauche */
 .hero-col-video::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 18%);
-  z-index: 2;
+background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 26%);  z-index: 2;
   pointer-events: none;
 }
 
@@ -148,7 +168,7 @@
 @media (max-width: 768px) {
   .hero { flex-direction: column; min-height: auto; }
   .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 40px; }
-  .hero-col-video { flex: none; max-width: 100%; height: 55vw; min-height: 220px; }
+.hero-col-video { flex: none; max-width: 100%; height: 62vw; min-height: 260px; }
   .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 20%); }
   .hero > .container { flex-direction: column; }
 }
@@ -783,7 +803,7 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Hero slideshow : crossfade automatique + dots ── */
+/* ── Hero slideshow : crossfade + Ken Burns automatique + dots ── */
 (function() {
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   const dots   = Array.from(document.querySelectorAll('.hero-dot'));
@@ -792,7 +812,16 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
   let current   = 0;
   let timer     = null;
-  const DELAY   = 4000; // ms entre chaque slide
+  const DELAY   = 2800; // ms entre chaque slide
+
+  function restartKenBurns(slide) {
+    const img = slide.querySelector('img');
+    if (!img) return;
+    // Force le navigateur à re-déclencher l'animation depuis le début
+    img.style.animation = 'none';
+    void img.offsetHeight; // reflow
+    img.style.animation = '';
+  }
 
   function goTo(index) {
     slides[current].classList.remove('active');
@@ -801,6 +830,7 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
     current = index % slides.length;
 
+    restartKenBurns(slides[current]);
     slides[current].classList.add('active');
     dots[current].classList.add('active');
     dots[current].setAttribute('aria-selected', 'true');
