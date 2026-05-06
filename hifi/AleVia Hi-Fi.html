@@ -23,142 +23,145 @@
 
 /* ── H1 hero ── */
 .hero .h-display {
-  font-size: clamp(40px, 5.7vw, 82px);
-  line-height: 0.96;
-  letter-spacing: -0.055em;
-  max-width: 11ch;
+  font-size: clamp(36px, 4.25vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.048em;
+  max-width: 12.5ch;
 }
 
-/* ── Hero : layout 2 colonnes ── */
+/* ── Hero : plus compact, image statique en soutien ── */
 .hero {
   position: relative;
-  min-height: calc(100svh - 76px);
+  min-height: 0;
   display: flex;
-  align-items: stretch;
-  padding: 0;
+  align-items: center;
+  padding: clamp(54px, 7vw, 86px) 0 clamp(46px, 6vw, 72px);
   background:
-    radial-gradient(circle at 12% 12%, rgba(178, 34, 52, 0.11), transparent 28%),
-    linear-gradient(135deg, var(--paper, #f7f5f0) 0%, #fffaf5 55%, #f0ebe1 100%);
+    radial-gradient(circle at 10% 12%, rgba(178, 34, 52, 0.08), transparent 24%),
+    linear-gradient(135deg, var(--paper, #f7f5f0) 0%, #fffaf5 58%, #f4efe5 100%);
   overflow: hidden;
 }
 
 .hero::after {
   content: '';
   position: absolute;
-  left: 80px;
-  right: 35%;
+  left: clamp(24px, 6vw, 96px);
+  right: clamp(24px, 6vw, 96px);
   bottom: 0;
   height: 1px;
-  background: linear-gradient(to right, rgba(178,34,52,.45), transparent);
+  background: linear-gradient(to right, rgba(178,34,52,.34), transparent);
   z-index: 1;
 }
 
-/* Container pleine largeur dans le hero */
 .hero > .container {
   width: 100%;
-  max-width: none;
-  padding: 0;
-  display: flex;
-  align-items: stretch;
+  max-width: 1280px;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: clamp(34px, 6vw, 74px);
+  align-items: center;
   position: relative;
   z-index: 2;
 }
 
-/* Colonne gauche : texte */
 .hero-col-text {
-  flex: 0 0 65%;
-  max-width: 65%;
-  display: flex;
-  align-items: center;
-  padding: clamp(72px, 9vw, 128px) 48px clamp(56px, 7vw, 96px) clamp(32px, 6vw, 96px);
-  position: relative;
-  z-index: 2;
+  min-width: 0;
 }
 
 .hero-content {
-  max-width: 760px;
+  max-width: 690px;
 }
 
-/* Colonne droite : slideshow */
-.hero-col-video {
-  flex: 0 0 35%;
-  max-width: 35%;
+.hero-visual {
   position: relative;
+  justify-self: end;
+  width: min(100%, 380px);
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 12% -4% -6% 18%;
+  background: rgba(178, 34, 52, 0.08);
+  border-radius: 999px;
+  filter: blur(26px);
+  z-index: 0;
+}
+
+.hero-figure {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(20,22,28,.1);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 26px 60px -42px rgba(20,22,28,.5);
   overflow: hidden;
-  border-left: 1px solid rgba(20,22,28,.08);
 }
 
-/* ── Slideshow hero ── */
-.hero-slideshow {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Chaque slide */
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity;
-}
-
-.hero-slide.active {
-  opacity: 1;
-}
-
-.hero-slide img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Dégradé de fondu vers la gauche */
-.hero-col-video::before {
+.hero-figure::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 18%);
-  z-index: 2;
+  border: 1px solid rgba(255,255,255,.76);
   pointer-events: none;
 }
 
-/* ── Dots de navigation ── */
-.hero-dots {
+.hero-figure img {
+  width: 100%;
+  aspect-ratio: 1 / .78;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: multiply;
+}
+
+.hero-figure-caption {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(20,22,28,.1);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.hero-figure-caption strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.hero-visual-chips {
   position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
+  z-index: 2;
+  left: -16px;
+  bottom: 22px;
   display: flex;
-  gap: 8px;
-  align-items: center;
+  flex-direction: column;
+  gap: 7px;
 }
 
-.hero-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.45);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s, transform 0.3s;
+.hero-visual-chip {
+  width: max-content;
+  max-width: 170px;
+  padding: 7px 10px;
+  border: 1px solid rgba(20,22,28,.1);
+  background: rgba(251,250,246,.92);
+  box-shadow: 0 12px 28px -20px rgba(20,22,28,.45);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--ink);
 }
 
-.hero-dot.active {
-  background: #fff;
-  transform: scale(1.4);
-}
+.hero-visual-chip:nth-child(2) { margin-left: 18px; }
+.hero-visual-chip:nth-child(3) { margin-left: 6px; color: var(--accent); }
 
-/* Texte en italique rouge pour les accents */
 .hero .h-display em {
   font-style: inherit;
   color: var(--accent, #b22234);
@@ -168,60 +171,69 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  margin-top: 42px;
-  max-width: 660px;
-  background: rgba(20,22,28,.1);
-  border: 1px solid rgba(20,22,28,.1);
+  margin-top: 30px;
+  max-width: 610px;
+  background: rgba(20,22,28,.09);
+  border: 1px solid rgba(20,22,28,.09);
 }
 
 .hero-proof-item {
-  background: rgba(255,255,255,.54);
-  padding: 18px 20px;
-  min-height: 112px;
+  background: rgba(255,255,255,.5);
+  padding: 14px 16px;
+  min-height: 90px;
 }
 
 .hero-proof-kpi {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(26px, 2.4vw, 36px);
+  font-size: clamp(23px, 2vw, 30px);
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 800;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hero-proof-label {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.35;
   color: var(--ink-soft);
 }
 
 .hero .lead {
-  max-width: 650px;
+  max-width: 610px;
+  margin-bottom: 22px;
+  font-size: clamp(16px, 1.35vw, 18px);
 }
 
 .hero .lead + .lead {
-  max-width: 680px;
+  max-width: 635px;
 }
 
-/* Mobile : empiler */
-@media (max-width: 900px) {
-  .hero { flex-direction: column; min-height: auto; }
-  .hero::after { left: 20px; right: 20px; }
-  .hero .h-display { max-width: 12ch; }
-  .hero-col-text { flex: none; max-width: 100%; padding: 96px 20px 44px; }
-  .hero-col-video { flex: none; max-width: 100%; height: 62vw; min-height: 260px; border-left: 0; border-top: 1px solid rgba(20,22,28,.08); }
-  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 22%); }
-  .hero > .container { flex-direction: column; }
+@media (max-width: 980px) {
+  .hero > .container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 20px;
+  }
+  .hero .h-display { max-width: 12.5ch; }
+  .hero-visual { justify-self: start; width: min(100%, 420px); }
 }
 
 @media (max-width: 640px) {
-  .hero .h-display { font-size: clamp(40px, 13vw, 58px); }
+  .hero { padding: 42px 0 52px; }
+  .hero .h-display { font-size: clamp(36px, 11.5vw, 52px); }
+  .hero-tagline { margin-bottom: 22px; }
   .hero-cta .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
-  .hero-proof { grid-template-columns: 1fr; margin-top: 32px; }
-  .hero-proof-item { min-height: auto; padding: 16px 18px; }
+  .hero-proof { grid-template-columns: 1fr; margin-top: 28px; }
+  .hero-proof-item { min-height: auto; padding: 14px 16px; }
+  .hero-visual { width: min(100%, 360px); }
+  .hero-figure { padding: 14px; }
+  .hero-visual-chips { position: static; flex-direction: row; flex-wrap: wrap; margin-top: 12px; }
+  .hero-visual-chip,
+  .hero-visual-chip:nth-child(2),
+  .hero-visual-chip:nth-child(3) { margin-left: 0; }
 }
 
 /* ── Section 05 / Engagements ── */
@@ -384,25 +396,19 @@
       </div>
     </div>
 
-    <!-- Colonne image (droite) — slideshow crossfade -->
-    <div class="hero-col-video" id="heroImageCol">
-      <div class="hero-slideshow" id="heroSlideshow">
-        <div class="hero-slide active" data-index="0">
-          <img src="../uploads/Hero1.png" alt="AleVia — visuel 1" loading="eager" />
-        </div>
-        <div class="hero-slide" data-index="1">
-          <img src="../uploads/Hero2.png" alt="AleVia — visuel 2" loading="eager" />
-        </div>
-        <div class="hero-slide" data-index="2">
-          <img src="../uploads/Hero3.png" alt="AleVia — visuel 3" loading="eager" />
-        </div>
-      </div>
-
-      <!-- Dots de navigation -->
-      <div class="hero-dots" id="heroDots" role="tablist" aria-label="Navigation slideshow">
-        <button class="hero-dot active" data-target="0" role="tab" aria-label="Image 1" aria-selected="true"></button>
-        <button class="hero-dot" data-target="1" role="tab" aria-label="Image 2" aria-selected="false"></button>
-        <button class="hero-dot" data-target="2" role="tab" aria-label="Image 3" aria-selected="false"></button>
+    <!-- Colonne image (droite) — visuel statique compact -->
+    <div class="hero-visual" aria-label="Illustration des territoires d'influence AleVia">
+      <figure class="hero-figure">
+        <img src="../uploads/Hero3.png" alt="Illustration One Health reliant santé, inclusion et transition écologique" loading="eager" />
+        <figcaption class="hero-figure-caption">
+          <strong>Santé · inclusion · environnement</strong>
+          Une image repère, plus petite, pour soutenir le message sans voler l'attention au titre.
+        </figcaption>
+      </figure>
+      <div class="hero-visual-chips" aria-hidden="true">
+        <span class="hero-visual-chip">Veille réglementaire</span>
+        <span class="hero-visual-chip">Plaidoyer</span>
+        <span class="hero-visual-chip">Décision publique</span>
       </div>
     </div>
 
@@ -868,61 +874,6 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Hero slideshow : crossfade automatique + dots ── */
-(function() {
-  const slides = Array.from(document.querySelectorAll('.hero-slide'));
-  const dots   = Array.from(document.querySelectorAll('.hero-dot'));
-  const col    = document.getElementById('heroImageCol');
-  if (!slides.length) return;
-
-  let current   = 0;
-  let timer     = null;
-  const DELAY   = 4000; // ms entre chaque slide
-
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    dots[current].setAttribute('aria-selected', 'false');
-
-    current = index % slides.length;
-
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    dots[current].setAttribute('aria-selected', 'true');
-  }
-
-  function next() {
-    goTo((current + 1) % slides.length);
-  }
-
-  function start() {
-    if (timer) return;
-    timer = setInterval(next, DELAY);
-  }
-
-  function stop() {
-    clearInterval(timer);
-    timer = null;
-  }
-
-  // Dots cliquables
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      stop();
-      goTo(i);
-      start();
-    });
-  });
-
-  // Pause au survol de la colonne image
-  if (col) {
-    col.addEventListener('mouseenter', stop);
-    col.addEventListener('mouseleave', start);
-  }
-
-  // Démarrage automatique dès que la page est chargée
-  start();
-})();
 </script>
 
 <script type="text/babel">
