@@ -8,32 +8,113 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 <style>
-/* H1 hero : aligné sur .h-section (même taille que "À qui nous nous adressons.") */
+/* ── H1 hero : même taille que .h-section ── */
 .hero .h-display {
-  font-size: var(--text-xl, clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem));
-  line-height: 1.2;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
 }
 
-/* Hero vidéo */
-.hero-video-wrap {
+/* ── Hero vidéo : intégration cinématique ── */
+.hero-visual {
   position: relative;
-  border-radius: 16px;
+  width: 100%;
+  border-radius: 12px;
   overflow: hidden;
+  background: var(--ink);
   aspect-ratio: 16 / 10;
-  background: #1a1916;
-  box-shadow: 0 24px 64px rgba(0,0,0,.18);
+  box-shadow:
+    0 2px 4px rgba(20,22,28,.08),
+    0 16px 48px rgba(20,22,28,.22),
+    0 40px 80px rgba(20,22,28,.14);
 }
-.hero-video-wrap video {
+.hero-visual video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
+/* Vignette subtile sur les bords */
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(20,22,28,.18) 0%, transparent 28%, transparent 72%, rgba(20,22,28,.18) 100%),
+    linear-gradient(to bottom, transparent 70%, rgba(20,22,28,.28) 100%);
+  pointer-events: none;
+}
 
-/* Cartes secteurs : structure Titre / Pour qui / Pour quoi / Lien */
+/* ── Section 05 / Engagements ── */
+.commitments {
+  background: #fff;
+}
+.commitments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+  margin-top: var(--gap-md);
+}
+@media (max-width: 700px) {
+  .commitments-grid { grid-template-columns: 1fr; }
+}
+.commitment-item {
+  background: #fff;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  transition: background .2s;
+}
+.commitment-item:hover { background: var(--paper); }
+.commitment-item--wide {
+  grid-column: 1 / -1;
+}
+.commitment-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.commitment-item h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+.commitment-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 46ch;
+}
+.commitment-item--wide p { max-width: 64ch; }
+
+/* Accent rule sous le titre */
+.commitment-item h3::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 10px;
+  border-radius: 1px;
+}
+
+/* Cartes secteurs */
 .sector-card .sector-label {
   font-size: 10px;
   font-weight: 600;
@@ -89,7 +170,7 @@
           Défendre <em>vos intérêts</em> pour servir les <em>biens communs</em>
         </h1>
         <p class="lead">
-          Spécialiste de la santé globale, du handicap, du médico-social, de la silver economy et du numérique responsable, AleVia aide les organisations engagées à intervenir plus tôt dans les réformes et à peser sur les décisions publiques.
+          Nous aidons les organisations engagées pour les biens communs à ne plus être absentes des réformes et à peser sur les décisions publiques.
         </p>
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary">
@@ -106,8 +187,8 @@
         </div>
       </div>
 
-      <!-- Vidéo hero -->
-      <div class="hero-video-wrap">
+      <!-- Vidéo hero — embedded cinématique -->
+      <div class="hero-visual">
         <video autoplay muted loop playsinline preload="auto">
           <source src="../uploads/hero.mp4" type="video/mp4" />
         </video>
@@ -253,56 +334,47 @@
   </div>
 </section>
 
-<!-- POURQUOI -->
-<section class="section pourquoi-board" id="pourquoi">
+<!-- 05 / ENGAGEMENTS -->
+<section class="section commitments" id="pourquoi">
   <div class="container">
-    <div class="board-frame reveal">
-      <div class="board-tag">05 / Engagements</div>
-      <div class="board-surface">
-        <div class="board-erase board-erase-1"></div>
-        <div class="board-erase board-erase-2"></div>
-        <div class="board-corner-note">
-          <span>AleVia · vrai/faux</span>
+    <div class="section-head reveal">
+      <div class="meta">
+        <div class="meta-row">
+          <span class="section-num">05 / Engagements</span>
+          <span class="rule"></span>
         </div>
-
-        <h2 class="board-title">Pourquoi AleVia<br/>plutôt qu'un autre cabinet.</h2>
-        <p class="board-sub">Cinq engagements — pas des arguments marketing. Ce qu'on accepte. Ce qu'on refuse.</p>
-
-        <div class="board-grid">
-          <div class="board-item">
-            <span class="board-num">N°1</span>
-            <h3 class="board-h">Zéro conflit d'intérêts.</h3>
-            <p class="board-p">Jamais deux acteurs aux intérêts croisés. Cela limite notre portefeuille — et protège votre crédibilité.</p>
-          </div>
-          <div class="board-item">
-            <span class="board-num">N°2</span>
-            <h3 class="board-h">L'intérêt général,<br/>boussole.</h3>
-            <p class="board-p">Santé, inclusion, numérique responsable, environnement, culture. Défendre un intérêt particulier en servant le bien commun.</p>
-          </div>
-          <div class="board-item">
-            <span class="board-num">N°3</span>
-            <h3 class="board-h">Interlocuteur unique.</h3>
-            <p class="board-p">Nicole reste dans la pièce — de la stratégie à l'exécution. Pas de « selling senior » qui s'évapore après la signature.</p>
-          </div>
-          <div class="board-item">
-            <span class="board-num">N°4</span>
-            <h3 class="board-h">Rien de standardisé.</h3>
-            <p class="board-p">Chaque mission repart de votre situation réelle. La stratégie qu'on construit n'a jamais servi pour quelqu'un d'autre.</p>
-          </div>
-          <div class="board-item board-item--wide">
-            <span class="board-num">N°5</span>
-            <h3 class="board-h">Trois métiers, une adresse.</h3>
-            <p class="board-p">Droit, journalisme, représentation d'intérêts — exercés de l'intérieur. La différence entre une belle analyse et une stratégie applicable.</p>
-          </div>
-        </div>
-
-        <div class="board-chalkline"></div>
+        <h2 class="h-section">Pourquoi AleVia<br/>plutôt qu'un autre cabinet.</h2>
       </div>
-      <div class="board-tray">
-        <span class="chalk chalk-white"></span>
-        <span class="chalk chalk-rose"></span>
-        <span class="chalk chalk-mint"></span>
-        <span class="board-eraser"></span>
+      <p class="lead">
+        Cinq engagements — pas des arguments marketing. Ce qu'on accepte. Ce qu'on refuse.
+      </p>
+    </div>
+
+    <div class="commitments-grid reveal">
+      <div class="commitment-item">
+        <span class="commitment-num">N°1</span>
+        <h3>Zéro conflit d'intérêts.</h3>
+        <p>Jamais deux acteurs aux intérêts croisés. Cela limite notre portefeuille — et protège votre crédibilité.</p>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-num">N°2</span>
+        <h3>L'intérêt général, boussole.</h3>
+        <p>Santé, inclusion, numérique responsable, environnement, culture. Défendre un intérêt particulier en servant le bien commun.</p>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-num">N°3</span>
+        <h3>Interlocuteur unique.</h3>
+        <p>Nicole reste dans la pièce — de la stratégie à l'exécution. Pas de « selling senior » qui s'évapore après la signature.</p>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-num">N°4</span>
+        <h3>Rien de standardisé.</h3>
+        <p>Chaque mission repart de votre situation réelle. La stratégie qu'on construit n'a jamais servi pour quelqu'un d'autre.</p>
+      </div>
+      <div class="commitment-item commitment-item--wide">
+        <span class="commitment-num">N°5</span>
+        <h3>Trois métiers, une adresse.</h3>
+        <p>Droit, journalisme, représentation d'intérêts — exercés de l'intérieur. La différence entre une belle analyse et une stratégie applicable.</p>
       </div>
     </div>
   </div>
@@ -481,23 +553,23 @@ const SECTORS = [
   },
   {
     title: 'Handicap et accessibilité',
-    who:   'Acteurs du handicap, gestionnaires d’ESMS, collectifs pour l’accessibilité',
+    who:   'Acteurs du handicap, gestionnaires d\u2019ESMS, collectifs pour l\u2019accessibilité',
     why:   'Accessibilité universelle, effectivité des droits, simplification des parcours de vie'
   },
   {
     title: 'Grand âge, médico-social et silver economy',
     who:   'Opérateurs du grand âge, acteurs médico-sociaux, acteurs de la silver economy',
-    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d’une silver economy responsable'
+    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d\u2019une silver economy responsable'
   },
   {
     title: 'Numérique responsable',
     who:   'Entreprises et opérateurs numériques, ESN, éditeurs de solutions de e-santé',
-    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobrieté du numérique'
+    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobriété du numérique'
   },
   {
     title: 'Transition écologique',
-    who:   'Acteurs de l’énergie et des énergies renouvelables, fédérations professionnelles, coalitions climat',
-    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l’air et des milieux'
+    who:   'Acteurs de l\u2019énergie et des énergies renouvelables, fédérations professionnelles, coalitions climat',
+    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l\u2019air et des milieux'
   },
   {
     title: 'Mutualité et protection sociale',
