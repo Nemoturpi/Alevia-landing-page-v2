@@ -10,6 +10,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
+<style>
+/* H1 hero : aligné sur .h-section (même taille que "À qui nous nous adressons.") */
+.hero .h-display {
+  font-size: var(--text-xl, clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem));
+  line-height: 1.2;
+}
+
+/* Hero vidéo */
+.hero-video-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: #1a1916;
+  box-shadow: 0 24px 64px rgba(0,0,0,.18);
+}
+.hero-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Cartes secteurs : structure Titre / Pour qui / Pour quoi / Lien */
+.sector-card .sector-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-mute, #7a7770);
+  margin-bottom: 2px;
+}
+.sector-card .sector-who,
+.sector-card .sector-why {
+  font-size: 13px;
+  color: var(--ink-mute, #7a7770);
+  line-height: 1.45;
+  margin: 0;
+}
+.sector-card .sector-who { margin-top: 8px; }
+.sector-card .sector-why { margin-top: 6px; }
+</style>
 </head>
 <body>
 
@@ -64,18 +106,11 @@
         </div>
       </div>
 
-      <div class="hero-orbit" id="heroOrbit">
-        <div class="orbit-ring"></div>
-        <div class="orbit-ring r2"></div>
-        <div class="orbit-center">
-          <img src="assets/one-health.png" alt="Santé humaine, animale et environnementale interconnectées" />
-        </div>
-        <button class="orbit-label orbit-label-1">Santé globale & One Health</button>
-        <button class="orbit-label orbit-label-2">Grand âge & médico-social</button>
-        <button class="orbit-label orbit-label-3">Handicap, accessibilité & inclusion</button>
-        <button class="orbit-label orbit-label-4">Numérique responsable & e-santé</button>
-        <button class="orbit-label orbit-label-5">Transition écologique & EnR</button>
-        <button class="orbit-label orbit-label-6">Mutualité & protection sociale</button>
+      <!-- Vidéo hero -->
+      <div class="hero-video-wrap">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="../uploads/hero.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </div>
@@ -98,7 +133,7 @@
     </div>
 
     <div class="sectors-grid" id="sectorsContainer">
-      <!-- Cards rendered by JS so we can swap layout via tweaks -->
+      <!-- Cards rendered by JS -->
     </div>
   </div>
 </section>
@@ -218,7 +253,7 @@
   </div>
 </section>
 
-      <!-- POURQUOI -->
+<!-- POURQUOI -->
 <section class="section pourquoi-board" id="pourquoi">
   <div class="container">
     <div class="board-frame reveal">
@@ -273,7 +308,7 @@
   </div>
 </section>
 
- <!-- LOGOS -->
+<!-- LOGOS -->
 <section class="section references" id="confiance">
   <div class="container">
     <div class="section-head reveal">
@@ -435,16 +470,50 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <script>
-/* SECTORS DATA + RENDERER */
+/* ================================================
+   SECTORS DATA — structure Titre / Pour qui / Pour quoi
+   ================================================ */
 const SECTORS = [
-  { icon: '\ud83e\uddec', title: 'Sant\u00e9 globale & One Health', body: 'F\u00e9d\u00e9rations et associations de sant\u00e9, industriels responsables, fondations, r\u00e9seaux One Health.' },
-  { icon: '\u267f', title: 'Handicap & accessibilit\u00e9', body: 'F\u00e9d\u00e9rations handicap, associations gestionnaires d\u2019ESMS, collectifs accessibilit\u00e9 num\u00e9rique.' },
-  { icon: '\ud83c\udfe5', title: 'Grand \u00e2ge & m\u00e9dico-social', body: 'Groupes et associations du secteur m\u00e9dico-social, op\u00e9rateurs du grand \u00e2ge, r\u00e9seaux d\u2019\u00e9tablissements.' },
-  { icon: '\ud83d\udcbb', title: 'Num\u00e9rique responsable', body: 'Entreprises et op\u00e9rateurs num\u00e9riques, ESN, \u00e9diteurs de solutions e-sant\u00e9, acteurs de l\u2019accessibilit\u00e9 num\u00e9rique.' },
-  { icon: '\ud83c\udf3f', title: 'Transition \u00e9cologique', body: 'Acteurs de l\u2019\u00e9nergie et des EnR, f\u00e9d\u00e9rations professionnelles, coalitions climat.' },
-  { icon: '\ud83e\udd1d', title: 'Mutualit\u00e9 & protection sociale', body: 'Mutuelles, institutions de pr\u00e9voyance, f\u00e9d\u00e9rations et unions du secteur de la protection sociale.' },
-  { icon: '\ud83c\udfad', title: 'Industries culturelles', body: 'Institutions culturelles, r\u00e9seaux professionnels, fondations et op\u00e9rateurs des ICC.' },
-  { icon: '\ud83d\udee1\ufe0f', title: 'S\u00e9curit\u00e9 & s\u00fbret\u00e9 priv\u00e9e', body: 'Entreprises de s\u00e9curit\u00e9 priv\u00e9e, f\u00e9d\u00e9rations et organisations professionnelles du secteur.' },
+  {
+    title: 'Santé globale et One Health',
+    who:   'Acteurs de la santé humaine, animale et environnementale',
+    why:   'Prévention, accès aux soins, santé environnementale, préparation aux crises sanitaires'
+  },
+  {
+    title: 'Handicap et accessibilité',
+    who:   'Acteurs du handicap, gestionnaires d’ESMS, collectifs pour l’accessibilité',
+    why:   'Accessibilité universelle, effectivité des droits, simplification des parcours de vie'
+  },
+  {
+    title: 'Grand âge, médico-social et silver economy',
+    who:   'Opérateurs du grand âge, acteurs médico-sociaux, acteurs de la silver economy',
+    why:   'Autonomie, qualité de vie, offre médico-sociale de proximité, développement d’une silver economy responsable'
+  },
+  {
+    title: 'Numérique responsable',
+    who:   'Entreprises et opérateurs numériques, ESN, éditeurs de solutions de e-santé',
+    why:   'Inclusion numérique, accessibilité des services essentiels, réduction de la fracture numérique, sobrieté du numérique'
+  },
+  {
+    title: 'Transition écologique',
+    who:   'Acteurs de l’énergie et des énergies renouvelables, fédérations professionnelles, coalitions climat',
+    why:   'Transition énergétique, développement des énergies renouvelables, adaptation climatique, qualité de l’air et des milieux'
+  },
+  {
+    title: 'Mutualité et protection sociale',
+    who:   'Mutuelles, institutions de prévoyance, fédérations et unions de la protection sociale',
+    why:   'Accès aux droits, lutte contre le renoncement aux soins, prévention, soutenabilité du système de protection sociale'
+  },
+  {
+    title: 'Culture et création',
+    who:   'Institutions culturelles, réseaux professionnels, fondations et opérateurs culturels et créatifs',
+    why:   'Accès à la culture, financement de la création, régulation des médias et plateformes, place de la culture dans les transitions sociales et écologiques'
+  },
+  {
+    title: 'Sécurité et sûreté privée',
+    who:   'Entreprises de sécurité privée, fédérations et organisations professionnelles du secteur',
+    why:   'Sécurité des lieux recevant du public, continuité des services essentiels, régulation de la filière, résilience des territoires'
+  },
 ];
 
 function renderSectors(layout) {
@@ -452,15 +521,23 @@ function renderSectors(layout) {
   if (!c) return;
   c.classList.remove('sectors-grid', 'sectors-list');
   c.innerHTML = '';
+
   if (layout === 'list') {
     c.classList.add('sectors-list');
-    SECTORS.forEach((s, i) => {
+    SECTORS.forEach((s) => {
       const row = document.createElement('div');
       row.className = 'sector-row';
       row.innerHTML = `
         <div class="sector-content">
-          <h3 class="h-card">${s.icon} ${s.title}</h3>
-          <p class="body">${s.body}</p>
+          <h3 class="h-card">${s.title}</h3>
+          <p class="sector-label">Pour qui</p>
+          <p class="sector-who">${s.who}</p>
+          <p class="sector-label" style="margin-top:10px;">Pour quoi</p>
+          <p class="sector-why">${s.why}</p>
+          <div class="arrow-row" style="margin-top:12px;">
+            <span>En savoir plus</span>
+            <span style="color:var(--accent);">→</span>
+          </div>
         </div>`;
       c.appendChild(row);
     });
@@ -470,14 +547,14 @@ function renderSectors(layout) {
       const card = document.createElement('article');
       card.className = 'card sector-card';
       card.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div class="sector-icon" aria-hidden="true">${s.icon}</div>
-        </div>
         <h3 class="h-card">${s.title}</h3>
-        <p class="body" style="font-size:13px;color:var(--ink-mute);margin-top:6px;">${s.body}</p>
-        <div class="arrow-row">
+        <p class="sector-label">Pour qui</p>
+        <p class="sector-who">${s.who}</p>
+        <p class="sector-label" style="margin-top:10px;">Pour quoi</p>
+        <p class="sector-why">${s.why}</p>
+        <div class="arrow-row" style="margin-top:auto;padding-top:16px;">
           <span>En savoir plus</span>
-          <span style="color:var(--accent);">\u2192</span>
+          <span style="color:var(--accent);">→</span>
         </div>`;
       c.appendChild(card);
     });
@@ -491,42 +568,6 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 12) header.classList.add('scrolled');
   else header.classList.remove('scrolled');
 });
-
-/* PARALLAX hero */
-const orbit = document.getElementById('heroOrbit');
-let raf = null;
-function onScroll() {
-  if (!orbit) return;
-  if (raf) return;
-  raf = requestAnimationFrame(() => {
-    const y = window.scrollY;
-    const center = orbit.querySelector('.orbit-center');
-    const labels = orbit.querySelectorAll('.orbit-label');
-    if (center) center.style.transform = `translate(-50%, calc(-50% + ${y * -0.08}px))`;
-    labels.forEach((l, i) => {
-      const speed = 0.04 + (i % 3) * 0.02;
-      l.style.setProperty('--py', `${y * speed * (i % 2 === 0 ? -1 : 1)}px`);
-    });
-    const rings = orbit.querySelectorAll('.orbit-ring');
-    rings.forEach((r, i) => {
-      r.style.transform = `rotate(${y * 0.02 * (i+1)}deg)`;
-    });
-    raf = null;
-  });
-}
-window.addEventListener('scroll', onScroll, { passive: true });
-
-/* Apply --py to labels */
-const orbitStyle = document.createElement('style');
-orbitStyle.textContent = `
-  .orbit-label-1 { transform: translate(-50%, calc(-40% + var(--py, 0px))); }
-  .orbit-label-2 { transform: translate(20%, calc(-50% + var(--py, 0px))); }
-  .orbit-label-3 { transform: translate(-34%, calc(-50% + var(--py, 0px))); }
-  .orbit-label-4 { transform: translate(20%, calc(50% + var(--py, 0px))); }
-  .orbit-label-5 { transform: translate(-50%, calc(40% + var(--py, 0px))); }
-  .orbit-label-6 { transform: translate(-20%, calc(50% + var(--py, 0px))); }
-`;
-document.head.appendChild(orbitStyle);
 
 /* REVEAL on scroll */
 const io = new IntersectionObserver((entries) => {
