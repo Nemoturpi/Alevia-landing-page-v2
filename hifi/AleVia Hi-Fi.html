@@ -108,13 +108,38 @@
   pointer-events: none;
 }
 
-.hero-figure img {
+.hero-visual-stage {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / .78;
-  height: auto;
+  overflow: hidden;
+}
+
+.hero-visual-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
   mix-blend-mode: multiply;
+  opacity: 0;
+  transform: scale(.985);
+  animation: heroVisualCycle 15s infinite ease-in-out;
+}
+
+.hero-visual-stage img:nth-child(1) { animation-delay: 0s; }
+.hero-visual-stage img:nth-child(2) { animation-delay: 5s; }
+.hero-visual-stage img:nth-child(3) { animation-delay: 10s; }
+
+@keyframes heroVisualCycle {
+  0%, 28% { opacity: 1; transform: scale(1); }
+  36%, 100% { opacity: 0; transform: scale(1.012); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual-stage img { animation: none; transform: none; }
+  .hero-visual-stage img:first-child { opacity: 1; }
 }
 
 .hero-figure-caption {
@@ -396,13 +421,17 @@
       </div>
     </div>
 
-    <!-- Colonne image (droite) — visuel statique compact -->
+    <!-- Colonne image (droite) — visuel animé compact -->
     <div class="hero-visual" aria-label="Illustration des territoires d'influence AleVia">
       <figure class="hero-figure">
-        <img src="../uploads/Hero3.png" alt="Illustration One Health reliant santé, inclusion et transition écologique" loading="eager" />
+        <div class="hero-visual-stage" aria-label="Animation des trois territoires d'influence AleVia">
+          <img src="../uploads/Hero1.png" alt="Territoire santé et inclusion" loading="eager" />
+          <img src="../uploads/Hero2.png" alt="Territoires santé et vivant" loading="eager" />
+          <img src="../uploads/Hero3.png" alt="Territoires santé, inclusion et transition écologique" loading="eager" />
+        </div>
         <figcaption class="hero-figure-caption">
           <strong>Santé · inclusion · environnement</strong>
-          Une image repère, plus petite, pour soutenir le message sans voler l'attention au titre.
+          Une animation lente des territoires AleVia, plus petite, pour soutenir le message sans voler l'attention au titre.
         </figcaption>
       </figure>
       <div class="hero-visual-chips" aria-hidden="true">
