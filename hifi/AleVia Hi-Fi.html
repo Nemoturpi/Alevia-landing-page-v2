@@ -803,23 +803,23 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-/* ── Hero slideshow : crossfade + Ken Burns automatique + dots ── */
+/* ── Hero slideshow : crossfade + Ken Burns — s'arrête à la dernière slide ── */
 (function() {
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   const dots   = Array.from(document.querySelectorAll('.hero-dot'));
   const col    = document.getElementById('heroImageCol');
   if (!slides.length) return;
 
-  let current   = 0;
-  let timer     = null;
-  const DELAY   = 2800; // ms entre chaque slide
+  const LAST  = slides.length - 1;
+  let current = 0;
+  let timer   = null;
+  const DELAY = 1500; // ms entre chaque slide
 
   function restartKenBurns(slide) {
     const img = slide.querySelector('img');
     if (!img) return;
-    // Force le navigateur à re-déclencher l'animation depuis le début
     img.style.animation = 'none';
-    void img.offsetHeight; // reflow
+    void img.offsetHeight; // reflow force
     img.style.animation = '';
   }
 
@@ -828,7 +828,7 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
     dots[current].classList.remove('active');
     dots[current].setAttribute('aria-selected', 'false');
 
-    current = index % slides.length;
+    current = index;
 
     restartKenBurns(slides[current]);
     slides[current].classList.add('active');
@@ -837,11 +837,18 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   }
 
   function next() {
-    goTo((current + 1) % slides.length);
+    if (current >= LAST) {
+      // Dernière slide atteinte : on arrête le timer
+      stop();
+      return;
+    }
+    goTo(current + 1);
   }
 
   function start() {
     if (timer) return;
+    // Ne démarre pas si on est déjà sur la dernière slide
+    if (current >= LAST) return;
     timer = setInterval(next, DELAY);
   }
 
@@ -850,22 +857,25 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
     timer = null;
   }
 
-  // Dots cliquables
+  // Dots cliquables (permettent toujours de naviguer manuellement)
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
       stop();
       goTo(i);
-      start();
+      // Relance l'avance automatique seulement si on n'est pas sur la dernière
+      if (i < LAST) start();
     });
   });
 
-  // Pause au survol de la colonne image
+  // Pause au survol
   if (col) {
     col.addEventListener('mouseenter', stop);
-    col.addEventListener('mouseleave', start);
+    col.addEventListener('mouseleave', () => {
+      if (current < LAST) start();
+    });
   }
 
-  // Démarrage automatique dès que la page est chargée
+  // Démarrage
   start();
 })();
 </script>
@@ -1057,178 +1067,105 @@ function TweakRow({ label, value, children, inline = false }) {
   );
 }
 
-function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, onChange }) {
   return (
-    <TweakRow label={label} value={`${value}${unit}`}>
-      <input type="range" className="twk-slider" min={min} max={max} step={step}
-             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    <TweakRow label={label} value={value}>
+      <input
+        type="range" className="twk-slider"
+        min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => (
+          <option key={o.value ?? o} value={o.value ?? o}>{o.label ?? o}</option>
+        ))}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakInput({ label, value, onChange, type = 'text' }) {
+  return (
+    <TweakRow label={label}>
+      <input
+        type={type} className="twk-field" value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </TweakRow>
   );
 }
 
 function TweakToggle({ label, value, onChange }) {
   return (
-    <div className="twk-row twk-row-h">
-      <div className="twk-lbl"><span>{label}</span></div>
-      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
-              role="switch" aria-checked={!!value}
-              onClick={() => onChange(!value)}><i /></button>
-    </div>
+    <TweakRow label={label} inline>
+      <button
+        className="twk-toggle" data-on={value ? '1' : '0'}
+        onClick={() => onChange(!value)} aria-pressed={value}
+      ><i /></button>
+    </TweakRow>
   );
 }
 
-function TweakRadio({ t, setTweak, k, label, options }) {
-  const value = t[k];
-  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
-  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
-  const n = opts.length;
-  const trackRef = React.useRef(null);
+function TweakColorPicker({ label, value, onChange }) {
+  return (
+    <TweakRow label={label} value={value} inline>
+      <input type="color" className="twk-swatch" value={value}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
 
-  const segAt = (clientX) => {
-    const r = trackRef.current.getBoundingClientRect();
-    const inner = r.width - 4;
-    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
-    return opts[Math.max(0, Math.min(n - 1, i))].value;
-  };
+function TweakSegmented({ label, value, options, onChange }) {
+  const idx = options.findIndex((o) => (o.value ?? o) === value);
+  const refs = React.useRef([]);
+  const [thumbStyle, setThumbStyle] = React.useState({});
 
-  const onPointerDown = (e) => {
-    const v0 = segAt(e.clientX);
-    if (v0 !== value) setTweak(k, v0);
-    const move = (ev) => {
-      if (!trackRef.current) return;
-      const v = segAt(ev.clientX);
-      setTweak(k, v);
-    };
-    const up = () => {
-      window.removeEventListener('pointermove', move);
-      window.removeEventListener('pointerup', up);
-    };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  };
+  React.useLayoutEffect(() => {
+    const el = refs.current[idx];
+    if (el) setThumbStyle({ left: el.offsetLeft + 'px', width: el.offsetWidth + 'px' });
+  }, [idx, options]);
 
   return (
     <TweakRow label={label}>
-      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown} className="twk-seg">
-        <div className="twk-seg-thumb"
-             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
-                      width: `calc((100% - 4px) / ${n})` }} />
-        {opts.map((o) => (
-          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
-            {o.label}
-          </button>
+      <div className="twk-seg">
+        <div className="twk-seg-thumb" style={thumbStyle} />
+        {options.map((o, i) => (
+          <button
+            key={o.value ?? o}
+            ref={(el) => (refs.current[i] = el)}
+            onClick={() => onChange(o.value ?? o)}
+          >{o.label ?? o}</button>
         ))}
       </div>
     </TweakRow>
   );
 }
 
-function TweakColor({ t, setTweak, k, label, options }) {
-  const value = t[k];
-  const key = (o) => String(JSON.stringify(o)).toLowerCase();
-  const cur = key(value);
-  return (
-    <TweakRow label={label}>
-      <div className="twk-chips" role="radiogroup">
-        {options.map((o, i) => {
-          const on = key(o) === cur;
-          return (
-            <button key={i} type="button" className="twk-chip" role="radio"
-                    aria-checked={on} data-on={on ? '1' : '0'}
-                    style={{ background: o }}
-                    onClick={() => setTweak(k, o)} />
-          );
-        })}
-      </div>
-    </TweakRow>
-  );
-}
-
-Object.assign(window, {
-  useTweaks, TweaksPanel, TweakSection, TweakRow,
-  TweakSlider, TweakToggle, TweakRadio, TweakColor,
-});
-
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#b22234",
-  "typo": "sans",
-  "density": "normal",
-  "sectorsLayout": "grid"
-}/*EDITMODE-END*/;
-
 function App() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [tweaks, setTweak] = useTweaks({
+    layout: 'grid',
+  });
 
   React.useEffect(() => {
-    document.documentElement.style.setProperty('--accent', t.accent);
-    const lighten = (hex, amt) => {
-      const n = parseInt(hex.slice(1), 16);
-      let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
-      r = Math.min(255, Math.round(r + (255 - r) * amt));
-      g = Math.min(255, Math.round(g + (255 - g) * amt));
-      b = Math.min(255, Math.round(b + (255 - b) * amt));
-      return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
-    };
-    const darken = (hex, amt) => {
-      const n = parseInt(hex.slice(1), 16);
-      let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
-      r = Math.max(0, Math.round(r * (1 - amt)));
-      g = Math.max(0, Math.round(g * (1 - amt)));
-      b = Math.max(0, Math.round(b + (255 - b) * 0));
-      return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
-    };
-    document.documentElement.style.setProperty('--accent-2', darken(t.accent, 0.2));
-    document.documentElement.style.setProperty('--accent-soft', lighten(t.accent, 0.78));
-  }, [t.accent]);
-
-  React.useEffect(() => {
-    document.body.classList.remove('typo-serif', 'typo-mix');
-    if (t.typo === 'serif') document.body.classList.add('typo-serif');
-    if (t.typo === 'mix') document.body.classList.add('typo-mix');
-  }, [t.typo]);
-
-  React.useEffect(() => {
-    document.body.classList.remove('dense', 'airy');
-    if (t.density === 'dense') document.body.classList.add('dense');
-    if (t.density === 'airy') document.body.classList.add('airy');
-  }, [t.density]);
-
-  React.useEffect(() => {
-    renderSectors(t.sectorsLayout);
-  }, [t.sectorsLayout]);
+    renderSectors(tweaks.layout);
+  }, [tweaks.layout]);
 
   return (
-    <TweaksPanel title="Tweaks">
-      <TweakSection title="Accent">
-        <TweakColor t={t} setTweak={setTweak} k="accent"
-          options={['#b22234', '#1c1d22', '#0f5e51', '#1f3a5f']}
-          label="Couleur d'accent" />
-      </TweakSection>
-      <TweakSection title="Typographie">
-        <TweakRadio t={t} setTweak={setTweak} k="typo"
-          options={[
-            { value: 'sans', label: 'Sans-serif' },
-            { value: 'mix', label: 'Mix' },
-            { value: 'serif', label: 'Serif' },
-          ]}
-          label="Familles" />
-      </TweakSection>
-      <TweakSection title="Densité">
-        <TweakRadio t={t} setTweak={setTweak} k="density"
-          options={[
-            { value: 'dense', label: 'Dense' },
-            { value: 'normal', label: 'Normal' },
-            { value: 'airy', label: 'Aéré' },
-          ]}
-          label="Espacement" />
-      </TweakSection>
+    <TweaksPanel title="AleVia Tweaks">
       <TweakSection title="Secteurs">
-        <TweakRadio t={t} setTweak={setTweak} k="sectorsLayout"
-          options={[
-            { value: 'grid', label: 'Grille' },
-            { value: 'list', label: 'Liste' },
-          ]}
-          label="Affichage" />
+        <TweakSegmented
+          label="Affichage"
+          value={tweaks.layout}
+          options={[{ value: 'grid', label: 'Grille' }, { value: 'list', label: 'Liste' }]}
+          onChange={(v) => setTweak('layout', v)}
+        />
       </TweakSection>
     </TweaksPanel>
   );
