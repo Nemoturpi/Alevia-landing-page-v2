@@ -23,18 +23,37 @@
 
 /* ── H1 hero ── */
 .hero .h-display {
-  font-size: clamp(36px, 4.25vw, 64px);
-  line-height: 1;
-  letter-spacing: -0.048em;
-  max-width: 12.5ch;
+  font-size: clamp(38px, 5vw, 74px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  max-width: 12ch;
+/* ── Hero : slideshow conservé, image réduite ── */
+  min-height: calc(100svh - 76px);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(178, 34, 52, 0.09), transparent 28%),
+    linear-gradient(135deg, var(--paper, #f7f5f0) 0%, #fffaf5 55%, #f0ebe1 100%);
+.hero::after {
+  content: '';
+  position: absolute;
+  left: clamp(24px, 6vw, 96px);
+  right: 30%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, rgba(178,34,52,.42), transparent);
+  z-index: 1;
 }
 
-/* ── Hero : plus compact, image animée en soutien ── */
-.hero {
-  position: relative;
-  min-height: 0;
-  display: flex;
-  align-items: center;
+  flex: 0 0 70%;
+  max-width: 70%;
+  padding: clamp(88px, 9vw, 128px) 48px clamp(56px, 7vw, 88px) clamp(32px, 6vw, 96px);
+.hero-content {
+  max-width: 760px;
+}
+
+/* Colonne droite : slideshow existant, volontairement plus étroit */
+  flex: 0 0 30%;
+  max-width: 30%;
+  border-left: 1px solid rgba(20,22,28,.08);
   padding: clamp(54px, 7vw, 86px) 0 clamp(46px, 6vw, 72px);
   background:
     radial-gradient(circle at 10% 12%, rgba(178, 34, 52, 0.08), transparent 24%),
@@ -119,10 +138,62 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  mix-blend-mode: multiply;
+.hero-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 36px;
+  max-width: 640px;
+  background: rgba(20,22,28,.1);
+  border: 1px solid rgba(20,22,28,.1);
+}
+
+.hero-proof-item {
+  background: rgba(255,255,255,.54);
+  padding: 16px 18px;
+  min-height: 98px;
+}
+
+.hero-proof-kpi {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.1vw, 32px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.hero-proof-label {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.hero .lead {
+  max-width: 650px;
+}
+
+.hero .lead + .lead {
+  max-width: 680px;
+}
+
+@media (max-width: 900px) {
+  .hero::after { left: 20px; right: 20px; }
+  .hero .h-display { max-width: 12ch; }
+  .hero-col-text { flex: none; max-width: 100%; padding: 92px 20px 42px; }
+  .hero-col-video { flex: none; max-width: 100%; height: 48vw; min-height: 210px; border-left: 0; border-top: 1px solid rgba(20,22,28,.08); }
+  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 22%); }
+@media (max-width: 640px) {
+  .hero .h-display { font-size: clamp(38px, 12vw, 54px); }
+  .hero-cta .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
+  .hero-proof { grid-template-columns: 1fr; margin-top: 30px; }
+  .hero-proof-item { min-height: auto; padding: 15px 16px; }
+  .hero-col-video { height: 46vw; min-height: 190px; }
+}
+
   opacity: 0;
   transform: scale(.985);
   animation: heroVisualCycle 9s infinite ease-in-out;
@@ -252,11 +323,25 @@
   .hero-tagline { margin-bottom: 22px; }
   .hero-cta .btn { width: 100%; justify-content: center; white-space: normal; text-align: center; }
   .hero-proof { grid-template-columns: 1fr; margin-top: 28px; }
-  .hero-proof-item { min-height: auto; padding: 14px 16px; }
-  .hero-visual { width: min(100%, 300px); }
-  .hero-figure { padding: 12px; }
-  .hero-visual-chips { position: static; flex-direction: row; flex-wrap: wrap; margin-top: 12px; }
-  .hero-visual-chip,
+          <span class="tag-text">01 / Cabinet d'affaires publiques à Paris</span>
+          Faites entrer <em>vos&nbsp;enjeux</em> dans les décisions publiques.
+          AleVia aide les organisations engagées pour les biens communs à détecter les réformes en amont, formuler une position crédible et peser au bon moment auprès des décideurs.
+          Santé globale (One Health), inclusivité, protection sociale, transition écologique, numérique responsable, silver economy, culture ou sécurité : nous transformons vos sujets complexes en trajectoires d'influence lisibles.
+            Voir la méthode
+        <div class="hero-proof" aria-label="Repères AleVia">
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">35+</span>
+            <span class="hero-proof-label">organisations accompagnées sur des causes d'intérêt général</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">3</span>
+            <span class="hero-proof-label">leviers : veille, plaidoyer et prise de parole</span>
+          </div>
+          <div class="hero-proof-item">
+            <span class="hero-proof-kpi">1</span>
+            <span class="hero-proof-label">interlocutrice senior de la stratégie à l'exécution</span>
+          </div>
+        </div>
   .hero-visual-chip:nth-child(2),
   .hero-visual-chip:nth-child(3) { margin-left: 0; }
 }
