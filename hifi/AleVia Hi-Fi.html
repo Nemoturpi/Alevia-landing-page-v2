@@ -204,6 +204,62 @@
 .pain-text.guillemets::before { content: '\00AB\00A0'; color: var(--accent); }
 .pain-text.guillemets::after  { content: '\00A0\00BB'; color: var(--accent); }
 </style>
+  <style>
+  /* Fix gap navbar/hero */
+  .hero { padding-top: 16px; }
+
+  /* Social-proof strip */
+  .clients-strip {
+    background: #ffffff;
+    border-top: 1px solid #edeae3;
+    border-bottom: 1px solid #edeae3;
+    padding: 28px 0;
+  }
+  .clients-strip-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .clients-strip-label {
+    font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8a8f9b;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .clients-strip-logos {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: space-between;
+  }
+  .clients-strip-logos img {
+    height: 36px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(55%) brightness(0.85);
+    transition: filter .25s ease;
+  }
+  .clients-strip-logos img:hover {
+    filter: grayscale(0%) opacity(100%) brightness(1);
+  }
+  @media (max-width: 768px) {
+    .clients-strip-inner { gap: 24px; }
+    .clients-strip-logos { gap: 20px; justify-content: center; }
+    .clients-strip-logos img { height: 28px; max-width: 90px; }
+    .clients-strip-label { width: 100%; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
@@ -261,7 +317,22 @@
     </div>
   </div>
 </section>
-
+<!-- SOCIAL PROOF STRIP -->
+<div class="clients-strip">
+  <div class="clients-strip-inner">
+    <span class="clients-strip-label">Ils nous font confiance</span>
+    <div class="clients-strip-logos">
+      <img src="uploads/10_ffmkr.png" alt="FFMKR" loading="lazy" />
+      <img src="uploads/FFMI.png" alt="FFMI" loading="lazy" />
+      <img src="uploads/AFT.png" alt="AFT" loading="lazy" />
+      <img src="uploads/27_Fermentalg.png" alt="Fermentalg" loading="lazy" />
+      <img src="uploads/26_ANFE.png" alt="ANFE" loading="lazy" />
+      <img src="uploads/25_Association_addictions_FR.png" alt="Addictions France" loading="lazy" />
+      <img src="uploads/16_ascop.png" alt="ASCOP" loading="lazy" />
+      <img src="uploads/12_valentin.png" alt="Association Valentin Haüy" loading="lazy" />
+    </div>
+  </div>
+</div>
 <!-- SECTEURS -->
 <section class="section audience" id="secteurs">
   <div class="container">
