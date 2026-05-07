@@ -33,8 +33,7 @@
   position: relative;
   min-height: 80vh;
   display: flex;
-  flex-direction: column; /* important */
-  justify-content: center;
+  align-items: center;
   background: var(--paper, #f7f5f0);
   overflow: hidden;
 }
@@ -84,15 +83,14 @@
 }
 
 /* Contenu texte positionné au-dessus */
-.hero .container{
+.hero > .container {
   position: relative;
   z-index: 2;
   padding-top: 72px;
-  padding-bottom: 32px; /* réduit pour laisser la place à la barre */
+  padding-bottom: 140px;
   display: grid;
   grid-template-columns: minmax(0, 56%) minmax(420px, 44%);
   align-items: center;
-  flex: 1; /* prend l’espace principal du hero */
 }
 
 .hero-grid {
@@ -211,20 +209,33 @@
 }
 
 /* Guillemets sur les pain-text */
-.clients-strip{
-  position: relative; /* au lieu de absolute */
-  left: auto;
-  right: auto;
-  bottom: auto;
-  z-index: 2;
-  margin-top: auto; /* pousse la barre vers le bas */
+.clients-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 20px 0 18px;
+  z-index: 2;
   background: linear-gradient(
     to top,
-    rgba(247,245,240,0.92) 0,
-    rgba(247,245,240,0.78) 55%,
-    rgba(247,245,240,0.00) 100%
+    rgba(247,245,240,0.96) 0%,
+    rgba(247,245,240,0.88) 52%,
+    rgba(247,245,240,0) 100%
   );
+}
+
+.clients-strip-inner {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.clients-strip-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .hero > .container {
@@ -233,9 +244,10 @@
 }
 
 .clients-strip-logos img {
-  height: 88px;
+  height: 44px;
   width: auto;
-  max-width: 220px;
+  max-width: 140px;
+  flex: 0 0 auto;
   object-fit: contain;
   filter: grayscale(100%) brightness(0.95) contrast(0.9);
   opacity: 0.72;
@@ -248,8 +260,17 @@
   transform: translateY(-2px);
 }
 @media (max-width: 768px) {
-  .clients-strip-logos { gap: 24px; justify-content: center; }
-  .clients-strip-logos img { height: 40px; max-width: 110px; }
+  .hero > .container { padding-bottom: 110px; }
+  .clients-strip-inner { width: calc(100% - 24px); }
+  .clients-strip-logos {
+    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .clients-strip-logos::-webkit-scrollbar { display: none; }
+  .clients-strip-logos img { height: 32px; max-width: 96px; }
 }
 </style>
 </head>
