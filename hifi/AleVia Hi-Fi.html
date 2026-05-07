@@ -217,45 +217,20 @@
 .hero { padding-top: 0px; padding-bottom: 140px; }
     
   /* Social-proof strip */
-.clients-strip {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 28px 0 20px;
-  z-index: 10;
-}
-
-.clients-strip::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(247,245,240,0.96) 0%,
-    rgba(247,245,240,0.84) 42%,
-    rgba(247,245,240,0.45) 74%,
-    rgba(247,245,240,0) 100%
-  );
-  pointer-events: none;
-}
-
-.clients-strip-inner,
-.clients-strip-logos {
-  position: relative;
-  z-index: 1;
-}
-
 .clients-strip-logos img {
-  filter: grayscale(100%) sepia(6%) brightness(0.96) contrast(0.9);
-  opacity: 0.7;
-  mix-blend-mode: multiply;
+  height: 88px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.96) contrast(0.9);
+  opacity: 0.78;
+  transition: filter .25s ease, transform .25s ease, opacity .25s ease;
 }
 
 .clients-strip-logos img:hover {
-  filter: grayscale(15%) opacity(100%) brightness(1);
-  transform: scale(1.02);
-  background: transparent;
+  filter: grayscale(15%) brightness(1) contrast(1);
+  opacity: 1;
+  transform: translateY(-2px);
 }
 @media (max-width: 768px) {
   .clients-strip-logos { gap: 24px; justify-content: center; }
