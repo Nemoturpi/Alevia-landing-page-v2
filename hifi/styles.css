@@ -1009,3 +1009,229 @@ body.typo-mix {
   .board-frame { padding: 16px 16px 0; }
   .board-item--wide { max-width: 100%; }
 }
+
+/* =============================================
+   AleVia page refinements
+   ============================================= */
+.h-display,
+.h-section,
+.h-card,
+.commitment-item h3,
+.founder-name,
+.why-item h3,
+.trade h4,
+.board-h,
+.lever h3 {
+  font-weight: 800;
+}
+
+/* Hero — split editorial layout */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.hero > .container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-col-text,
+.hero-col-media {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.hero-col-text {
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px 72px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero .h-display {
+  font-size: clamp(32px, 3.6vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.hero .h-display em {
+  font-style: inherit;
+  color: var(--accent);
+}
+
+.hero-col-media {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.hero-col-media .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-col-media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--paper) 0%, transparent 30%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero > .container {
+    flex-direction: column;
+  }
+
+  .hero-col-text,
+  .hero-col-media {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .hero-col-text {
+    padding: 100px 20px 40px;
+  }
+
+  .hero-col-media {
+    height: 62vw;
+    min-height: 260px;
+  }
+
+  .hero-col-media::before {
+    background: linear-gradient(to bottom, var(--paper) 0%, transparent 20%);
+  }
+}
+
+/* Section 05 / Engagements */
+.commitments { background: #fff; }
+
+.commitments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule-soft);
+  border: 1px solid var(--rule-soft);
+  margin-top: var(--gap-md);
+}
+
+.commitment-item {
+  background: #fff;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  transition: background .2s;
+}
+
+.commitment-item:hover { background: var(--paper); }
+.commitment-item--wide { grid-column: 1 / -1; }
+
+.commitment-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.commitment-item h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+
+.commitment-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.commitment-item--wide p { max-width: 64ch; }
+
+.commitment-item h3::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 10px;
+  border-radius: 1px;
+}
+
+@media (max-width: 700px) {
+  .commitments-grid { grid-template-columns: 1fr; }
+}
+
+/* Secteurs */
+.sector-card .sector-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 2px;
+}
+
+.sector-card .sector-who,
+.sector-card .sector-why {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.sector-card .sector-who { margin-top: 8px; }
+.sector-card .sector-why { margin-top: 6px; }
+
+.sector-card .sector-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rule-soft);
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--accent);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.pain-text.guillemets::before {
+  content: '\00AB\00A0';
+  color: var(--accent);
+}
+
+.pain-text.guillemets::after {
+  content: '\00A0\00BB';
+  color: var(--accent);
+}
