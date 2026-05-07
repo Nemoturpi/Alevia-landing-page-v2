@@ -273,7 +273,7 @@
   position: absolute !important;
   left: 0 !important;
   right: 0 !important;
-  bottom: 0 !important;
+bottom: 24px !important;
   top: auto !important;
 
   height: 170px;
@@ -320,20 +320,20 @@
   background: transparent;
   mix-blend-mode: multiply;
 
-  filter: grayscale(100%) contrast(0.95) brightness(0.9);
-  opacity: 0.82;
+  filter: grayscale(20%) contrast(1) brightness(1);
+  opacity: 1;
 
   transition: filter .25s ease, transform .25s ease, opacity .25s ease;
 }
 
 .clients-strip-logos img:hover {
-  filter: grayscale(20%) contrast(1) brightness(1);
+  filter: grayscale(0%) contrast(1) brightness(1);
   opacity: 1;
   transform: translateY(-2px);
 }
 
 .hero > .container {
-  padding-bottom: 170px !important;
+padding-bottom: 195px !important;
 }
 
 @media (max-width: 768px) {
@@ -362,7 +362,7 @@
   }
 
   .hero > .container {
-    padding-bottom: 125px !important;
+    padding-bottom: 150px !important;
   }
 }
 </style>
