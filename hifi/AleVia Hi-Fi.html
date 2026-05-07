@@ -209,21 +209,33 @@
 }
 
 /* Guillemets sur les pain-text */
-.pain-text.guillemets::before { content: '\00AB\00A0'; color: var(--accent); }
-.pain-text.guillemets::after  { content: '\00A0\00BB'; color: var(--accent); }
-</style>
-  <style>
-  /* Fix gap navbar/hero */
-.hero { padding-top: 0px; padding-bottom: 140px; }
-    
-  /* Social-proof strip */
+.clients-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 0 18px;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(247,245,240,0.92) 0%,
+    rgba(247,245,240,0.78) 55%,
+    rgba(247,245,240,0.00) 100%
+  );
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
 .clients-strip-logos img {
   height: 88px;
   width: auto;
   max-width: 220px;
   object-fit: contain;
-  filter: grayscale(100%) brightness(0.96) contrast(0.9);
-  opacity: 0.78;
+  filter: grayscale(100%) brightness(0.95) contrast(0.9);
+  opacity: 0.72;
   transition: filter .25s ease, transform .25s ease, opacity .25s ease;
 }
 
