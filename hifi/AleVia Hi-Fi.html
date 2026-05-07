@@ -31,7 +31,7 @@
 /* ── Hero : layout 2 colonnes ── */
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: 78vh;
   display: flex;
   align-items: stretch;
   background: var(--paper, #f7f5f0);
@@ -51,21 +51,25 @@
 
 /* Colonne gauche : texte */
 .hero-col-text {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 58%;
+  max-width: 58%;
   display: flex;
   align-items: center;
-  padding: 120px 40px 80px 72px;
+  padding: 100px 48px 80px 72px;
   position: relative;
   z-index: 2;
 }
 
-/* Colonne droite : image animée */
+/* Colonne droite : illustration flottante */
 .hero-col-video {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 42%;
+  max-width: 42%;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 56px 80px 16px;
 }
 
 /* Image hero unique avec Ken Burns */
@@ -89,14 +93,9 @@
   100% { transform: scale(1.04) translate(-1%, 1%); }
 }
 
-/* Dégradé de fondu vers la gauche */
+/* Pas de dégradé sur l'illustration flottante */
 .hero-col-video::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, var(--paper, #f7f5f0) 0%, transparent 30%);
-  z-index: 2;
-  pointer-events: none;
+  display: none;
 }
 
 /* Texte en italique rouge pour les accents */
@@ -108,62 +107,40 @@
 /* Mobile : empiler */
 @media (max-width: 768px) {
   .hero { flex-direction: column; min-height: auto; }
-  .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 40px; }
-  .hero-col-video { flex: none; max-width: 100%; height: 62vw; min-height: 260px; }
-  .hero-col-video::before { background: linear-gradient(to bottom, var(--paper, #f7f5f0) 0%, transparent 20%); }
+  .hero-col-text { flex: none; max-width: 100%; padding: 100px 20px 32px; }
+  .hero-col-video { flex: none; max-width: 100%; height: auto; padding: 8px 20px 48px; overflow: visible; }
   .hero > .container { flex-direction: column; }
 }
 
-/* ── Hero Slideshow ── */
+/* ── Hero Slideshow (Option A — illustration flottante) ── */
 .hero-slides {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
 }
 
 .hero-slide {
   position: absolute;
-  inset: -5%;
-  width: 110%;
-  height: 110%;
-  object-fit: cover;
-  object-position: center top;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   display: block;
-  will-change: opacity, transform;
+  will-change: opacity;
 }
 
-.hero-slide:nth-child(1) {
-  opacity: 1;
-  animation: kenBurns1 14s ease-in-out infinite alternate;
-}
-.hero-slide:nth-child(2) {
-  opacity: 0;
-  animation: kenBurns2 16s ease-in-out infinite alternate;
-}
-.hero-slide:nth-child(3) {
-  opacity: 0;
-  animation: kenBurns3 15s ease-in-out infinite alternate;
-}
+.hero-slide:nth-child(1) { opacity: 1; }
+.hero-slide:nth-child(2) { opacity: 0; }
+.hero-slide:nth-child(3) { opacity: 0; }
 
-@keyframes kenBurns1 {
-  0%   { transform: scale(1.00) translate(0%, 0%); }
-  100% { transform: scale(1.08) translate(-2%, -1.5%); }
-}
-@keyframes kenBurns2 {
-  0%   { transform: scale(1.02) translate(1%, -1%); }
-  100% { transform: scale(1.08) translate(-1.5%, -2%); }
-}
-@keyframes kenBurns3 {
-  0%   { transform: scale(1.00) translate(-1%, 0%); }
-  100% { transform: scale(1.07) translate(1%, -2.5%); }
-}
-
-/* Slide navigation dots */
+/* Dots sous l'illustration, couleur accent AleVia */
 .hero-slides-nav {
   position: absolute;
-  bottom: 28px;
-  right: 32px;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 8px;
   z-index: 10;
@@ -173,22 +150,19 @@
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(178, 34, 52, 0.25);
   transition: background 0.3s ease, width 0.3s ease;
   cursor: pointer;
 }
 
 .slide-dot.active {
   width: 22px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(178, 34, 52, 0.75);
 }
 
 @media (max-width: 768px) {
-  .hero-slides-nav { bottom: 16px; right: 16px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-slide { animation: none !important; }
+  .hero-slides { max-width: 300px; margin: 0 auto; }
+  .hero-slides-nav { bottom: -24px; }
 }
 
 /* ── Section 05 / Engagements ── */
@@ -694,15 +668,17 @@
 
   /* ── Text entrance animations ── */
   if (!reduced) {
-    const tagline = document.querySelector('#heroSection .hero-tagline');
-    const title   = document.querySelector('#heroSection .h-display');
-    const leads   = [...document.querySelectorAll('#heroSection .lead')];
-    const cta     = document.querySelector('#heroSection .hero-cta');
+    const tagline  = document.querySelector('#heroSection .hero-tagline');
+    const title    = document.querySelector('#heroSection .h-display');
+    const leads    = [...document.querySelectorAll('#heroSection .lead')];
+    const cta      = document.querySelector('#heroSection .hero-cta');
+    const illus    = document.querySelector('#heroSection .hero-slides');
 
     if (tagline) animate(tagline, { opacity: [0, 1], y: [18, 0] }, { delay: 0.25, duration: 0.6, ease: 'easeOut' });
     if (title)   animate(title,   { opacity: [0, 1], y: [28, 0] }, { delay: 0.50, duration: 0.85, ease: 'easeOut' });
     if (leads.length) animate(leads, { opacity: [0, 1], y: [18, 0] }, { delay: stagger(0.15, { start: 0.85 }), duration: 0.7, ease: 'easeOut' });
     if (cta)     animate(cta,     { opacity: [0, 1], y: [18, 0] }, { delay: 1.25, duration: 0.7, ease: 'easeOut' });
+    if (illus)   animate(illus,   { opacity: [0, 1], scale: [0.88, 1] }, { delay: 0.35, duration: 1.0, ease: [0.34, 1.56, 0.64, 1] });
   }
 
   /* ── Hero image crossfade slideshow ── */
@@ -721,8 +697,8 @@
         slides[prev].style.opacity = '0';
         slides[current].style.opacity = '1';
       } else {
-        animate(slides[prev],    { opacity: 0 }, { duration: 1.3, ease: 'easeInOut' });
-        animate(slides[current], { opacity: 1 }, { duration: 1.3, ease: 'easeInOut' });
+        animate(slides[prev],    { opacity: 0 }, { duration: 1.1, ease: 'easeInOut' });
+        animate(slides[current], { opacity: 1 }, { duration: 1.1, ease: 'easeInOut' });
       }
 
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
