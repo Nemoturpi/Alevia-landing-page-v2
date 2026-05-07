@@ -58,6 +58,8 @@
   opacity: 0;
   transition: opacity 0.9s ease-in-out;
   will-change: opacity;
+  transform: scale(0.75);
+  transform-origin: right center;
 }
 
 .oh-img.is-on {
@@ -231,15 +233,19 @@
   justify-content: space-between;
 }
 .clients-strip-logos img {
-  height: 64px;
+  height: 80px;
   width: auto;
-  max-width: 180px;
+  max-width: 220px;
   object-fit: contain;
   filter: grayscale(100%) opacity(60%) brightness(0.9);
-  transition: filter .25s ease;
+  transition: filter .25s ease, background-color .25s ease, transform .25s ease;
+  padding: 8px;
+  border-radius: 8px;
 }
 .clients-strip-logos img:hover {
   filter: grayscale(0%) opacity(100%) brightness(1);
+  background-color: var(--paper-2, #f4f1e9);
+  transform: scale(1.03);
 }
 @media (max-width: 768px) {
   .clients-strip-logos { gap: 24px; justify-content: center; }
