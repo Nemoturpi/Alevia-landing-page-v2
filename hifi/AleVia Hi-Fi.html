@@ -32,8 +32,6 @@
 .hero {
   position: relative;
   min-height: 80vh;
-  display: flex;
-  align-items: center;
   background: var(--paper, #f7f5f0);
   overflow: hidden;
 }
@@ -76,7 +74,7 @@
     var(--paper, #f7f5f0) 0%,
     var(--paper, #f7f5f0) 55%,
     rgba(247, 245, 240, 0.5) 68%,
-    rgba(247, 245, 240, 0.0) 85%
+    rgba(247, 245, 240, 0) 85%
   );
   z-index: 1;
   pointer-events: none;
@@ -87,10 +85,11 @@
   position: relative;
   z-index: 2;
   padding-top: 0;
-  padding-bottom: 150px;
+  padding-bottom: 160px; /* réserve la place pour la barre */
   display: grid;
   grid-template-columns: minmax(0, 56%) minmax(420px, 44%);
   align-items: center;
+  min-height: 80vh;
 }
 
 .hero-grid {
@@ -109,18 +108,60 @@
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
-    padding-bottom: 40px;
   }
-  .oh-img { object-position: center bottom; }
+
+  .hero > .container {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-bottom: 120px;
+  }
+
+  .hero-grid {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .oh-img {
+    right: 0;
+    width: 100%;
+    object-position: center bottom;
+  }
+
   .hero-bg-veil {
-  background: linear-gradient(
-    to right,
-    var(--paper, #f7f5f0) 0%,
-    var(--paper, #f7f5f0) 55%,
-    rgba(247, 245, 240, 0.5) 68%,
-    rgba(247, 245, 240, 0) 85%
-  );
-  .hero-grid { max-width: 100%; }
+    background: linear-gradient(
+      to bottom,
+      var(--paper, #f7f5f0) 0%,
+      var(--paper, #f7f5f0) 48%,
+      rgba(247, 245, 240, 0.72) 72%,
+      rgba(247, 245, 240, 0) 100%
+    );
+  }
+
+  .clients-strip {
+    height: 120px;
+  }
+
+  .clients-strip-inner {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .clients-strip-logos {
+    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .clients-strip-logos::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clients-strip-logos img {
+    height: 40px;
+    max-width: 110px;
+  }
 }
 
 /* ── Section 05 / Engagements ── */
@@ -216,34 +257,41 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 3;
-  height: 150px;
-  display: flex;
-  align-items: flex-end;
+  height: 160px;
+  z-index: 5;
   background: var(--paper, #f7f5f0);
+  border-top: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
 .clients-strip-inner {
   width: 100%;
-  padding: 0 24px 18px;
+  overflow: hidden;
+  padding: 0 24px;
 }
 
 .clients-strip-logos {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 28px;
-  flex-wrap: nowrap;
+  gap: 32px;
+  width: 100%;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .clients-strip-logos img {
-  height: 88px;
-  width: auto;
-  max-width: 220px;
+  display: block;
   flex: 0 0 auto;
+  height: 64px;
+  width: auto;
+  max-width: 160px;
   object-fit: contain;
+  vertical-align: middle;
   filter: grayscale(100%) brightness(0.95) contrast(0.9);
   opacity: 0.72;
   transition: filter .25s ease, transform .25s ease, opacity .25s ease;
@@ -253,20 +301,6 @@
   filter: grayscale(15%) brightness(1) contrast(1);
   opacity: 1;
   transform: translateY(-2px);
-}
-@media (max-width: 768px) {
-  .hero > .container { padding-bottom: 110px; }
-  .clients-strip-inner { width: calc(100% - 24px); }
-  .clients-strip-logos {
-    gap: 24px;
-    justify-content: center;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-  .clients-strip-logos::-webkit-scrollbar { display: none; }
-  .clients-strip-logos img { height: 40px; max-width: 110px; }
-}
 </style>
 </head>
 <body>
