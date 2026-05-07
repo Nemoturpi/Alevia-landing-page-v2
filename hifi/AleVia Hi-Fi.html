@@ -114,6 +114,83 @@
   .hero > .container { flex-direction: column; }
 }
 
+/* ── Hero Slideshow ── */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  will-change: opacity, transform;
+}
+
+.hero-slide:nth-child(1) {
+  opacity: 1;
+  animation: kenBurns1 14s ease-in-out infinite alternate;
+}
+.hero-slide:nth-child(2) {
+  opacity: 0;
+  animation: kenBurns2 16s ease-in-out infinite alternate;
+}
+.hero-slide:nth-child(3) {
+  opacity: 0;
+  animation: kenBurns3 15s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns1 {
+  0%   { transform: scale(1.00) translate(0%, 0%); }
+  100% { transform: scale(1.08) translate(-2%, -1.5%); }
+}
+@keyframes kenBurns2 {
+  0%   { transform: scale(1.02) translate(1%, -1%); }
+  100% { transform: scale(1.08) translate(-1.5%, -2%); }
+}
+@keyframes kenBurns3 {
+  0%   { transform: scale(1.00) translate(-1%, 0%); }
+  100% { transform: scale(1.07) translate(1%, -2.5%); }
+}
+
+/* Slide navigation dots */
+.hero-slides-nav {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.slide-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background 0.3s ease, width 0.3s ease;
+  cursor: pointer;
+}
+
+.slide-dot.active {
+  width: 22px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 768px) {
+  .hero-slides-nav { bottom: 16px; right: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { animation: none !important; }
+}
+
 /* ── Section 05 / Engagements ── */
 .commitments { background: #fff; }
 .commitments-grid {
@@ -260,9 +337,18 @@
       </div>
     </div>
 
-    <!-- Colonne image (droite) — image animée Ken Burns -->
+    <!-- Colonne image (droite) — slideshow framer-motion -->
     <div class="hero-col-video" id="heroImageCol">
-      <img class="hero3-img" src="../uploads/Hero3.png" alt="AleVia — cabinet d'affaires publiques à Paris" loading="eager" width="800" height="900" />
+      <div class="hero-slides" id="heroSlides">
+        <img class="hero-slide" src="../uploads/Hero1.png" alt="AleVia — cabinet d'affaires publiques à Paris" loading="eager" width="800" height="900" />
+        <img class="hero-slide" src="../uploads/Hero2.png" alt="AleVia — représentation d'intérêts" loading="eager" width="800" height="900" />
+        <img class="hero-slide" src="../uploads/Hero3.png" alt="AleVia — stratégie d'influence" loading="eager" width="800" height="900" />
+      </div>
+      <div class="hero-slides-nav" id="heroDotsNav">
+        <div class="slide-dot active" data-idx="0"></div>
+        <div class="slide-dot" data-idx="1"></div>
+        <div class="slide-dot" data-idx="2"></div>
+      </div>
     </div>
 
   </div>
@@ -600,6 +686,59 @@
 
 <!-- TWEAKS PANEL -->
 <div id="tweaks-root"></div>
+
+<script type="module">
+  import { animate, stagger } from 'https://esm.sh/framer-motion@11';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Text entrance animations ── */
+  if (!reduced) {
+    const tagline = document.querySelector('#heroSection .hero-tagline');
+    const title   = document.querySelector('#heroSection .h-display');
+    const leads   = [...document.querySelectorAll('#heroSection .lead')];
+    const cta     = document.querySelector('#heroSection .hero-cta');
+
+    if (tagline) animate(tagline, { opacity: [0, 1], y: [18, 0] }, { delay: 0.25, duration: 0.6, ease: 'easeOut' });
+    if (title)   animate(title,   { opacity: [0, 1], y: [28, 0] }, { delay: 0.50, duration: 0.85, ease: 'easeOut' });
+    if (leads.length) animate(leads, { opacity: [0, 1], y: [18, 0] }, { delay: stagger(0.15, { start: 0.85 }), duration: 0.7, ease: 'easeOut' });
+    if (cta)     animate(cta,     { opacity: [0, 1], y: [18, 0] }, { delay: 1.25, duration: 0.7, ease: 'easeOut' });
+  }
+
+  /* ── Hero image crossfade slideshow ── */
+  const slides = [...document.querySelectorAll('.hero-slide')];
+  const dots   = [...document.querySelectorAll('.slide-dot')];
+
+  if (slides.length > 1) {
+    let current = 0;
+
+    function goToSlide(next) {
+      if (next === current) return;
+      const prev = current;
+      current = next;
+
+      if (reduced) {
+        slides[prev].style.opacity = '0';
+        slides[current].style.opacity = '1';
+      } else {
+        animate(slides[prev],    { opacity: 0 }, { duration: 1.3, ease: 'easeInOut' });
+        animate(slides[current], { opacity: 1 }, { duration: 1.3, ease: 'easeInOut' });
+      }
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    let timer = setInterval(() => goToSlide((current + 1) % slides.length), 5000);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goToSlide(i);
+        timer = setInterval(() => goToSlide((current + 1) % slides.length), 5000);
+      });
+    });
+  }
+</script>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
