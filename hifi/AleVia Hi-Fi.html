@@ -252,15 +252,36 @@
 }
 
 /* Guillemets sur les pain-text */
+/* PATCH LOGOS HERO — barre en bas, fond identique, logos plus grands */
+
+.hero {
+  --hero-bg: #f7f5f0;
+  background: var(--hero-bg) !important;
+}
+
+.hero-bg-veil {
+  background: linear-gradient(
+    to right,
+    var(--hero-bg) 0%,
+    var(--hero-bg) 55%,
+    rgba(247, 245, 240, 0.5) 68%,
+    rgba(247, 245, 240, 0) 85%
+  ) !important;
+}
+
 .clients-strip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 160px;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+
+  height: 170px;
   z-index: 5;
-  background: var(--paper, #f7f5f0);
-  border-top: 1px solid rgba(0,0,0,0.04);
+
+  background: var(--hero-bg) !important;
+  border-top: 1px solid rgba(0,0,0,0.035);
+
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -269,7 +290,7 @@
 .clients-strip-inner {
   width: 100%;
   overflow: hidden;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 .clients-strip-logos {
@@ -278,7 +299,8 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+
+  gap: 46px;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -287,20 +309,62 @@
 .clients-strip-logos img {
   display: block;
   flex: 0 0 auto;
-  height: 64px;
+
+  height: 88px;
   width: auto;
-  max-width: 160px;
+  max-width: 210px;
+
   object-fit: contain;
   vertical-align: middle;
-  filter: grayscale(100%) brightness(0.95) contrast(0.9);
-  opacity: 0.72;
+
+  background: transparent;
+  mix-blend-mode: multiply;
+
+  filter: grayscale(100%) contrast(0.95) brightness(0.9);
+  opacity: 0.82;
+
   transition: filter .25s ease, transform .25s ease, opacity .25s ease;
 }
 
 .clients-strip-logos img:hover {
-  filter: grayscale(15%) brightness(1) contrast(1);
+  filter: grayscale(20%) contrast(1) brightness(1);
   opacity: 1;
   transform: translateY(-2px);
+}
+
+.hero > .container {
+  padding-bottom: 170px !important;
+}
+
+@media (max-width: 768px) {
+  .clients-strip {
+    height: 125px;
+  }
+
+  .clients-strip-inner {
+    padding: 0 16px;
+  }
+
+  .clients-strip-logos {
+    justify-content: flex-start;
+    gap: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .clients-strip-logos::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clients-strip-logos img {
+    height: 58px;
+    max-width: 145px;
+  }
+
+  .hero > .container {
+    padding-bottom: 125px !important;
+  }
+}
 </style>
 </head>
 <body>
