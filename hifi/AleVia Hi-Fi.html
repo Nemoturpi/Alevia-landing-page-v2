@@ -222,36 +222,34 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: transparent;
-  padding: 24px 0;
+  padding: 28px 0 20px;
   z-index: 10;
 }
-.clients-strip-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 32px;
+
+.clients-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(247,245,240,0.96) 0%,
+    rgba(247,245,240,0.84) 42%,
+    rgba(247,245,240,0.45) 74%,
+    rgba(247,245,240,0) 100%
+  );
+  pointer-events: none;
 }
-/* Rangée de logos */
+
+.clients-strip-inner,
 .clients-strip-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 18px 34px;
-  padding: 12px 0 0;
   position: relative;
   z-index: 1;
 }
+
 .clients-strip-logos img {
-  height: 118px;
-  width: auto;
-  max-width: 280px;
-  object-fit: contain;
-  filter: grayscale(100%) opacity(72%) brightness(0.92);
-  transition: filter .25s ease, transform .25s ease, opacity .25s ease;
-  padding: 0;
-  background: transparent;
-  border-radius: 0;
+  filter: grayscale(100%) sepia(6%) brightness(0.96) contrast(0.9);
+  opacity: 0.7;
+  mix-blend-mode: multiply;
 }
 
 .clients-strip-logos img:hover {
