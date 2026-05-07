@@ -203,9 +203,16 @@
     .lever .h-card { text-align: center; }
 
     @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      .section-head { gap: 14px; margin-bottom: 28px; }
+      .section-head .lead { font-size: 16px; line-height: 1.45; }
+      .h-section { font-size: clamp(30px, 9vw, 38px); }
       .hero { min-height: auto; }
       .hero > .container { min-height: auto; grid-template-columns: 1fr; padding-bottom: 150px !important; }
       .hero-grid { max-width: 100%; padding-right: 0; }
+      .hero .h-display { font-size: clamp(30px, 10vw, 38px); }
+      .hero .lead { max-width: 32ch; font-size: 16px; line-height: 1.45; }
+      .hero-cta .btn-ghost { display: none; }
       .oh-img { top: -10px; right: 0; width: 100%; object-position: center 38%; }
       .hero-bg-veil { background: linear-gradient(to bottom, var(--hero-bg) 0%, var(--hero-bg) 38%, rgba(247,245,240,.42) 66%, rgba(247,245,240,0) 100%) !important; }
       .clients-strip { height: 125px; }
@@ -213,7 +220,23 @@
       .clients-strip-logos { justify-content: flex-start; gap: 28px; overflow-x: auto; scrollbar-width: none; }
       .clients-strip-logos::-webkit-scrollbar { display: none; }
       .clients-strip-logos img { height: 75px; max-width: 189px; }
+      .sector-card { min-height: auto !important; padding: 20px !important; gap: 10px; }
+      .sector-card .h-card { font-size: 19px !important; }
+      .sector-card .sector-why,
+      .sector-card p.sector-label:nth-of-type(3) { display: none; }
+      .pain-text.guillemets { padding: 0 24px; font-size: 20px; line-height: 1.25; }
+      .pain-text.guillemets::before,
+      .pain-text.guillemets::after { font-size: 28px; }
+      .lever { min-height: auto; padding-top: 28px; gap: 12px; }
+      .lever-icon { width: 56px; height: 56px; margin-bottom: 12px; }
+      .lever-icon svg { width: 28px; height: 28px; }
+      .lever .body { font-size: 15px; line-height: 1.45; }
+      .lever-tags { padding-top: 12px; gap: 6px; }
+      .lever-tag { font-size: 11px; padding: 5px 8px; }
       .commitments-grid { grid-template-columns: 1fr; }
+      .commitment-item { padding: 28px 22px; }
+      .founder-bio { font-size: 16px; line-height: 1.5; }
+      .contact .body { font-size: 15px !important; }
     }
   </style>
 </head>
@@ -253,20 +276,7 @@
         </div>
       </div>
     </div>
-    <div class="clients-strip">
-      <div class="clients-strip-inner">
-        <div class="clients-strip-logos">
-          <img src="../uploads/10_ffmkr.png" alt="FFMKR" loading="lazy" />
-          <img src="../uploads/FFMI.png" alt="FFMI" loading="lazy" />
-          <img src="../uploads/AFT.png" alt="AFT" loading="lazy" />
-          <img src="../uploads/27_Fermentalg.png" alt="Fermentalg" loading="lazy" />
-          <img src="../uploads/26_ANFE.png" alt="ANFE" loading="lazy" />
-          <img src="../uploads/25_Association_addictions_FR.png" alt="Addictions France" loading="lazy" />
-          <img src="../uploads/16_ascop.png" alt="ASCOP" loading="lazy" />
-          <img src="../uploads/12_valentin.png" alt="Association Valentin Haüy" loading="lazy" />
-        </div>
-      </div>
-    </div>
+    <div class="clients-strip"><div class="clients-strip-inner"><div class="clients-strip-logos"><img src="../uploads/10_ffmkr.png" alt="FFMKR" loading="lazy" /><img src="../uploads/FFMI.png" alt="FFMI" loading="lazy" /><img src="../uploads/AFT.png" alt="AFT" loading="lazy" /><img src="../uploads/27_Fermentalg.png" alt="Fermentalg" loading="lazy" /><img src="../uploads/26_ANFE.png" alt="ANFE" loading="lazy" /><img src="../uploads/25_Association_addictions_FR.png" alt="Addictions France" loading="lazy" /><img src="../uploads/16_ascop.png" alt="ASCOP" loading="lazy" /><img src="../uploads/12_valentin.png" alt="Association Valentin Haüy" loading="lazy" /></div></div></div>
   </section>
 
   <section class="section audience" id="secteurs">
@@ -312,81 +322,25 @@
         <p class="lead">Peser sur les décisions publiques exige une approche globale : remporter la bataille culturelle sur le long terme, scruter l’actualité en continu et saisir, ou provoquer, les bons moments pour plaider votre cause.</p>
       </div>
       <div class="levers reveal">
-        <article class="lever">
-          <div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path><path d="M8.5 11h5"></path><path d="M11 8.5v5"></path></svg></div>
-          <h3 class="h-card" style="color:var(--accent);">Veille et cartographie</h3>
-          <p class="body">Avant qu’un texte soit déposé ou qu’un arbitrage soit rendu, nous savons déjà ce qui se prépare. Nous filtrons l’information et identifions les opportunités et les risques pour vous : réglementaires, politiques, médiatiques...</p>
-          <div class="lever-tags"><span class="lever-tag">Bulletins de veille</span><span class="lever-tag">Notes d'alerte</span><span class="lever-tag">Cartographies d'acteurs</span><span class="lever-tag">Analyses de risques</span></div>
-        </article>
-        <article class="lever">
-          <div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"></path><path d="M4 7h10l-1.5 3L14 13H4"></path><path d="M17 18c1.7-1.2 3-3.2 3-6s-1.3-4.8-3-6"></path></svg></div>
-          <h3 class="h-card" style="color:var(--accent);">Plaidoyer</h3>
-          <p class="body">Nous clarifions votre position et la mettons sur la table des décideurs publics. Nous préparons et organisons les rencontres utiles avec les élus, les administrations, les cabinets, les coalitions, etc.</p>
-          <div class="lever-tags"><span class="lever-tag">Notes de position</span><span class="lever-tag">Livres blancs</span><span class="lever-tag">Rédaction d'amendements</span><span class="lever-tag">Rendez-vous institutionnels</span><span class="lever-tag">Coalitions</span></div>
-        </article>
-        <article class="lever">
-          <div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11v2a3 3 0 0 0 3 3h1l4 4v-4h3a5 5 0 0 0 5-5V9a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v2Z"></path><path d="M9 9h6"></path><path d="M9 12h4"></path></svg></div>
-          <h3 class="h-card" style="color:var(--accent);">Relations presse</h3>
-          <p class="body">Chaque tribune, audition ou interview peut faire avancer votre dossier ou le freiner ; nous préparons vos prises de parole pour qu’elles servent à la fois votre stratégie et votre visibilité.</p>
-          <div class="lever-tags"><span class="lever-tag">Tribunes</span><span class="lever-tag">Événements décideurs</span><span class="lever-tag">Media-training</span><span class="lever-tag">Communiqués de presse</span><span class="lever-tag">Dossiers de presse</span></div>
-        </article>
+        <article class="lever"><div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path><path d="M8.5 11h5"></path><path d="M11 8.5v5"></path></svg></div><h3 class="h-card" style="color:var(--accent);">Veille et cartographie</h3><p class="body">Avant qu’un texte soit déposé ou qu’un arbitrage soit rendu, nous savons déjà ce qui se prépare. Nous filtrons l’information et identifions les opportunités et les risques pour vous : réglementaires, politiques, médiatiques...</p><div class="lever-tags"><span class="lever-tag">Bulletins de veille</span><span class="lever-tag">Notes d'alerte</span><span class="lever-tag">Cartographies d'acteurs</span><span class="lever-tag">Analyses de risques</span></div></article>
+        <article class="lever"><div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"></path><path d="M4 7h10l-1.5 3L14 13H4"></path><path d="M17 18c1.7-1.2 3-3.2 3-6s-1.3-4.8-3-6"></path></svg></div><h3 class="h-card" style="color:var(--accent);">Plaidoyer</h3><p class="body">Nous clarifions votre position et la mettons sur la table des décideurs publics. Nous préparons et organisons les rencontres utiles avec les élus, les administrations, les cabinets, les coalitions, etc.</p><div class="lever-tags"><span class="lever-tag">Notes de position</span><span class="lever-tag">Livres blancs</span><span class="lever-tag">Rédaction d'amendements</span><span class="lever-tag">Rendez-vous institutionnels</span><span class="lever-tag">Coalitions</span></div></article>
+        <article class="lever"><div class="lever-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11v2a3 3 0 0 0 3 3h1l4 4v-4h3a5 5 0 0 0 5-5V9a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v2Z"></path><path d="M9 9h6"></path><path d="M9 12h4"></path></svg></div><h3 class="h-card" style="color:var(--accent);">Relations presse</h3><p class="body">Chaque tribune, audition ou interview peut faire avancer votre dossier ou le freiner ; nous préparons vos prises de parole pour qu’elles servent à la fois votre stratégie et votre visibilité.</p><div class="lever-tags"><span class="lever-tag">Tribunes</span><span class="lever-tag">Événements décideurs</span><span class="lever-tag">Media-training</span><span class="lever-tag">Communiqués de presse</span><span class="lever-tag">Dossiers de presse</span></div></article>
       </div>
     </div>
   </section>
 
   <section class="section commitments" id="pourquoi">
     <div class="container">
-      <div class="section-head reveal">
-        <div class="meta"><div class="meta-row"><span class="section-num">Proposition de valeur et engagements</span><span class="rule"></span></div><h2 class="h-section">Pourquoi choisir <br>AleVia<br />?</h2></div>
-        <p class="lead">AleVia se distingue à la fois par son expertise sur les biens communs, ainsi que par ses engagements et ses valeurs.</p>
-      </div>
-      <div class="commitments-grid reveal">
-        <div class="commitment-item"><h3>Une expertise des biens communs.</h3><p>Nos collaborateurs mettent à profit leurs expertises dans les domaines du droit, des politiques publiques ou encore de la communication pour faire la différence dans le domaine des biens communs.</p></div>
-        <div class="commitment-item"><h3>L'intérêt général comme boussole.</h3><p>Nous choisissons nos missions dans des domaines qui servent l’intérêt général.</p></div>
-        <div class="commitment-item"><h3>Zéro conflit d'intérêts.</h3><p>Nous ne travaillons pas pour deux acteurs aux intérêts opposés. C’est plus de clarté pour nous, plus de crédibilité pour vous.</p></div>
-        <div class="commitment-item"><h3>Transparence.</h3><p>AleVia est déclarée au répertoire des représentants d’intérêts tenu par la Haute Autorité pour la transparence de la vie publique (HATVP), et s'engage à respecter les règles déontologiques fixés par la loi Sapin 2.</p></div>
-        <div class="commitment-item"><h3>Interlocuteur unique.</h3><p>Contrairement à la plupart des cabinets, votre dossier sera géré par un interlocuteur unique. Nicole sera toujours dans la pièce.</p></div>
-        <div class="commitment-item"><h3>Tout est sur-mesure.</h3><p>Chaque mission est unique. Nous construisons ensemble une stratégie sur-mesure pour vous accompagner.</p></div>
-      </div>
+      <div class="section-head reveal"><div class="meta"><div class="meta-row"><span class="section-num">Proposition de valeur et engagements</span><span class="rule"></span></div><h2 class="h-section">Pourquoi choisir <br>AleVia<br />?</h2></div><p class="lead">AleVia se distingue à la fois par son expertise sur les biens communs, ainsi que par ses engagements et ses valeurs.</p></div>
+      <div class="commitments-grid reveal"><div class="commitment-item"><h3>Une expertise des biens communs.</h3><p>Nos collaborateurs mettent à profit leurs expertises dans les domaines du droit, des politiques publiques ou encore de la communication pour faire la différence dans le domaine des biens communs.</p></div><div class="commitment-item"><h3>L'intérêt général comme boussole.</h3><p>Nous choisissons nos missions dans des domaines qui servent l’intérêt général.</p></div><div class="commitment-item"><h3>Zéro conflit d'intérêts.</h3><p>Nous ne travaillons pas pour deux acteurs aux intérêts opposés. C’est plus de clarté pour nous, plus de crédibilité pour vous.</p></div><div class="commitment-item"><h3>Transparence.</h3><p>AleVia est déclarée au répertoire des représentants d’intérêts tenu par la Haute Autorité pour la transparence de la vie publique (HATVP), et s'engage à respecter les règles déontologiques fixés par la loi Sapin 2.</p></div><div class="commitment-item"><h3>Interlocuteur unique.</h3><p>Contrairement à la plupart des cabinets, votre dossier sera géré par un interlocuteur unique. Nicole sera toujours dans la pièce.</p></div><div class="commitment-item"><h3>Tout est sur-mesure.</h3><p>Chaque mission est unique. Nous construisons ensemble une stratégie sur-mesure pour vous accompagner.</p></div></div>
     </div>
   </section>
 
-  <section class="section references" id="confiance">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="meta"><div class="meta-row"><span class="section-num">Références</span><span class="rule"></span></div><h2 class="h-section">Ils nous font déjà confiance.</h2></div>
-        <p class="lead">Plus de 35 organisations engagées sur les biens communs nous font déjà confiance.</p>
-      </div>
-      <div class="logos-grid reveal">
-        <div class="logo-tile">Institut des hautes études<br />de défense nationale</div><div class="logo-tile">Nexem</div><div class="logo-tile">Fédération française des<br />masseurs-kinésithérapeutes</div><div class="logo-tile">FFMI</div><div class="logo-tile">Association<br />Valentin Haüy</div><div class="logo-tile">Addictions France</div><div class="logo-tile">Ligue contre la<br />sclérose en plaques</div><div class="logo-tile">Fermentalg</div>
-      </div>
-    </div>
-  </section>
+  <section class="section references" id="confiance"><div class="container"><div class="section-head reveal"><div class="meta"><div class="meta-row"><span class="section-num">Références</span><span class="rule"></span></div><h2 class="h-section">Ils nous font déjà confiance.</h2></div><p class="lead">Plus de 35 organisations engagées sur les biens communs nous font déjà confiance.</p></div><div class="logos-grid reveal"><div class="logo-tile">Institut des hautes études<br />de défense nationale</div><div class="logo-tile">Nexem</div><div class="logo-tile">Fédération française des<br />masseurs-kinésithérapeutes</div><div class="logo-tile">FFMI</div><div class="logo-tile">Association<br />Valentin Haüy</div><div class="logo-tile">Addictions France</div><div class="logo-tile">Ligue contre la<br />sclérose en plaques</div><div class="logo-tile">Fermentalg</div></div></div></section>
 
-  <section class="section founder" id="fondatrice">
-    <div class="container">
-      <div class="section-head reveal"><div class="meta"><div class="meta-row"><span class="section-num">Fondatrice</span><span class="rule"></span></div><h2 class="h-section">La fondatrice.</h2></div></div>
-      <div class="founder-hero reveal">
-        <div><div class="founder-photo-wrap"><img src="assets/nicole.png" alt="Portrait de Nicole Tortello Duban" /><div class="founder-photo-credit">Nicole Tortello Duban</div></div></div>
-        <div>
-          <span class="eyebrow accent">Présidente &amp; fondatrice d'AleVia Conseil</span>
-          <h3 class="founder-name">Nicole Tortello Duban</h3>
-          <p class="founder-bio">Avocate, journaliste puis déléguée générale d’organisation professionnelle, elle a passé des années au contact de celles et ceux qui décident. Elle met aujourd’hui cette expérience <em>au service de vos dossiers pour qu’ils comptent dans les arbitrages publics</em>.</p>
-          <div class="founder-trades"><div class="trade"><h4>Avocate</h4><p>Avocate au barreau de Paris pendant plusieurs années, titulaire du CAPA.</p></div><div class="trade"><h4>Journaliste</h4><p>Journaliste de formation, rédactrice spécialisée pendant plusieurs années.</p></div><div class="trade"><h4>Déléguée générale</h4><p>Déléguée générale d'organisation professionnelle pendant plusieurs années, au contact direct des arbitrages sectoriels.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="section founder" id="fondatrice"><div class="container"><div class="section-head reveal"><div class="meta"><div class="meta-row"><span class="section-num">Fondatrice</span><span class="rule"></span></div><h2 class="h-section">La fondatrice.</h2></div></div><div class="founder-hero reveal"><div><div class="founder-photo-wrap"><img src="assets/nicole.png" alt="Portrait de Nicole Tortello Duban" /><div class="founder-photo-credit">Nicole Tortello Duban</div></div></div><div><span class="eyebrow accent">Présidente &amp; fondatrice d'AleVia Conseil</span><h3 class="founder-name">Nicole Tortello Duban</h3><p class="founder-bio">Avocate, journaliste puis déléguée générale d’organisation professionnelle, elle a passé des années au contact de celles et ceux qui décident. Elle met aujourd’hui cette expérience <em>au service de vos dossiers pour qu’ils comptent dans les arbitrages publics</em>.</p><div class="founder-trades"><div class="trade"><h4>Avocate</h4><p>Avocate au barreau de Paris pendant plusieurs années, titulaire du CAPA.</p></div><div class="trade"><h4>Journaliste</h4><p>Journaliste de formation, rédactrice spécialisée pendant plusieurs années.</p></div><div class="trade"><h4>Déléguée générale</h4><p>Déléguée générale d'organisation professionnelle pendant plusieurs années, au contact direct des arbitrages sectoriels.</p></div></div></div></div></div></section>
 
-  <section class="section contact" id="contact">
-    <div class="container">
-      <div class="section-head reveal" style="margin-bottom:60px"><div class="meta"><div class="meta-row"><span class="section-num" style="color:var(--accent-soft)">Contact</span><span class="rule" style="background:rgba(255,255,255,.3)"></span></div><h2 class="h-section">Transformons ensemble vos enjeux en décisions concrètes.</h2></div></div>
-      <div class="contact-grid reveal">
-        <div><p class="lead" style="font-size:22px;margin-bottom:24px">Consultation gratuite, sans engagement.</p><p class="body" style="color:rgba(255,255,255,.7);font-size:17px;max-width:460px">Expliquez-nous en une phrase la situation qui vous préoccupe. Nous vous dirons rapidement si AleVia est le bon cabinet pour vous accompagner.</p><div class="contact-meta"><div><strong>Réponse</strong> sous 24h ouvrées</div><div><strong>Confidentialité</strong> totale, échanges sous secret professionnel</div><div><strong>Paris</strong> · déplacements France entière</div></div></div>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Merci, nous vous recontactons sous 48h.')"><div class="field"><label for="f-name">Prénom &amp; nom</label><input id="f-name" type="text" autocomplete="name" /></div><div class="field"><label for="f-org">Organisation</label><input id="f-org" type="text" autocomplete="organization" /></div><div class="field"><label for="f-msg">Votre enjeu en une phrase</label><textarea id="f-msg" rows="3"></textarea></div><label class="consent"><input type="checkbox" /><span>J'accepte que mes données soient utilisées pour me recontacter. <a href="#">Politique de confidentialité</a>.</span></label><div><button type="submit" class="btn btn-accent">Prendre rendez-vous avec Nicole<span class="arrow">→</span></button></div></form>
-      </div>
-    </div>
-  </section>
+  <section class="section contact" id="contact"><div class="container"><div class="section-head reveal" style="margin-bottom:60px"><div class="meta"><div class="meta-row"><span class="section-num" style="color:var(--accent-soft)">Contact</span><span class="rule" style="background:rgba(255,255,255,.3)"></span></div><h2 class="h-section">Transformons ensemble vos enjeux en décisions concrètes.</h2></div></div><div class="contact-grid reveal"><div><p class="lead" style="font-size:22px;margin-bottom:24px">Consultation gratuite, sans engagement.</p><p class="body" style="color:rgba(255,255,255,.7);font-size:17px;max-width:460px">Expliquez-nous en une phrase la situation qui vous préoccupe. Nous vous dirons rapidement si AleVia est le bon cabinet pour vous accompagner.</p><div class="contact-meta"><div><strong>Réponse</strong> sous 24h ouvrées</div><div><strong>Confidentialité</strong> totale, échanges sous secret professionnel</div><div><strong>Paris</strong> · déplacements France entière</div></div></div><form class="contact-form" onsubmit="event.preventDefault(); alert('Merci, nous vous recontactons sous 48h.')"><div class="field"><label for="f-name">Prénom &amp; nom</label><input id="f-name" type="text" autocomplete="name" /></div><div class="field"><label for="f-org">Organisation</label><input id="f-org" type="text" autocomplete="organization" /></div><div class="field"><label for="f-msg">Votre enjeu en une phrase</label><textarea id="f-msg" rows="3"></textarea></div><label class="consent"><input type="checkbox" /><span>J'accepte que mes données soient utilisées pour me recontacter. <a href="#">Politique de confidentialité</a>.</span></label><div><button type="submit" class="btn btn-accent">Prendre rendez-vous avec Nicole<span class="arrow">→</span></button></div></form></div></div></section>
 
   <footer class="site-footer"><div class="container"><div class="footer-row"><div style="display:flex;align-items:center;gap:16px"><img src="assets/alevia-logo.png" alt="AleVia" style="height:24px;filter:brightness(0) invert(1);opacity:.85" /><span style="opacity:.5;font-size:12px">Communication stratégique &amp; représentation d'intérêts</span></div><div style="display:flex;gap:24px;font-size:13px"><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a><a href="#">Registre HATVP</a><span style="opacity:.5">© 2026 AleVia Conseil</span></div></div></div></footer>
 
@@ -419,6 +373,69 @@
       });
     }, { threshold: .12 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    (function () {
+      const replacements = [
+        ['.hero .lead', 'Nous vous aidons à entrer dans les bons arbitrages, au bon moment.'],
+        ['#secteurs .section-head .lead', 'Pour les organisations qui défendent les biens communs.'],
+        ['#douleurs .section-head .lead', 'Quelques signaux qu’il est temps d’agir.'],
+        ['#leviers .section-head .lead', 'Veiller, plaider, prendre la parole : trois leviers pour peser au bon moment.'],
+        ['#pourquoi .section-head .lead', 'Une expertise engagée, claire et sans conflit d’intérêts.'],
+        ['#confiance .section-head .lead', 'Plus de 35 organisations nous font déjà confiance.'],
+        ['#contact .contact-grid .lead', 'Premier échange gratuit.'],
+        ['#contact .contact-grid .body', 'Décrivez votre enjeu. Nous vous répondrons rapidement.'],
+        ['.founder-bio', 'Avocate, journaliste puis déléguée générale, Nicole connaît les lieux où se décident les arbitrages publics.'],
+        ['.lever:nth-child(1) .body', 'Repérer tôt les signaux utiles et les risques à venir.'],
+        ['.lever:nth-child(2) .body', 'Transformer votre position en arbitrages concrets.'],
+        ['.lever:nth-child(3) .body', 'Préparer vos prises de parole et vos réponses publiques.']
+      ];
+
+      const sectorWho = [
+        'Santé, animal, environnement.',
+        'Handicap et accessibilité.',
+        'Grand âge et médico-social.',
+        'Numérique utile et sobre.',
+        'Énergie, climat, environnement.',
+        'Protection sociale et accès aux droits.',
+        'Culture, création, médias.',
+        'Sécurité et résilience.'
+      ];
+
+      const pains = [
+        'Réforme découverte trop tard.',
+        'Vos intérêts sont mal portés.',
+        'Jamais consultés.',
+        'Envie d’agir, sans mode d’emploi.',
+        'Pas les bons contacts.',
+        'Crise presse mal anticipée.'
+      ];
+
+      const commitmentTexts = [
+        'Droit, politiques publiques et communication au service de vos dossiers.',
+        'Des missions choisies pour leur utilité collective.',
+        'Pas de dossiers opposés, donc plus de clarté.',
+        'Déclaration HATVP et respect des règles Sapin 2.',
+        'Nicole reste votre point d’entrée unique.',
+        'Une stratégie adaptée à chaque situation.'
+      ];
+
+      function setText(el, text, isMobile) {
+        if (!el) return;
+        if (!el.dataset.fullText) el.dataset.fullText = el.textContent;
+        el.textContent = isMobile ? text : el.dataset.fullText;
+      }
+
+      function applyResponsiveCopy() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        replacements.forEach(([selector, text]) => setText(document.querySelector(selector), text, isMobile));
+        document.querySelectorAll('.sector-card .sector-who').forEach((el, i) => setText(el, sectorWho[i], isMobile));
+        document.querySelectorAll('.pain-text').forEach((el, i) => setText(el, pains[i], isMobile));
+        document.querySelectorAll('.commitment-item p').forEach((el, i) => setText(el, commitmentTexts[i], isMobile));
+      }
+
+      applyResponsiveCopy();
+      window.addEventListener('resize', applyResponsiveCopy);
+    })();
   </script>
 </body>
 </html>
