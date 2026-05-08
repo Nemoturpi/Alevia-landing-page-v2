@@ -187,7 +187,11 @@ body {
 
 #fondatrice,
 .founder {
-  background: #fbfaf6 !important;
+  background: #fff !important;
+}
+
+.founder-photo-wrap {
+  background: #fff !important;
 }
 
 .founder-bio em {
