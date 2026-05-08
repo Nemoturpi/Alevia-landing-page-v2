@@ -278,6 +278,37 @@ body {
   color: var(--ink) !important;
 }
 
+.consent {
+  display: grid !important;
+  grid-template-columns: 16px minmax(0, 1fr) !important;
+  align-items: start !important;
+  column-gap: 8px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.consent input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  margin: 1px 0 0 0 !important;
+  padding: 0 !important;
+}
+
+.consent span {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.45 !important;
+  text-align: left !important;
+}
+
+.consent a {
+  color: var(--accent) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .field input:focus,
 .field textarea:focus {
   border-bottom-color: var(--accent) !important;
