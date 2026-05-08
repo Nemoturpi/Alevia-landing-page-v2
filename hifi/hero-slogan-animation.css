@@ -2,8 +2,20 @@
    CSS pur : pas de JS, pas d'image, impact perf négligeable.
    À charger après alevia-brand-emotions.css. */
 
+/* Slogan hero : plus grand, plus dense, plus institutionnel. */
+#heroSection .h-display {
+  font-size: clamp(38px, 4.1vw, 62px) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 900 !important;
+  font-synthesis-weight: auto;
+  animation: alevia-slogan-breathe 9s ease-in-out infinite;
+  transform-origin: left center;
+}
+
 #heroSection .h-display em {
   color: transparent !important;
+  font-weight: 900 !important;
   background-image: linear-gradient(
     110deg,
     var(--accent) 0%,
@@ -17,12 +29,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   animation: alevia-slogan-glow 8s ease-in-out infinite;
-  text-shadow: 0 0 0 rgba(155, 30, 30, 0);
-}
-
-#heroSection .h-display {
-  animation: alevia-slogan-breathe 9s ease-in-out infinite;
-  transform-origin: left center;
+  text-shadow: 0.012em 0 0 rgba(155, 30, 30, 0.10);
 }
 
 @keyframes alevia-slogan-glow {
@@ -42,10 +49,24 @@
 
 @keyframes alevia-slogan-breathe {
   0%, 100% {
-    letter-spacing: -0.025em;
+    letter-spacing: -0.045em;
   }
   50% {
-    letter-spacing: -0.018em;
+    letter-spacing: -0.038em;
+  }
+}
+
+@media (min-width: 1440px) {
+  #heroSection .h-display {
+    font-size: clamp(44px, 4.25vw, 68px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #heroSection .h-display {
+    font-size: clamp(34px, 11.2vw, 46px) !important;
+    line-height: 1.01 !important;
+    letter-spacing: -0.04em !important;
   }
 }
 
