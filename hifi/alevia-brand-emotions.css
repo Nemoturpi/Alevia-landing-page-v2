@@ -259,7 +259,7 @@ body {
 }
 
 .founder-bio em {
-  background: linear-gradient(transparent 65%, var(--gold-soft) 65%, var(--gold-soft) 92%, transparent 92%) !important;
+  background: linear-gradient(transparent 65%, var(--gold-light) 65%, var(--gold-light) 92%, transparent 92%) !important;
 }
 
 .contact {
