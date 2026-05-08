@@ -1,0 +1,57 @@
+/* Animation légère du slogan hero.
+   CSS pur : pas de JS, pas d'image, impact perf négligeable.
+   À charger après alevia-brand-emotions.css. */
+
+#heroSection .h-display em {
+  color: transparent !important;
+  background-image: linear-gradient(
+    110deg,
+    var(--accent) 0%,
+    var(--accent-2) 34%,
+    #b8975a 50%,
+    var(--accent) 66%,
+    var(--accent-2) 100%
+  );
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: alevia-slogan-glow 8s ease-in-out infinite;
+  text-shadow: 0 0 0 rgba(155, 30, 30, 0);
+}
+
+#heroSection .h-display {
+  animation: alevia-slogan-breathe 9s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+@keyframes alevia-slogan-glow {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: saturate(1);
+  }
+  45% {
+    background-position: 82% 50%;
+    filter: saturate(1.08);
+  }
+  60% {
+    background-position: 100% 50%;
+    filter: saturate(1.04);
+  }
+}
+
+@keyframes alevia-slogan-breathe {
+  0%, 100% {
+    letter-spacing: -0.025em;
+  }
+  50% {
+    letter-spacing: -0.018em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #heroSection .h-display,
+  #heroSection .h-display em {
+    animation: none !important;
+  }
+}
