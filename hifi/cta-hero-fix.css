@@ -23,6 +23,27 @@
   z-index: 0;
 }
 
+/* Navbar simplifiée : logo seul, agrandi de 30 %. */
+.nav {
+  justify-content: flex-start !important;
+}
+
+.nav-links,
+.nav-cta {
+  display: none !important;
+}
+
+.nav-logo img {
+  height: 39px !important;
+  width: auto !important;
+}
+
+@media (max-width: 768px) {
+  .nav-logo img {
+    height: 36px !important;
+  }
+}
+
 @media (max-width: 420px) {
   .hero-cta .btn-primary {
     width: 100% !important;
