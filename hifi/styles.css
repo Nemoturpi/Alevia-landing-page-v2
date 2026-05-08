@@ -1009,3 +1009,56 @@ body.typo-mix {
   .board-frame { padding: 16px 16px 0; }
   .board-item--wide { max-width: 100%; }
 }
+
+.references .logos-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.references .logo-tile {
+  min-height: 150px;
+  height: auto;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.references .logo-mark {
+  width: 100%;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.references .logo-mark img {
+  max-width: 150px;
+  max-height: 64px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: grayscale(16%);
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.references .logo-name {
+  display: block;
+  min-height: 2.5em;
+}
+
+.references .logo-tile:hover .logo-mark img {
+  filter: grayscale(0);
+  transform: translateY(-2px);
+}
+
+@media (min-width: 700px) {
+  .references .logos-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .references .logos-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
