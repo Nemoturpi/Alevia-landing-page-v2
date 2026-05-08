@@ -1058,8 +1058,8 @@ body.typo-mix {
 }
 
 .reference-card {
-  flex: 0 0 190px;
-  min-height: 136px;
+  flex: 0 0 220px;
+  min-height: 152px;
   display: grid;
   place-items: center;
   gap: 12px;
@@ -1070,7 +1070,7 @@ body.typo-mix {
   text-align: center;
   text-decoration: none;
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -1112,7 +1112,8 @@ body.typo-mix {
 
 .reference-name {
   display: block;
-  overflow-wrap: anywhere;
+  max-width: 100%;
+  text-wrap: balance;
 }
 
 @keyframes references-marquee {
@@ -1122,8 +1123,8 @@ body.typo-mix {
 
 @media (max-width: 699px) {
   .reference-card {
-    flex-basis: 162px;
-    min-height: 124px;
+    flex-basis: 178px;
+    min-height: 136px;
     padding: 16px 14px;
     font-size: 12px;
   }
