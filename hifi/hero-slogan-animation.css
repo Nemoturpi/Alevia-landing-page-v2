@@ -1,19 +1,23 @@
-/* Slogan hero — version sobre.
-   CSS pur, chargé après alevia-brand-emotions.css.
-   Objectif : préserver l'élégance du hero sans casser les lignes. */
+/* Slogan hero — piste serif éditoriale.
+   Pas de police externe : aucune requête supplémentaire, donc pas d'impact perf.
+   Objectif : sortir du rendu trop tech / trop bloc d'Inter Tight. */
 
 #heroSection .h-display {
-  font-size: clamp(31px, 3.15vw, 50px) !important;
-  line-height: 1.04 !important;
-  letter-spacing: -0.028em !important;
-  font-weight: 800 !important;
-  max-width: 640px;
+  font-family: Georgia, 'Times New Roman', Times, ui-serif, serif !important;
+  font-size: clamp(39px, 4.15vw, 62px) !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.055em !important;
+  font-weight: 700 !important;
+  max-width: 760px !important;
   animation: none !important;
+  text-wrap: balance;
 }
 
 #heroSection .h-display em {
   color: var(--accent) !important;
-  font-weight: 800 !important;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
   background: none !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
@@ -23,16 +27,23 @@
 
 @media (min-width: 1440px) {
   #heroSection .h-display {
-    font-size: clamp(34px, 3.35vw, 54px) !important;
-    max-width: 680px;
+    font-size: clamp(44px, 4.35vw, 70px) !important;
+    max-width: 820px !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  #heroSection .h-display {
+    font-size: clamp(36px, 4vw, 54px) !important;
+    max-width: 620px !important;
   }
 }
 
 @media (max-width: 768px) {
   #heroSection .h-display {
-    font-size: clamp(30px, 10vw, 38px) !important;
-    line-height: 1.06 !important;
-    letter-spacing: -0.025em !important;
-    max-width: 10ch;
+    font-size: clamp(33px, 10.5vw, 44px) !important;
+    line-height: 1.0 !important;
+    letter-spacing: -0.045em !important;
+    max-width: 11ch !important;
   }
 }
