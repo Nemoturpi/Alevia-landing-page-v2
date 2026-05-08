@@ -54,6 +54,70 @@ body {
   background: var(--hero-bg) !important;
 }
 
+/* Hero : rééquilibrage texte / visuel + fondu entre les deux colonnes */
+#heroSection {
+  min-height: clamp(760px, 84vh, 940px) !important;
+}
+
+#heroSection > .container {
+  grid-template-columns: minmax(0, 50%) minmax(460px, 50%) !important;
+  min-height: clamp(640px, 78vh, 820px) !important;
+  padding-bottom: 170px !important;
+}
+
+#heroSection .hero-grid {
+  padding-right: 1.25rem !important;
+}
+
+#heroSection .hero-bg-stack {
+  overflow: hidden;
+}
+
+#heroSection .oh-img {
+  top: -56px !important;
+  right: 1.5% !important;
+  width: 63% !important;
+  height: 112% !important;
+  transform: scale(0.88) !important;
+  object-position: 62% 34% !important;
+}
+
+#heroSection .hero-bg-veil {
+  background: linear-gradient(
+    to right,
+    var(--hero-bg) 0%,
+    var(--hero-bg) 40%,
+    rgba(247,245,240,.92) 47%,
+    rgba(247,245,240,.58) 56%,
+    rgba(247,245,240,.20) 70%,
+    rgba(247,245,240,0) 86%
+  ) !important;
+}
+
+#heroSection::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 40%;
+  width: 24%;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--hero-bg) 0%,
+    rgba(247,245,240,.88) 24%,
+    rgba(247,245,240,.52) 52%,
+    rgba(247,245,240,0) 100%
+  );
+}
+
+#heroSection > .container,
+#heroSection .clients-strip {
+  position: relative;
+  z-index: 2;
+}
+
 .hero .h-display em,
 .hero-tagline .tag-text,
 .hero-tagline .tag-rule,
@@ -223,8 +287,81 @@ body {
   background: #1c2733 !important;
 }
 
+@media (min-width: 1440px) {
+  #heroSection > .container {
+    grid-template-columns: minmax(0, 47%) minmax(520px, 53%) !important;
+  }
+
+  #heroSection .oh-img {
+    top: -76px !important;
+    right: -1% !important;
+    width: 68% !important;
+    height: 118% !important;
+    transform: scale(0.9) !important;
+    object-position: 60% 32% !important;
+  }
+
+  #heroSection::after {
+    left: 38%;
+    width: 27%;
+  }
+}
+
+@media (max-width: 1180px) {
+  #heroSection > .container {
+    grid-template-columns: minmax(0, 54%) minmax(390px, 46%) !important;
+  }
+
+  #heroSection .oh-img {
+    top: -42px !important;
+    right: -2% !important;
+    width: 66% !important;
+    height: 108% !important;
+    transform: scale(0.84) !important;
+    object-position: 60% 34% !important;
+  }
+
+  #heroSection::after {
+    left: 43%;
+    width: 25%;
+  }
+}
+
 @media (max-width: 768px) {
   #douleurs {
     background: linear-gradient(180deg, #f8eeee 0%, #f4e3e1 100%) !important;
+  }
+
+  #heroSection {
+    min-height: auto !important;
+  }
+
+  #heroSection > .container {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    padding-bottom: 150px !important;
+  }
+
+  #heroSection .oh-img {
+    top: -22px !important;
+    right: -7% !important;
+    width: 116% !important;
+    height: 100% !important;
+    transform: scale(0.86) !important;
+    object-position: center 30% !important;
+  }
+
+  #heroSection .hero-bg-veil {
+    background: linear-gradient(
+      to bottom,
+      var(--hero-bg) 0%,
+      var(--hero-bg) 34%,
+      rgba(247,245,240,.66) 58%,
+      rgba(247,245,240,0) 100%
+    ) !important;
+  }
+
+  #heroSection::after {
+    display: none;
   }
 }
