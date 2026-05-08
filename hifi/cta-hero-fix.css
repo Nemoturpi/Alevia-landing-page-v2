@@ -23,7 +23,7 @@
   z-index: 0;
 }
 
-/* Navbar simplifiée : logo seul, agrandi de 30 %. */
+/* Navbar simplifiée : logo seul, plus visible. */
 .nav {
   justify-content: flex-start !important;
 }
@@ -34,13 +34,13 @@
 }
 
 .nav-logo img {
-  height: 39px !important;
+  height: 54px !important;
   width: auto !important;
 }
 
 @media (max-width: 768px) {
   .nav-logo img {
-    height: 36px !important;
+    height: 46px !important;
   }
 }
 
@@ -51,5 +51,9 @@
     min-width: 0 !important;
     white-space: normal !important;
     text-align: center !important;
+  }
+
+  .nav-logo img {
+    height: 42px !important;
   }
 }
