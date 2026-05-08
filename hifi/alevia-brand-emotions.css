@@ -1,0 +1,226 @@
+/* AleVia · brand + emotional section overrides
+   A charger après styles.css dans hifi/AleVia Hi-Fi.html. */
+
+:root {
+  --ink: #1c2733;
+  --ink-2: #2a3848;
+  --ink-soft: #5f6670;
+  --ink-mute: #8a8f94;
+  --rule: #1c2733;
+  --rule-soft: #e8e3db;
+  --paper: #f8f5f0;
+  --paper-2: #f1ebe2;
+  --paper-3: #e8e3db;
+  --accent: #9b1e1e;
+  --accent-2: #7d1818;
+  --accent-soft: #f1dede;
+  --accent-mist: #f7eaea;
+  --gold: #b8975a;
+  --gold-light: #d4b07a;
+  --gold-soft: #eadcc1;
+  --hero-bg: #f7f5f0;
+}
+
+body {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.site-header {
+  background: rgba(248, 245, 240, 0.88);
+}
+
+.btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary:hover,
+.btn-accent,
+.btn-accent:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.hero,
+.clients-strip {
+  background: var(--hero-bg) !important;
+}
+
+.hero .h-display em,
+.hero-tagline .tag-text,
+.hero-tagline .tag-rule,
+.section-num,
+.sector-label,
+.field--required label:after {
+  color: var(--accent) !important;
+}
+
+.hero-tagline .tag-rule {
+  background: var(--accent) !important;
+}
+
+.section.audience {
+  background: #fff;
+}
+
+.sector-card {
+  background: rgba(255,255,255,0.82) !important;
+  border-color: rgba(28,39,51,0.22) !important;
+}
+
+.sector-card:hover {
+  border-color: rgba(155,30,30,0.35) !important;
+  box-shadow: 0 18px 42px -28px rgba(28,39,51,0.35) !important;
+}
+
+.sector-icon {
+  background: var(--paper-2) !important;
+  color: var(--accent) !important;
+  border-color: var(--rule-soft) !important;
+}
+
+#douleurs {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(155, 30, 30, 0.10), transparent 34%),
+    linear-gradient(180deg, #f8eeee 0%, #f4e3e1 100%) !important;
+}
+
+#douleurs .section-num,
+#douleurs .pain-text.guillemets:before,
+#douleurs .pain-text.guillemets:after {
+  color: var(--accent) !important;
+}
+
+#douleurs .lead {
+  color: rgba(28,39,51,0.72) !important;
+}
+
+#douleurs .pain-card {
+  background: rgba(255,255,255,0.72) !important;
+  border: 1px solid rgba(155,30,30,0.18) !important;
+}
+
+#douleurs .pain-card:hover {
+  border-color: rgba(155,30,30,0.42) !important;
+  box-shadow: 0 20px 48px -28px rgba(155,30,30,0.35) !important;
+}
+
+#leviers {
+  background: #1c2733 !important;
+  color: #f8f5f0 !important;
+}
+
+#leviers .h-section,
+#leviers .h-card,
+#leviers .lever h3 {
+  color: #f8f5f0 !important;
+}
+
+#leviers .lead,
+#leviers .body {
+  color: rgba(248,245,240,0.72) !important;
+}
+
+#leviers .section-num,
+#leviers .lever-num .accent {
+  color: var(--gold-light) !important;
+}
+
+#leviers .rule,
+#leviers .lever {
+  border-color: rgba(212,176,122,0.65) !important;
+}
+
+#leviers .lever-icon {
+  background: rgba(248,245,240,0.06) !important;
+  border-color: rgba(212,176,122,0.28) !important;
+  color: var(--gold-light) !important;
+}
+
+#leviers .lever-tag {
+  color: rgba(248,245,240,0.72) !important;
+  border-color: rgba(248,245,240,0.18) !important;
+}
+
+#pourquoi,
+.commitments {
+  background: linear-gradient(180deg, #fbfaf6 0%, #f1ebe2 100%) !important;
+}
+
+#pourquoi .section-num {
+  color: var(--gold) !important;
+}
+
+#pourquoi .commitments-grid {
+  background: rgba(184,151,90,0.22) !important;
+  border-color: rgba(184,151,90,0.22) !important;
+}
+
+#pourquoi .commitment-item {
+  background: rgba(255,255,255,0.74) !important;
+}
+
+#pourquoi .commitment-item h3:after {
+  background: var(--gold) !important;
+}
+
+#confiance,
+.section.references {
+  background: #f3eee8 !important;
+}
+
+.logo-tile {
+  background: rgba(255,255,255,0.52);
+}
+
+.logo-tile:hover {
+  background: #fff;
+}
+
+#fondatrice,
+.founder {
+  background: #fbfaf6 !important;
+}
+
+.founder-bio em {
+  background: linear-gradient(transparent 65%, var(--gold-soft) 65%, var(--gold-soft) 92%, transparent 92%) !important;
+}
+
+.contact {
+  background:
+    radial-gradient(circle at 80% 12%, rgba(155,30,30,0.18), transparent 34%),
+    #1c2733 !important;
+  color: var(--paper) !important;
+}
+
+.contact .section-num {
+  color: var(--gold-light) !important;
+}
+
+.contact-form {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-bottom-color: var(--accent) !important;
+}
+
+.site-footer {
+  background: #1c2733 !important;
+}
+
+@media (max-width: 768px) {
+  #douleurs {
+    background: linear-gradient(180deg, #f8eeee 0%, #f4e3e1 100%) !important;
+  }
+}
