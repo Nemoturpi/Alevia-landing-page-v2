@@ -1,14 +1,28 @@
 /* Slogan hero — retour à la police de base des titres.
    Pas de police externe, pas d'animation : on garde la cohérence globale de la landing.
-   Ce fichier ne sert plus qu'à ajuster proprement la taille du hero. */
+   Ce fichier ajuste aussi le rapport colonne texte / image pour permettre
+   un slogan plus grand sans effet escalier. */
+
+#heroSection > .container {
+  grid-template-columns: minmax(0, 56%) minmax(380px, 44%) !important;
+}
+
+#heroSection .hero-grid {
+  padding-right: 0 !important;
+  max-width: 720px !important;
+}
+
+#heroSection .hero-content {
+  max-width: 720px !important;
+}
 
 #heroSection .h-display {
   font-family: var(--font-display) !important;
-  font-size: clamp(30px, 2.75vw, 44px) !important;
-  line-height: 1.06 !important;
-  letter-spacing: -0.026em !important;
+  font-size: clamp(34px, 3.25vw, 52px) !important;
+  line-height: 1.03 !important;
+  letter-spacing: -0.03em !important;
   font-weight: 800 !important;
-  max-width: 620px !important;
+  max-width: 690px !important;
   animation: none !important;
   text-wrap: balance;
 }
@@ -25,25 +39,75 @@
   text-shadow: none !important;
 }
 
+#heroSection .oh-img {
+  right: 9% !important;
+  width: 53% !important;
+  height: 98% !important;
+  transform: scale(0.84) !important;
+}
+
 @media (min-width: 1440px) {
+  #heroSection > .container {
+    grid-template-columns: minmax(0, 55%) minmax(430px, 45%) !important;
+  }
+
+  #heroSection .hero-grid,
+  #heroSection .hero-content {
+    max-width: 780px !important;
+  }
+
   #heroSection .h-display {
-    font-size: clamp(32px, 2.95vw, 48px) !important;
-    max-width: 660px !important;
+    font-size: clamp(38px, 3.45vw, 58px) !important;
+    max-width: 760px !important;
+  }
+
+  #heroSection .oh-img {
+    right: 8% !important;
+    width: 57% !important;
+    height: 104% !important;
+    transform: scale(0.86) !important;
   }
 }
 
 @media (max-width: 1180px) {
+  #heroSection > .container {
+    grid-template-columns: minmax(0, 58%) minmax(340px, 42%) !important;
+  }
+
   #heroSection .h-display {
-    font-size: clamp(30px, 2.9vw, 42px) !important;
-    max-width: 560px !important;
+    font-size: clamp(32px, 3.15vw, 46px) !important;
+    max-width: 610px !important;
+  }
+
+  #heroSection .oh-img {
+    right: 7% !important;
+    width: 55% !important;
+    height: 96% !important;
+    transform: scale(0.80) !important;
   }
 }
 
 @media (max-width: 768px) {
+  #heroSection > .container {
+    grid-template-columns: 1fr !important;
+  }
+
+  #heroSection .hero-grid,
+  #heroSection .hero-content {
+    max-width: none !important;
+  }
+
   #heroSection .h-display {
     font-size: clamp(30px, 9vw, 36px) !important;
     line-height: 1.06 !important;
     letter-spacing: -0.025em !important;
     max-width: 11ch !important;
+  }
+
+  #heroSection .oh-img {
+    right: 0 !important;
+    width: 104% !important;
+    height: 94% !important;
+    transform: scale(0.84) !important;
   }
 }
