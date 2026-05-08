@@ -74,11 +74,11 @@ body {
 }
 
 #heroSection .oh-img {
-  top: -56px !important;
-  right: 1.5% !important;
-  width: 63% !important;
-  height: 112% !important;
-  transform: scale(0.88) !important;
+  top: -48px !important;
+  right: 3% !important;
+  width: 56% !important;
+  height: 102% !important;
+  transform: scale(0.86) !important;
   object-position: 62% 34% !important;
 }
 
@@ -293,11 +293,11 @@ body {
   }
 
   #heroSection .oh-img {
-    top: -76px !important;
-    right: -1% !important;
-    width: 68% !important;
-    height: 118% !important;
-    transform: scale(0.9) !important;
+    top: -66px !important;
+    right: 1% !important;
+    width: 60% !important;
+    height: 108% !important;
+    transform: scale(0.88) !important;
     object-position: 60% 32% !important;
   }
 
@@ -313,11 +313,11 @@ body {
   }
 
   #heroSection .oh-img {
-    top: -42px !important;
-    right: -2% !important;
-    width: 66% !important;
-    height: 108% !important;
-    transform: scale(0.84) !important;
+    top: -34px !important;
+    right: 0 !important;
+    width: 58% !important;
+    height: 100% !important;
+    transform: scale(0.82) !important;
     object-position: 60% 34% !important;
   }
 
@@ -343,11 +343,11 @@ body {
   }
 
   #heroSection .oh-img {
-    top: -22px !important;
-    right: -7% !important;
-    width: 116% !important;
-    height: 100% !important;
-    transform: scale(0.86) !important;
+    top: -18px !important;
+    right: -3% !important;
+    width: 104% !important;
+    height: 94% !important;
+    transform: scale(0.84) !important;
     object-position: center 30% !important;
   }
 
