@@ -1,54 +1,49 @@
-/* Slogan hero — serif display premium.
-   Fraunces donne un rendu plus cabinet / éditorial : empattements larges,
-   graisse assumée, mais moins brutale qu'un Inter Tight ultra-bold.
-   Chargée uniquement pour le slogan hero. */
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@72,800,35,0;72,900,35,0&display=swap');
+/* Slogan hero — retour à la police de base des titres.
+   Pas de police externe, pas d'animation : on garde la cohérence globale de la landing.
+   Ce fichier ne sert plus qu'à ajuster proprement la taille du hero. */
 
 #heroSection .h-display {
-  font-family: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Palatino, ui-serif, serif !important;
-  font-size: clamp(35px, 3.55vw, 56px) !important;
-  line-height: 0.98 !important;
-  letter-spacing: -0.05em !important;
-  font-weight: 900 !important;
-  max-width: 720px !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(30px, 2.75vw, 44px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.026em !important;
+  font-weight: 800 !important;
+  max-width: 620px !important;
   animation: none !important;
   text-wrap: balance;
-  font-variation-settings: 'SOFT' 35, 'WONK' 0, 'opsz' 72;
 }
 
 #heroSection .h-display em {
   color: var(--accent) !important;
   font-family: inherit !important;
   font-style: normal !important;
-  font-weight: 900 !important;
+  font-weight: 800 !important;
   background: none !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
   animation: none !important;
   text-shadow: none !important;
-  font-variation-settings: 'SOFT' 35, 'WONK' 0, 'opsz' 72;
 }
 
 @media (min-width: 1440px) {
   #heroSection .h-display {
-    font-size: clamp(38px, 3.75vw, 60px) !important;
-    max-width: 760px !important;
+    font-size: clamp(32px, 2.95vw, 48px) !important;
+    max-width: 660px !important;
   }
 }
 
 @media (max-width: 1180px) {
   #heroSection .h-display {
-    font-size: clamp(33px, 3.6vw, 50px) !important;
-    max-width: 600px !important;
+    font-size: clamp(30px, 2.9vw, 42px) !important;
+    max-width: 560px !important;
   }
 }
 
 @media (max-width: 768px) {
   #heroSection .h-display {
-    font-size: clamp(31px, 9.8vw, 40px) !important;
-    line-height: 1.0 !important;
-    letter-spacing: -0.042em !important;
+    font-size: clamp(30px, 9vw, 36px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.025em !important;
     max-width: 11ch !important;
   }
 }
