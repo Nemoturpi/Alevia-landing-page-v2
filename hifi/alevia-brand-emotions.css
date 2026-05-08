@@ -278,6 +278,67 @@ body {
   color: var(--ink) !important;
 }
 
+/* CTA rendez-vous : relief léger, dégradé et reflet au survol, sans JS */
+.hero-cta .btn-primary,
+.contact-form .btn-accent {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 58%, #6f1720 100%) !important;
+  border-color: rgba(155,30,30,0.92) !important;
+  color: #fff !important;
+  box-shadow: 0 14px 30px -18px rgba(155,30,30,0.78), 0 1px 0 rgba(255,255,255,0.18) inset;
+  transform: translateZ(0);
+}
+
+.hero-cta .btn-primary::before,
+.contact-form .btn-accent::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(135deg, #b8975a 0%, var(--accent) 38%, var(--accent-2) 100%);
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+
+.hero-cta .btn-primary::after,
+.contact-form .btn-accent::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: -42%;
+  z-index: -1;
+  width: 34%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent);
+  transform: translateX(-120%) skewX(-18deg);
+  transition: transform .65s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-cta .btn-primary:hover,
+.contact-form .btn-accent:hover {
+  border-color: rgba(184,151,90,0.55) !important;
+  box-shadow: 0 18px 38px -20px rgba(155,30,30,0.95), 0 0 0 1px rgba(184,151,90,0.22) inset;
+  transform: translateY(-2px);
+}
+
+.hero-cta .btn-primary:hover::before,
+.contact-form .btn-accent:hover::before {
+  opacity: 1;
+}
+
+.hero-cta .btn-primary:hover::after,
+.contact-form .btn-accent:hover::after {
+  transform: translateX(520%) skewX(-18deg);
+}
+
+.hero-cta .btn-primary:focus-visible,
+.contact-form .btn-accent:focus-visible {
+  outline: 3px solid rgba(184,151,90,0.42);
+  outline-offset: 3px;
+}
+
 .consent {
   display: grid !important;
   grid-template-columns: 16px minmax(0, 1fr) !important;
@@ -316,6 +377,17 @@ body {
 
 .site-footer {
   background: #1c2733 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta .btn-primary,
+  .hero-cta .btn-primary::before,
+  .hero-cta .btn-primary::after,
+  .contact-form .btn-accent,
+  .contact-form .btn-accent::before,
+  .contact-form .btn-accent::after {
+    transition: none !important;
+  }
 }
 
 @media (min-width: 1440px) {
