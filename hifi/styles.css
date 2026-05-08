@@ -1042,7 +1042,7 @@ body.typo-mix {
 .references-track {
   display: flex;
   width: max-content;
-  animation: references-marquee 78s linear infinite;
+  animation: references-marquee 110s linear infinite;
   will-change: transform;
 }
 
@@ -1058,19 +1058,19 @@ body.typo-mix {
 }
 
 .reference-card {
-  flex: 0 0 220px;
-  min-height: 152px;
+  flex: 0 0 286px;
+  min-height: 184px;
   display: grid;
   place-items: center;
-  gap: 12px;
-  padding: 18px 16px;
+  gap: 10px;
+  padding: 18px 18px;
   border: 1px solid var(--rule-soft);
   background: rgba(255,255,255,0.56);
   color: var(--ink-soft);
   text-align: center;
   text-decoration: none;
   font-family: var(--font-display);
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.2;
@@ -1087,7 +1087,7 @@ body.typo-mix {
 }
 
 .reference-logo {
-  min-height: 66px;
+  min-height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1123,8 +1123,8 @@ body.typo-mix {
 
 @media (max-width: 699px) {
   .reference-card {
-    flex-basis: 178px;
-    min-height: 136px;
+    flex-basis: 232px;
+    min-height: 164px;
     padding: 16px 14px;
     font-size: 12px;
   }
