@@ -17,7 +17,7 @@
   --accent-soft: #f3dcdf;
 
   /* Type */
-  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-display: 'Inter Tight', 'Söhne', 'Helvetica Neue', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
